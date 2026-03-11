@@ -1,7 +1,25 @@
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import Skills from "@/components/Skills";
+import About from "@/components/About";
+import Projects from "@/components/Projects";
+import Experience from "@/components/Experience";
+import Leadership from "@/components/Leadership";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
+
 export default function Home() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black text-white text-3xl">
-      Tailwind v4 Working 🚀
-    </div>
+    <>
+      <Navbar />
+      <Hero />
+      <About />
+      <Skills />
+      <Projects />
+      <Experience />
+      <Leadership />
+      <Contact />
+      <Footer />
+    </>
   );
 }
