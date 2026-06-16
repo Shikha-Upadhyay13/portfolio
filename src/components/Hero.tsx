@@ -2,30 +2,69 @@
 
 import Image from "next/image";
 import { TypeAnimation } from "react-type-animation";
+import { motion } from "framer-motion";
+
+const container = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.12, delayChildren: 0.1 },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 24 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
+  },
+};
+
+const stats = [
+  { value: "6+", label: "Projects" },
+  { value: "20+", label: "Technologies" },
+  { value: "AI", label: "B.Tech Major" },
+];
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center px-8 max-w-7xl mx-auto overflow-hidden">
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center px-8 max-w-7xl mx-auto overflow-hidden"
+    >
       <div className="grid md:grid-cols-2 gap-16 items-center w-full relative z-10">
-
         {/* LEFT SIDE */}
-        <div className="space-y-8">
-
-          {/* Small Label */}
-          <p className="text-sm uppercase tracking-[0.25em] text-gray-500">
-            AI Portfolio
-          </p>
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="show"
+          className="space-y-7"
+        >
+          {/* Availability badge */}
+          <motion.div variants={item}>
+            <span className="inline-flex items-center gap-2 px-3 py-1.5 text-xs rounded-full glass text-gray-300">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400" />
+              </span>
+              Open to AI / ML opportunities
+            </span>
+          </motion.div>
 
           {/* Name */}
-          <h1 className="text-5xl md:text-6xl font-bold leading-tight">
+          <motion.h1
+            variants={item}
+            className="text-5xl md:text-6xl font-bold leading-tight"
+          >
             Shikha{" "}
-            <span className="bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">
-              Upadhyay
-            </span>
-          </h1>
+            <span className="accent-text">Upadhyay</span>
+          </motion.h1>
 
           {/* Animated Role */}
-          <div className="text-2xl md:text-3xl font-semibold text-gray-300">
+          <motion.div
+            variants={item}
+            className="text-2xl md:text-3xl font-semibold text-gray-300 h-10"
+          >
             <TypeAnimation
               sequence={[
                 "AI Engineer",
@@ -38,47 +77,77 @@ export default function Hero() {
               speed={50}
               repeat={Infinity}
             />
-          </div>
+          </motion.div>
 
           {/* Description */}
-          <p className="text-lg text-gray-400 max-w-xl leading-relaxed">
+          <motion.p
+            variants={item}
+            className="text-lg text-gray-400 max-w-xl leading-relaxed"
+          >
             I design intelligent AI systems using Retrieval-Augmented Generation,
             agentic workflows, and scalable LLM architectures focused on
             reliability and real-world deployment.
-          </p>
+          </motion.p>
 
           {/* Skill Pills */}
-          <div className="flex flex-wrap gap-3">
-            {["RAG Systems", "Agentic AI", "LLM Integration"].map((item, i) => (
+          <motion.div variants={item} className="flex flex-wrap gap-3">
+            {["RAG Systems", "Agentic AI", "LLM Integration"].map((label) => (
               <span
-                key={i}
+                key={label}
                 className="px-4 py-2 text-sm rounded-full glass hover-lift"
               >
-                {item}
+                {label}
               </span>
             ))}
-          </div>
+          </motion.div>
 
           {/* CTA Buttons */}
-          <div className="flex gap-4 pt-4">
-            <button className="accent-btn px-6 py-3 rounded-xl">
+          <motion.div variants={item} className="flex gap-4 pt-2">
+            <a href="#projects" className="accent-btn px-6 py-3 rounded-xl">
               View Projects
-            </button>
-
-            <button className="glass px-6 py-3 rounded-xl transition hover:border-white/20">
+            </a>
+            <a
+              href="#contact"
+              className="glass px-6 py-3 rounded-xl transition accent-border"
+            >
               Contact Me
-            </button>
-          </div>
-        </div>
+            </a>
+          </motion.div>
+
+          {/* Stats row */}
+          <motion.div
+            variants={item}
+            className="flex gap-10 pt-6 border-t border-white/10"
+          >
+            {stats.map((s) => (
+              <div key={s.label}>
+                <div className="text-2xl font-bold accent-text">{s.value}</div>
+                <div className="text-xs text-gray-500 mt-1 uppercase tracking-wider">
+                  {s.label}
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </motion.div>
 
         {/* RIGHT SIDE */}
-        <div className="flex justify-center md:justify-end">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="flex justify-center md:justify-end"
+        >
           <div className="relative w-72 h-72 md:w-80 md:h-80">
             <div className="absolute inset-0 -z-10 flex justify-center">
-              <div className="w-[600px] h-[600px] bg-purple-500/20 blur-[120px] rounded-full"></div>
+              <div className="w-[600px] h-[600px] bg-purple-500/20 blur-[120px] rounded-full" />
             </div>
-            {/* Glow */}
-            <div className="absolute inset-0 rounded-full bg-purple-500/20 blur-3xl -z-10"></div>
+            {/* Rotating gradient ring */}
+            <motion.div
+              aria-hidden
+              animate={{ rotate: 360 }}
+              transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+              className="absolute -inset-3 rounded-full bg-[conic-gradient(from_0deg,#c084fc,#3b82f6,#c084fc)] opacity-40 blur-[2px]"
+            />
 
             {/* Image */}
             <div className="relative w-full h-full rounded-full overflow-hidden border border-white/10">
@@ -90,10 +159,8 @@ export default function Hero() {
                 className="object-cover transition duration-500 hover:scale-105"
               />
             </div>
-
           </div>
-        </div>
-
+        </motion.div>
       </div>
     </section>
   );
