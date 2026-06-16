@@ -13,14 +13,14 @@ export default function Leadership() {
         </h2>
       </Reveal>
 
-      <div className="space-y-16">
+      <div className="group/lead space-y-16">
         {leadership.map((item, index) => (
           <Reveal
             key={index}
             direction={index % 2 === 0 ? "right" : "left"}
             className={`max-w-xl ${index % 2 === 0 ? "mr-auto" : "ml-auto"}`}
           >
-            <div className="border border-white/10 rounded-xl p-6 transition-all duration-300 hover:border-purple-400/40 hover:-translate-y-1 hover:shadow-lg">
+            <div className="border border-white/10 rounded-xl p-6 bg-white/[0.03] backdrop-blur-xl transition-all duration-300 hover:border-purple-400/50 hover:-translate-y-1 hover:shadow-lg group-hover/lead:opacity-50 hover:!opacity-100">
               <h3 className="text-lg font-semibold mb-2">{item.club}</h3>
 
               <p className="text-sm text-gray-400 mb-4">{item.role}</p>
