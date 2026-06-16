@@ -1,16 +1,20 @@
 "use client";
 
+import Reveal from "@/components/ui/Reveal";
+
 export default function Contact() {
   return (
     <section id="contact" className="py-24 px-6 max-w-6xl mx-auto">
       {/* Section Header */}
-      <div className="mb-16 text-center">
-        <h2 className="text-3xl md:text-4xl font-semibold">Contact</h2>
+      <Reveal className="mb-16 text-center">
+        <h2 className="text-3xl md:text-4xl font-semibold accent-text">
+          Contact
+        </h2>
         <p className="text-gray-400 mt-4">
           Open to AI, ML, and GenAI opportunities. Let’s build something
           impactful.
         </p>
-      </div>
+      </Reveal>
 
       {/* Layout */}
       <div className="grid md:grid-cols-2 gap-12">

@@ -1,21 +1,23 @@
 "use client";
 
 import { leadership } from "@/data/leadership";
+import Reveal from "@/components/ui/Reveal";
 
 export default function Leadership() {
   return (
     <section id="leadership" className="py-16 px-6 max-w-6xl mx-auto">
       {/* Section Title */}
-      <div className="mb-14 text-center">
+      <Reveal className="mb-14 text-center">
         <h2 className="text-3xl md:text-4xl font-semibold accent-text">
           Leadership & Activities
         </h2>
-      </div>
+      </Reveal>
 
       <div className="space-y-16">
         {leadership.map((item, index) => (
-          <div
+          <Reveal
             key={index}
+            direction={index % 2 === 0 ? "right" : "left"}
             className={`max-w-xl ${index % 2 === 0 ? "mr-auto" : "ml-auto"}`}
           >
             <div className="border border-white/10 rounded-xl p-6 transition-all duration-300 hover:border-purple-400/40 hover:-translate-y-1 hover:shadow-lg">
@@ -27,7 +29,7 @@ export default function Leadership() {
                 {item.description}
               </p>
             </div>
-          </div>
+          </Reveal>
         ))}
       </div>
     </section>

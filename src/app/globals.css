@@ -1,8 +1,30 @@
 @import "tailwindcss";
 
-/* Smooth scrolling */
+/* ───────────────────────── Design Tokens ───────────────────────── */
+:root {
+  --bg: #0b0b0f;
+  --bg-soft: #0f0f14;
+  --accent-1: #c084fc; /* purple-400 */
+  --accent-2: #3b82f6; /* blue-500   */
+  --accent-glow: rgba(168, 85, 247, 0.45);
+  --ring: rgba(255, 255, 255, 0.1);
+}
+
+/* Smooth scrolling + nav offset so the sticky navbar doesn't cover headings */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Base theme */
@@ -60,6 +82,80 @@ body {
 body {
   cursor: none;
 }
-.cursor-hover div:first-child {
-  transform: translate(-50%, -50%) scale(1.4) !important;
+
+/* Hide the custom cursor on touch devices (no hover/fine pointer) */
+@media (hover: none), (pointer: coarse) {
+  body {
+    cursor: auto;
+  }
+}
+
+/* ───────────────────── Accent system (was undefined) ───────────────────── */
+/* Gradient text used on the logo + every section heading */
+.accent-text {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Primary glowing gradient button */
+.accent-btn {
+  position: relative;
+  color: #fff;
+  font-weight: 600;
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  box-shadow: 0 8px 30px -8px var(--accent-glow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+.accent-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 12px 40px -6px var(--accent-glow);
+}
+.accent-btn:active {
+  transform: translateY(0);
+}
+
+/* Outlined accent border on hover (used by glass CTAs) */
+.accent-border:hover {
+  border-color: rgba(192, 132, 252, 0.5);
+}
+
+/* Active-state grow line for nav links + animated underline */
+.nav-underline {
+  position: relative;
+}
+.nav-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 2px;
+  width: 0;
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  transition: width 0.3s ease;
+}
+.nav-underline:hover::after,
+.nav-underline[data-active="true"]::after {
+  width: 100%;
+}
+
+/* Make the click-ripple match the purple accent (was teal) */
+.cursor-ripple {
+  border-color: var(--accent-1) !important;
+}
+
+/* Thin custom scrollbar to match the dark theme */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--accent-1), var(--accent-2));
+  border-radius: 9999px;
+  border: 3px solid var(--bg);
 }
