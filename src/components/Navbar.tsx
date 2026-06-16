@@ -72,6 +72,20 @@ export default function Navbar() {
             ))}
           </div>
 
+          {/* Command palette trigger */}
+          <button
+            onClick={() =>
+              window.dispatchEvent(new CustomEvent("open-command-palette"))
+            }
+            aria-label="Open command palette"
+            className="hidden sm:inline-flex items-center gap-2 px-3 py-2 rounded-lg glass text-gray-400 transition accent-border hover:text-white"
+          >
+            <span className="text-xs">Search</span>
+            <kbd className="text-[10px] border border-white/15 rounded px-1.5 py-0.5">
+              ⌘K
+            </kbd>
+          </button>
+
           <a
             href="/resume.pdf"
             download

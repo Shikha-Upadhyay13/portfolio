@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { resumeData } from "@/data/resumeData";
 import { detectIntent } from "@/utils/detectIntent";
 
@@ -9,150 +10,222 @@ type Message = {
   content: string;
 };
 
+const quickReplies = [
+  "What skills do you have?",
+  "Tell me about your projects",
+  "What is your experience?",
+  "Education?",
+];
+
 export default function SmartAssistant() {
   const [open, setOpen] = useState(false);
   const [minimized, setMinimized] = useState(false);
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
+  const [streaming, setStreaming] = useState(false);
   const [lastIntent, setLastIntent] = useState<string | null>(null);
+
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
+
+  // Auto-scroll to the newest message
+  useEffect(() => {
+    scrollRef.current?.scrollTo({
+      top: scrollRef.current.scrollHeight,
+      behavior: "smooth",
+    });
+  }, [chat]);
+
+  // Clean up any pending timers on unmount
+  useEffect(() => {
+    return () => timers.current.forEach(clearTimeout);
+  }, []);
+
+  // Stream a reply in character-by-character (typewriter effect)
+  const streamReply = (text: string) => {
+    setStreaming(true);
+    setChat((prev) => [...prev, { role: "assistant", content: "" }]);
+
+    const chars = [...text];
+    let i = 0;
+    const step = () => {
+      i += 1;
+      setChat((prev) => {
+        const next = [...prev];
+        next[next.length - 1] = {
+          role: "assistant",
+          content: chars.slice(0, i).join(""),
+        };
+        return next;
+      });
+      if (i < chars.length) {
+        const t = setTimeout(step, 12);
+        timers.current.push(t);
+      } else {
+        setStreaming(false);
+      }
+    };
+    step();
+  };
 
   const handleSend = (customMessage?: string) => {
     const finalMessage = customMessage || message;
-    if (!finalMessage.trim()) return;
+    if (!finalMessage.trim() || streaming) return;
 
     setChat((prev) => [...prev, { role: "user", content: finalMessage }]);
     setMessage("");
     setLoading(true);
 
-    setTimeout(() => {
+    const t = setTimeout(() => {
       let intent = detectIntent(finalMessage);
-
-      if (intent === "unknown" && lastIntent) {
-        intent = lastIntent;
-      }
-
+      if (intent === "unknown" && lastIntent) intent = lastIntent;
       setLastIntent(intent);
 
-      let reply = "";
+      const reply =
+        intent === "unknown"
+          ? "You can ask me about my skills, projects, experience, leadership, or education."
+          : resumeData[intent as keyof typeof resumeData].trim();
 
-      if (intent === "unknown") {
-        reply =
-          "You can ask me about my skills, projects, experience, leadership, or education.";
-      } else {
-        reply = resumeData[intent as keyof typeof resumeData];
-      }
-
-      setChat((prev) => [...prev, { role: "assistant", content: reply }]);
       setLoading(false);
-    }, 600);
+      streamReply(reply);
+    }, 500);
+    timers.current.push(t);
   };
 
   return (
     <>
       {/* Floating Button */}
-      {!open && (
-        <button
-          onClick={() => setOpen(true)}
-          className="fixed bottom-6 right-6 px-4 py-3 rounded-full bg-purple-600 text-white shadow-lg z-50 hover:scale-105 transition"
-        >
-          Ask Me
-        </button>
-      )}
-
-      {open && (
-        <div className="fixed bottom-6 right-6 w-96 bg-black/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl z-50">
-          {/* HEADER */}
-          <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
-            <span className="text-sm font-semibold text-purple-400">
-              Portfolio Assistant
+      <AnimatePresence>
+        {!open && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            onClick={() => setOpen(true)}
+            className="fixed bottom-6 right-6 inline-flex items-center gap-2 px-4 py-3 rounded-full accent-btn z-50"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full rounded-full bg-white/80 opacity-75 animate-ping" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-white" />
             </span>
+            Ask AI
+          </motion.button>
+        )}
+      </AnimatePresence>
 
-            <div className="flex gap-2">
-              {/* Minimize */}
-              <button
-                onClick={() => setMinimized(!minimized)}
-                className="text-gray-400 hover:text-white text-sm"
-              >
-                –
-              </button>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.97 }}
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed bottom-6 right-6 w-[92vw] max-w-sm bg-black/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl z-50"
+          >
+            {/* HEADER */}
+            <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
+              <span className="text-sm font-semibold accent-text">
+                Portfolio Assistant
+              </span>
 
-              {/* Close */}
-              <button
-                onClick={() => setOpen(false)}
-                className="text-gray-400 hover:text-white text-sm"
-              >
-                ✕
-              </button>
-            </div>
-          </div>
-
-          {!minimized && (
-            <div className="p-4 flex flex-col h-[420px]">
-              {/* CHAT */}
-              <div className="flex-1 overflow-y-auto space-y-3 text-sm">
-                {chat.map((msg, i) => (
-                  <div
-                    key={i}
-                    className={`max-w-[80%] px-4 py-2 rounded-xl whitespace-pre-line ${
-                      msg.role === "user"
-                        ? "ml-auto bg-purple-600 text-white"
-                        : "bg-white/10 text-gray-200"
-                    }`}
-                  >
-                    {msg.content}
-                  </div>
-                ))}
-
-                {loading && (
-                  <div className="bg-white/10 text-gray-300 px-4 py-2 rounded-xl w-fit animate-pulse">
-                    Thinking...
-                  </div>
-                )}
-              </div>
-
-              {/* SUGGESTIONS */}
-              {chat.length === 0 && (
-                <div className="mt-3 space-y-2 text-xs text-gray-400">
-                  <p>Try asking:</p>
-                  <div className="flex flex-wrap gap-2">
-                    {[
-                      "What skills do you have?",
-                      "Tell me about your projects",
-                      "What is your experience?",
-                    ].map((suggestion, i) => (
-                      <button
-                        key={i}
-                        onClick={() => handleSend(suggestion)}
-                        className="px-3 py-1 bg-white/10 rounded-full hover:bg-purple-500/20 transition"
-                      >
-                        {suggestion}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* INPUT */}
-              <div className="mt-3 flex gap-2">
-                <input
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && handleSend()}
-                  className="flex-1 bg-white/10 p-2 rounded-lg text-sm outline-none"
-                  placeholder="Ask something about me..."
-                />
+              <div className="flex gap-3 text-gray-400">
                 <button
-                  onClick={() => handleSend()}
-                  className="bg-purple-600 px-4 rounded-lg text-sm hover:bg-purple-500 transition"
+                  onClick={() => setMinimized(!minimized)}
+                  className="hover:text-white text-sm"
+                  aria-label="Minimize"
                 >
-                  Send
+                  –
+                </button>
+                <button
+                  onClick={() => setOpen(false)}
+                  className="hover:text-white text-sm"
+                  aria-label="Close"
+                >
+                  ✕
                 </button>
               </div>
             </div>
-          )}
-        </div>
-      )}
+
+            {!minimized && (
+              <div className="p-4 flex flex-col h-[440px]">
+                {/* CHAT */}
+                <div
+                  ref={scrollRef}
+                  className="flex-1 overflow-y-auto space-y-3 text-sm pr-1"
+                >
+                  {chat.length === 0 && (
+                    <p className="text-gray-400 text-sm leading-relaxed">
+                      Hi! I&apos;m Shikha&apos;s portfolio assistant. Ask me about
+                      her skills, projects, experience, leadership, or education.
+                    </p>
+                  )}
+
+                  {chat.map((msg, i) => (
+                    <div
+                      key={i}
+                      className={`max-w-[85%] px-4 py-2 rounded-xl whitespace-pre-line ${
+                        msg.role === "user"
+                          ? "ml-auto bg-purple-600 text-white"
+                          : "bg-white/10 text-gray-200"
+                      }`}
+                    >
+                      {msg.content}
+                      {streaming &&
+                        msg.role === "assistant" &&
+                        i === chat.length - 1 && (
+                          <span className="inline-block w-1.5 h-4 align-middle ml-0.5 bg-purple-300 animate-pulse" />
+                        )}
+                    </div>
+                  ))}
+
+                  {loading && (
+                    <div className="bg-white/10 text-gray-300 px-4 py-2 rounded-xl w-fit">
+                      <span className="inline-flex gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-gray-400 animate-bounce [animation-delay:-0.3s]" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-gray-400 animate-bounce [animation-delay:-0.15s]" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-gray-400 animate-bounce" />
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                {/* QUICK REPLIES */}
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {quickReplies.map((q) => (
+                    <button
+                      key={q}
+                      onClick={() => handleSend(q)}
+                      disabled={streaming || loading}
+                      className="px-3 py-1 text-xs bg-white/10 rounded-full hover:bg-purple-500/20 transition disabled:opacity-40"
+                    >
+                      {q}
+                    </button>
+                  ))}
+                </div>
+
+                {/* INPUT */}
+                <div className="mt-3 flex gap-2">
+                  <input
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && handleSend()}
+                    className="flex-1 bg-white/10 p-2 rounded-lg text-sm outline-none focus:ring-1 focus:ring-purple-400/50"
+                    placeholder="Ask something about me..."
+                  />
+                  <button
+                    onClick={() => handleSend()}
+                    disabled={streaming || loading}
+                    className="accent-btn px-4 rounded-lg text-sm disabled:opacity-40"
+                  >
+                    Send
+                  </button>
+                </div>
+              </div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

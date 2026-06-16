@@ -3,6 +3,7 @@ import CustomCursor from "@/components/CustomCursor";
 import CursorRipple from "@/components/CursorRipple";
 import ScrollProgress from "@/components/ScrollProgress";
 import Spotlight from "@/components/Spotlight";
+import CommandPalette from "@/components/CommandPalette";
 import SmartAssistant from "@/components/SmartAssistant";
 
 export const metadata = {
@@ -31,6 +32,7 @@ export default function RootLayout({
 
         <CustomCursor />
         <CursorRipple />
+        <CommandPalette />
         <SmartAssistant />
       </body>
     </html>
