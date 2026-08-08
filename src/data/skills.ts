@@ -3,12 +3,12 @@ export const skills = [
     category: "AI & Generative AI",
     items: [
       "RAG Pipelines",
-      "LangChain",
       "Prompt Engineering",
       "LLM Integration",
       "Embedding Models",
+      "Transformers",
+      "Chunking & Retrieval Tuning",
       "Hugging Face",
-      "Agentic Workflows",
     ],
   },
   {
@@ -16,12 +16,15 @@ export const skills = [
     items: [
       "Machine Learning",
       "Deep Learning",
-      "Transformers",
       "Model Evaluation",
       "Feature Engineering",
       "Power BI",
       "Excel",
     ],
+  },
+  {
+    category: "Agentic Workflows & Automation",
+    items: ["LangChain", "LangGraph", "LangSmith", "N8N", "Make"],
   },
   {
     category: "Programming",
@@ -34,14 +37,27 @@ export const skills = [
       "SQL",
       "HTML",
       "CSS",
+      "Data Structures & Algorithms",
     ],
   },
   {
     category: "Databases & Vector Search",
-    items: ["MySQL", "Firebase", "FAISS", "Vector Databases"],
+    items: ["MySQL", "Firebase", "FAISS", "Chroma", "Vector Databases"],
   },
   {
-    category: "Web & Automation",
-    items: ["Next.js", "Wix Studio", "Git", "GitHub", "N8N", "Make"],
+    category: "Frontend & Backend",
+    items: [
+      "React.js (Vite)",
+      "Next.js",
+      "FastAPI",
+      "REST APIs",
+      "Styled-Components",
+      "Framer Motion",
+      "CORS Configuration",
+    ],
+  },
+  {
+    category: "Web Platforms & Tools",
+    items: ["Git", "GitHub", "Wix Studio", "Figma"],
   },
 ];
