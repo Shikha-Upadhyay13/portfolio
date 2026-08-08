@@ -5,6 +5,13 @@ import { ArrowUpRight, Lock, Sparkles } from "lucide-react";
 import { projects, PLACEHOLDER_REPO } from "@/data/projects";
 import Reveal from "@/components/ui/Reveal";
 
+const CATEGORY_STYLES: Record<string, string> = {
+  "Generative AI": "text-purple-300/80 bg-purple-500/10 border-purple-400/20",
+  "Web App": "text-sky-300/80 bg-sky-500/10 border-sky-400/20",
+  Security: "text-amber-300/80 bg-amber-500/10 border-amber-400/20",
+  "Machine Learning": "text-emerald-300/80 bg-emerald-500/10 border-emerald-400/20",
+};
+
 export default function Projects() {
   return (
     <section id="projects" className="py-24 px-8 max-w-[1400px] mx-auto">
@@ -40,7 +47,12 @@ export default function Projects() {
             >
               {/* Top row: category + featured marker */}
               <div className="flex items-center justify-between mb-3">
-                <span className="text-[11px] uppercase tracking-wider text-purple-300/80 px-2.5 py-1 rounded-full bg-purple-500/10 border border-purple-400/20">
+                <span
+                  className={`text-[11px] uppercase tracking-wider px-2.5 py-1 rounded-full border ${
+                    CATEGORY_STYLES[project.category] ??
+                    "text-purple-300/80 bg-purple-500/10 border-purple-400/20"
+                  }`}
+                >
                   {project.category}
                 </span>
                 {project.featured && (
