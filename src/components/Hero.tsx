@@ -137,28 +137,14 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="flex justify-center md:justify-end"
         >
-          <div className="relative w-72 h-72 md:w-80 md:h-80">
-            <div className="absolute inset-0 -z-10 flex justify-center">
-              <div className="w-[600px] h-[600px] bg-purple-500/20 blur-[120px] rounded-full" />
-            </div>
-            {/* Rotating gradient ring */}
-            <motion.div
-              aria-hidden
-              animate={{ rotate: 360 }}
-              transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-              className="absolute -inset-3 rounded-full bg-[conic-gradient(from_0deg,#c084fc,#3b82f6,#c084fc)] opacity-40 blur-[2px]"
+          <div className="relative w-72 md:w-96 aspect-[15/16]">
+            <Image
+              src="/profile-cutout.png"
+              alt="Shikha Upadhyay"
+              fill
+              priority
+              className="object-contain transition duration-500 hover:scale-105"
             />
-
-            {/* Image */}
-            <div className="relative w-full h-full rounded-full overflow-hidden border border-white/10">
-              <Image
-                src="/profile.jpg"
-                alt="Shikha Upadhyay"
-                fill
-                priority
-                className="object-cover transition duration-500 hover:scale-105"
-              />
-            </div>
           </div>
         </motion.div>
       </div>

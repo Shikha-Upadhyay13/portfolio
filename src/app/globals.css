@@ -147,6 +147,33 @@ body {
   border-color: var(--accent-1) !important;
 }
 
+/* Hide scrollbar on horizontally-dragged filmstrips (Hobbies section) */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Fade the left/right edges of a horizontal scroll strip so it reads as "more to scroll" */
+.fade-x {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 32px,
+    black calc(100% - 32px),
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 32px,
+    black calc(100% - 32px),
+    transparent
+  );
+}
+
 /* Thin custom scrollbar to match the dark theme */
 ::-webkit-scrollbar {
   width: 10px;
