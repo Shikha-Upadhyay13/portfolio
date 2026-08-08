@@ -49,6 +49,7 @@ export default function CommandPalette() {
       { label: "Skills", hint: "Jump to section", icon: Wrench, action: go("skills") },
       { label: "Projects", hint: "Jump to section", icon: FolderGit2, action: go("projects") },
       { label: "Experience", hint: "Jump to section", icon: Briefcase, action: go("experience") },
+      { label: "Education", hint: "Jump to section", icon: GraduationCap, action: go("education") },
       { label: "Achievements", hint: "Jump to section", icon: Award, action: go("achievements") },
       { label: "Certifications", hint: "Jump to section", icon: BadgeCheck, action: go("certifications") },
       { label: "Hackathons", hint: "Jump to section", icon: Trophy, action: go("hackathons") },
