@@ -160,7 +160,7 @@ export default function Hero() {
           {/* Backdrop card gives the cutout a "stage" instead of floating on empty space */}
           <div
             aria-hidden
-            className="absolute right-2 md:right-12 bottom-4 w-60 h-80 md:w-72 md:h-[24rem] rounded-[2.5rem] bg-gradient-to-br from-purple-500/15 to-blue-500/15 border border-white/5 -rotate-6 -z-10"
+            className="absolute right-2 md:right-12 bottom-4 w-60 h-80 md:w-72 md:h-[24rem] rounded-[2.5rem] bg-[#47F1FF]/12 border border-white/5 -rotate-6 -z-10"
           />
 
           {/* Soft contact shadow anchors the figure to the ground */}

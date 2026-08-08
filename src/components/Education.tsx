@@ -19,8 +19,8 @@ function EduCard({
   const textAlign = align === "right" ? "text-right" : "text-left";
   const durationAlign = align === "right" ? "text-left" : "text-right";
   return (
-    <div className="rounded-2xl border border-white/10 bg-black/40 backdrop-blur-xl p-8 transition-all duration-300 hover:border-purple-400/40 hover:-translate-y-1">
-      <p className={`${durationAlign} text-sm font-mono tracking-wider text-purple-300/80`}>
+    <div className="rounded-2xl border border-white/10 bg-black/40 backdrop-blur-xl p-8 transition-all duration-300 hover:border-[#47F1FF]/40 hover:-translate-y-1">
+      <p className={`${durationAlign} text-sm font-mono tracking-wider text-[#47F1FF]/80`}>
         {duration}
       </p>
       <h3 className={`${textAlign} text-2xl font-semibold mt-3`}>{degree}</h3>
@@ -55,8 +55,8 @@ export default function Education() {
               <div key={index} className="relative md:grid md:grid-cols-2 md:gap-16 items-center">
                 {/* Dot marker on the spine, desktop only */}
                 <span className="hidden md:flex absolute left-1/2 top-10 -translate-x-1/2 -translate-y-1/2 z-10 items-center justify-center">
-                  <span className="absolute w-7 h-7 rounded-full bg-purple-500/20" />
-                  <span className="relative w-3.5 h-3.5 rounded-full bg-purple-400 ring-4 ring-[#0b0b0f]" />
+                  <span className="absolute w-7 h-7 rounded-full bg-[#47F1FF]/20" />
+                  <span className="relative w-3.5 h-3.5 rounded-full bg-[#47F1FF] ring-4 ring-[#0b0b0f]" />
                 </span>
 
                 {onLeft ? (

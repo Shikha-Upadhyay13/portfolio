@@ -152,7 +152,7 @@ export default function CommandPalette() {
           >
             {/* Search */}
             <div className="flex items-center gap-3 px-4 py-3 border-b border-white/10">
-              <Command className="w-4 h-4 text-purple-400" />
+              <Command className="w-4 h-4 text-[#47F1FF]" />
               <input
                 ref={inputRef}
                 value={query}
@@ -181,11 +181,11 @@ export default function CommandPalette() {
                     onMouseEnter={() => setActiveIndex(i)}
                     className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm text-left transition ${
                       i === activeIndex
-                        ? "bg-purple-500/15 text-white"
+                        ? "bg-[#47F1FF]/15 text-white"
                         : "text-gray-300"
                     }`}
                   >
-                    <Icon className="w-4 h-4 text-purple-300" />
+                    <Icon className="w-4 h-4 text-[#47F1FF]" />
                     <span className="flex-1">{item.label}</span>
                     <span className="text-xs text-gray-500">{item.hint}</span>
                   </button>

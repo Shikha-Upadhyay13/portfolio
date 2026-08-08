@@ -14,7 +14,7 @@ function ClubCard({
   description: string;
 }) {
   return (
-    <div className="border border-white/10 rounded-xl p-6 bg-white/[0.03] backdrop-blur-xl transition-all duration-300 hover:border-purple-400/50 hover:-translate-y-1 hover:shadow-lg">
+    <div className="border border-white/10 rounded-xl p-6 bg-white/[0.03] backdrop-blur-xl transition-all duration-300 hover:border-[#47F1FF]/50 hover:-translate-y-1 hover:shadow-lg">
       <h3 className="text-lg font-semibold mb-2">{club}</h3>
       <p className="text-sm text-gray-400 mb-4">{role}</p>
       <p className="text-gray-300 text-sm leading-relaxed">{description}</p>
@@ -68,7 +68,7 @@ export default function Leadership() {
                 <div className="relative w-full max-w-md aspect-[4/5]">
                   <div
                     aria-hidden
-                    className="absolute -inset-8 -z-10 bg-gradient-to-br from-purple-500/15 to-blue-500/15 blur-3xl rounded-full"
+                    className="absolute -inset-8 -z-10 bg-[#47F1FF]/12 blur-3xl rounded-full"
                   />
                   <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-black/50 transition-transform duration-300 hover:scale-[1.03]">
                     <Image

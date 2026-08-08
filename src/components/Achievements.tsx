@@ -92,7 +92,7 @@ function PhotoStack({ photos }: { photos: AchievementPhoto[] }) {
               onClick={() => setCurrent(i)}
               className={`h-1.5 rounded-full transition-all ${
                 i === current
-                  ? "w-5 bg-gradient-to-r from-purple-400 to-blue-500"
+                  ? "w-5 bg-[#47F1FF]"
                   : "w-1.5 bg-white/20"
               }`}
             />

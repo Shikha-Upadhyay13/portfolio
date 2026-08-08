@@ -166,7 +166,7 @@ export default function SmartAssistant() {
                       key={i}
                       className={`max-w-[85%] px-4 py-2 rounded-xl whitespace-pre-line ${
                         msg.role === "user"
-                          ? "ml-auto bg-purple-600 text-white"
+                          ? "ml-auto bg-[#0B5C68] text-white"
                           : "bg-white/10 text-gray-200"
                       }`}
                     >
@@ -174,7 +174,7 @@ export default function SmartAssistant() {
                       {streaming &&
                         msg.role === "assistant" &&
                         i === chat.length - 1 && (
-                          <span className="inline-block w-1.5 h-4 align-middle ml-0.5 bg-purple-300 animate-pulse" />
+                          <span className="inline-block w-1.5 h-4 align-middle ml-0.5 bg-[#47F1FF] animate-pulse" />
                         )}
                     </div>
                   ))}
@@ -197,7 +197,7 @@ export default function SmartAssistant() {
                       key={q}
                       onClick={() => handleSend(q)}
                       disabled={streaming || loading}
-                      className="px-3 py-1 text-xs bg-white/10 rounded-full hover:bg-purple-500/20 transition disabled:opacity-40"
+                      className="px-3 py-1 text-xs bg-white/10 rounded-full hover:bg-[#47F1FF]/20 transition disabled:opacity-40"
                     >
                       {q}
                     </button>
@@ -210,7 +210,7 @@ export default function SmartAssistant() {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && handleSend()}
-                    className="flex-1 bg-white/10 p-2 rounded-lg text-sm outline-none focus:ring-1 focus:ring-purple-400/50"
+                    className="flex-1 bg-white/10 p-2 rounded-lg text-sm outline-none focus:ring-1 focus:ring-[#47F1FF]/50"
                     placeholder="Ask something about me..."
                   />
                   <button

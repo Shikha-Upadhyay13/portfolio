@@ -42,7 +42,7 @@ export default function CustomCursor() {
     <>
       {/* Outer ring (spring-smoothed, grows on interactive hover) */}
       <motion.div
-        className="fixed top-0 left-0 w-9 h-9 rounded-full pointer-events-none z-[9999] border border-purple-400/50 backdrop-blur-[1px]"
+        className="fixed top-0 left-0 w-9 h-9 rounded-full pointer-events-none z-[9999] border border-[#47F1FF]/50 backdrop-blur-[1px]"
         style={{ x: ringX, y: ringY, translateX: "-50%", translateY: "-50%" }}
         animate={{ scale: hovering ? 1.7 : 1, opacity: hovering ? 0.7 : 1 }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -50,7 +50,7 @@ export default function CustomCursor() {
 
       {/* Inner dot (snappy, follows raw position) */}
       <motion.div
-        className="fixed top-0 left-0 w-2 h-2 rounded-full pointer-events-none z-[9999] bg-purple-400"
+        className="fixed top-0 left-0 w-2 h-2 rounded-full pointer-events-none z-[9999] bg-[#47F1FF]"
         style={{ x, y, translateX: "-50%", translateY: "-50%" }}
         animate={{ scale: hovering ? 0 : 1 }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}

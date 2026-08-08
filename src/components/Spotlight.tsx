@@ -15,7 +15,7 @@ export default function Spotlight() {
   const sx = useSpring(x, { stiffness: 60, damping: 20, mass: 0.8 });
   const sy = useSpring(y, { stiffness: 60, damping: 20, mass: 0.8 });
 
-  const background = useMotionTemplate`radial-gradient(140px circle at ${sx}px ${sy}px, rgba(168,85,247,0.18), rgba(59,130,246,0.10) 40%, transparent 70%)`;
+  const background = useMotionTemplate`radial-gradient(140px circle at ${sx}px ${sy}px, rgba(71,241,255,0.16), rgba(71,241,255,0.08) 40%, transparent 70%)`;
 
   useEffect(() => {
     // Start centered so there's a glow before the first mouse move

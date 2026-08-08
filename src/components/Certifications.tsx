@@ -58,9 +58,9 @@ export default function Certifications() {
             <button
               id={`cert-${cert.id}`}
               onClick={() => setOpenId(cert.id)}
-              className={`h-full w-full text-left flex flex-col rounded-2xl border bg-white/5 backdrop-blur-xl overflow-hidden transition-all duration-300 hover:border-purple-400/50 hover:-translate-y-1 ${
+              className={`h-full w-full text-left flex flex-col rounded-2xl border bg-white/5 backdrop-blur-xl overflow-hidden transition-all duration-300 hover:border-[#47F1FF]/50 hover:-translate-y-1 ${
                 highlightId === cert.id
-                  ? "border-purple-400 ring-2 ring-purple-400/60 shadow-[0_0_40px_-8px_rgba(168,85,247,0.6)]"
+                  ? "border-[#47F1FF] ring-2 ring-[#47F1FF]/60 shadow-[0_0_40px_-8px_rgba(71,241,255,0.6)]"
                   : "border-white/10"
               }`}
             >
