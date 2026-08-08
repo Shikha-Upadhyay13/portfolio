@@ -9,6 +9,9 @@ import SmartAssistant from "@/components/SmartAssistant";
 export const metadata = {
   title: "Shikha Upadhyay | AI Engineer",
   description: "AI Engineer building RAG systems and agentic workflows.",
+  icons: {
+    icon: "/profile-cutout.png",
+  },
 };
 
 export default function RootLayout({
