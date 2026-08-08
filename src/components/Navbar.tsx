@@ -49,7 +49,7 @@ export default function Navbar() {
           : "bg-transparent border-transparent"
       }`}
     >
-      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div className="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
         <a href="#" className="text-lg font-semibold accent-text">
           Shikha.dev

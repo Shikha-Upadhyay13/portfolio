@@ -4,7 +4,7 @@ import Reveal from "@/components/ui/Reveal";
 
 export default function About() {
   return (
-    <section id="about" className="py-14 px-6 max-w-6xl mx-auto">
+    <section id="about" className="py-14 px-6 max-w-[1400px] mx-auto">
       {/* Centered Heading */}
       <Reveal className="mb-10 text-center">
         <h2 className="text-3xl md:text-4xl font-semibold accent-text">

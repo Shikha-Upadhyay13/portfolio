@@ -30,7 +30,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center px-8 max-w-7xl mx-auto overflow-hidden"
+      className="relative min-h-screen flex items-center px-8 max-w-[1400px] mx-auto overflow-hidden"
     >
       <div className="grid md:grid-cols-2 gap-16 items-center w-full relative z-10">
         {/* LEFT SIDE */}

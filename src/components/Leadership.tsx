@@ -5,7 +5,7 @@ import Reveal from "@/components/ui/Reveal";
 
 export default function Leadership() {
   return (
-    <section id="leadership" className="py-16 px-6 max-w-6xl mx-auto">
+    <section id="leadership" className="py-16 px-6 max-w-[1400px] mx-auto">
       {/* Section Title */}
       <Reveal className="mb-14 text-center">
         <h2 className="text-3xl md:text-4xl font-semibold accent-text">

@@ -7,7 +7,7 @@ import Reveal from "@/components/ui/Reveal";
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24 px-8 max-w-7xl mx-auto">
+    <section id="projects" className="py-24 px-8 max-w-[1400px] mx-auto">
       <Reveal className="text-center mb-16">
         <h2 className="text-3xl md:text-4xl font-semibold accent-text">
           Projects

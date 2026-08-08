@@ -4,7 +4,7 @@ import Reveal from "@/components/ui/Reveal";
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-24 px-6 max-w-6xl mx-auto">
+    <section id="contact" className="py-24 px-6 max-w-[1400px] mx-auto">
       {/* Section Header */}
       <Reveal className="mb-16 text-center">
         <h2 className="text-3xl md:text-4xl font-semibold accent-text">

@@ -3,7 +3,7 @@
 export default function Footer() {
   return (
     <footer className="border-t mt-24">
-      <div className="max-w-6xl mx-auto px-6 py-12">
+      <div className="max-w-[1400px] mx-auto px-6 py-12">
         {/* Top Section */}
         <div className="grid md:grid-cols-2 gap-8">
           {/* Left */}
