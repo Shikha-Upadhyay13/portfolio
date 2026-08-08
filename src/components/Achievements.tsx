@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
-import { achievement } from "@/data/achievements";
+import { achievements, type AchievementPhoto } from "@/data/achievements";
 
 /** Stacked-photo depths behind the front card: offset, tilt, scale, fade. */
 const DEPTH = [
@@ -14,8 +14,7 @@ const DEPTH = [
   { x: 38, y: 30, rotate: 12, scale: 0.92, zIndex: 10, opacity: 0.55 },
 ];
 
-export default function Achievements() {
-  const { photos } = achievement;
+function PhotoStack({ photos }: { photos: AchievementPhoto[] }) {
   const total = photos.length;
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -33,6 +32,91 @@ export default function Achievements() {
   }, [go, paused, total]);
 
   return (
+    <div className="flex flex-col items-center">
+      <div
+        className="relative w-full max-w-sm aspect-[4/5]"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        {photos.map((photo, i) => {
+          const pos = (i - current + total) % total;
+          if (pos > 2) return null;
+          const depth = DEPTH[pos];
+
+          return (
+            <motion.div
+              key={photo.src}
+              drag={pos === 0 ? "x" : false}
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.2}
+              onDragEnd={(_, info) => {
+                if (info.offset.x < -70) go(1);
+                else if (info.offset.x > 70) go(-1);
+              }}
+              animate={depth}
+              transition={{ type: "spring", stiffness: 260, damping: 26 }}
+              style={{ touchAction: "pan-y" }}
+              className="absolute inset-0 rounded-2xl overflow-hidden border border-white/10 bg-[#111115] shadow-2xl shadow-black/50 p-2 cursor-grab active:cursor-grabbing"
+            >
+              <div className="relative w-full h-full rounded-lg overflow-hidden">
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  sizes="(max-width: 768px) 90vw, 380px"
+                  className="object-contain bg-[#0c0c10]"
+                  priority={i === 0}
+                  draggable={false}
+                />
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+
+      {/* Controls */}
+      <div className="flex items-center gap-4 mt-6">
+        <button
+          aria-label="Previous photo"
+          onClick={() => go(-1)}
+          className="w-9 h-9 flex items-center justify-center rounded-full glass accent-border text-gray-400 hover:text-white transition"
+        >
+          <ChevronLeft className="w-4 h-4" />
+        </button>
+
+        <div className="flex gap-1.5">
+          {photos.map((_, i) => (
+            <button
+              key={i}
+              aria-label={`Go to photo ${i + 1}`}
+              onClick={() => setCurrent(i)}
+              className={`h-1.5 rounded-full transition-all ${
+                i === current
+                  ? "w-5 bg-gradient-to-r from-purple-400 to-blue-500"
+                  : "w-1.5 bg-white/20"
+              }`}
+            />
+          ))}
+        </div>
+
+        <button
+          aria-label="Next photo"
+          onClick={() => go(1)}
+          className="w-9 h-9 flex items-center justify-center rounded-full glass accent-border text-gray-400 hover:text-white transition"
+        >
+          <ChevronRight className="w-4 h-4" />
+        </button>
+      </div>
+
+      <p className="mt-3 text-sm text-gray-400 text-center max-w-xs">
+        {photos[current].caption}
+      </p>
+    </div>
+  );
+}
+
+export default function Achievements() {
+  return (
     <section id="achievements" className="py-24 px-6 max-w-[1400px] mx-auto">
       <Reveal className="mb-14 text-center">
         <h2 className="text-3xl md:text-4xl font-semibold accent-text">
@@ -40,102 +124,25 @@ export default function Achievements() {
         </h2>
       </Reveal>
 
-      <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
-        {/* Text side */}
-        <Reveal delay={0.1} className="space-y-4 order-2 md:order-1">
-          <p className="text-xs uppercase tracking-[0.25em] text-gray-500">
-            Academic Excellence
-          </p>
-          <h3 className="text-2xl md:text-3xl font-semibold">
-            {achievement.title}
-          </h3>
-          <p className="accent-text font-medium">{achievement.meta}</p>
-          <p className="text-gray-300 leading-relaxed max-w-md">
-            {achievement.description}
-          </p>
-        </Reveal>
+      <div className="space-y-20">
+        {achievements.map((item) => (
+          <div key={item.title} className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+            <Reveal delay={0.1} className="space-y-4 order-2 md:order-1">
+              <p className="text-xs uppercase tracking-[0.25em] text-gray-500">
+                {item.eyebrow}
+              </p>
+              <h3 className="text-2xl md:text-3xl font-semibold">{item.title}</h3>
+              <p className="accent-text font-medium">{item.meta}</p>
+              <p className="text-gray-300 leading-relaxed max-w-md">
+                {item.description}
+              </p>
+            </Reveal>
 
-        {/* Photo stack */}
-        <Reveal delay={0.15} className="order-1 md:order-2 flex flex-col items-center">
-          <div
-            className="relative w-full max-w-sm aspect-[4/5]"
-            onMouseEnter={() => setPaused(true)}
-            onMouseLeave={() => setPaused(false)}
-          >
-            {photos.map((photo, i) => {
-              const pos = (i - current + total) % total;
-              if (pos > 2) return null;
-              const depth = DEPTH[pos];
-
-              return (
-                <motion.div
-                  key={photo.src}
-                  drag={pos === 0 ? "x" : false}
-                  dragConstraints={{ left: 0, right: 0 }}
-                  dragElastic={0.2}
-                  onDragEnd={(_, info) => {
-                    if (info.offset.x < -70) go(1);
-                    else if (info.offset.x > 70) go(-1);
-                  }}
-                  animate={depth}
-                  transition={{ type: "spring", stiffness: 260, damping: 26 }}
-                  style={{ touchAction: "pan-y" }}
-                  className="absolute inset-0 rounded-2xl overflow-hidden border border-white/10 bg-[#111115] shadow-2xl shadow-black/50 p-2 cursor-grab active:cursor-grabbing"
-                >
-                  <div className="relative w-full h-full rounded-lg overflow-hidden">
-                    <Image
-                      src={photo.src}
-                      alt={photo.alt}
-                      fill
-                      sizes="(max-width: 768px) 90vw, 380px"
-                      className="object-contain bg-[#0c0c10]"
-                      priority={i === 0}
-                      draggable={false}
-                    />
-                  </div>
-                </motion.div>
-              );
-            })}
+            <Reveal delay={0.15} className="order-1 md:order-2">
+              <PhotoStack photos={item.photos} />
+            </Reveal>
           </div>
-
-          {/* Controls */}
-          <div className="flex items-center gap-4 mt-6">
-            <button
-              aria-label="Previous photo"
-              onClick={() => go(-1)}
-              className="w-9 h-9 flex items-center justify-center rounded-full glass accent-border text-gray-400 hover:text-white transition"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-
-            <div className="flex gap-1.5">
-              {photos.map((_, i) => (
-                <button
-                  key={i}
-                  aria-label={`Go to photo ${i + 1}`}
-                  onClick={() => setCurrent(i)}
-                  className={`h-1.5 rounded-full transition-all ${
-                    i === current
-                      ? "w-5 bg-gradient-to-r from-purple-400 to-blue-500"
-                      : "w-1.5 bg-white/20"
-                  }`}
-                />
-              ))}
-            </div>
-
-            <button
-              aria-label="Next photo"
-              onClick={() => go(1)}
-              className="w-9 h-9 flex items-center justify-center rounded-full glass accent-border text-gray-400 hover:text-white transition"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
-
-          <p className="mt-3 text-sm text-gray-400 text-center max-w-xs">
-            {photos[current].caption}
-          </p>
-        </Reveal>
+        ))}
       </div>
     </section>
   );

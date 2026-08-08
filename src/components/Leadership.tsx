@@ -1,17 +1,37 @@
 "use client";
 
-import { leadership } from "@/data/leadership";
+import Image from "next/image";
+import { leadership, leadershipPhotos } from "@/data/leadership";
 import Reveal from "@/components/ui/Reveal";
 
 export default function Leadership() {
   return (
     <section id="leadership" className="py-16 px-6 max-w-[1400px] mx-auto">
-      {/* Section Title */}
-      <Reveal className="mb-14 text-center">
-        <h2 className="text-3xl md:text-4xl font-semibold accent-text">
-          Leadership & Activities
-        </h2>
-      </Reveal>
+      {/* Section header: title on the left, a photo strip on the right */}
+      <div className="mb-14 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+        <Reveal className="text-center md:text-left">
+          <h2 className="text-3xl md:text-4xl font-semibold accent-text">
+            Leadership & Activities
+          </h2>
+        </Reveal>
+
+        <Reveal delay={0.1} className="flex justify-center md:justify-end gap-3">
+          {leadershipPhotos.map((photo) => (
+            <div
+              key={photo.src}
+              className="relative w-24 h-28 sm:w-28 sm:h-32 md:w-32 md:h-36 rounded-xl overflow-hidden border border-white/10 bg-white/[0.03] backdrop-blur-xl shrink-0 transition-transform duration-300 hover:-translate-y-1"
+            >
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                fill
+                sizes="(max-width: 768px) 30vw, 144px"
+                className="object-cover"
+              />
+            </div>
+          ))}
+        </Reveal>
+      </div>
 
       <div className="group/lead space-y-16">
         {leadership.map((item, index) => (

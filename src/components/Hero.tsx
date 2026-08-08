@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { TypeAnimation } from "react-type-animation";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const container = {
   hidden: {},
@@ -25,6 +25,26 @@ const stats = [
   { value: "20+", label: "Technologies" },
   { value: "AI", label: "B.Tech Major" },
 ];
+
+/** Gentle idle float for the portrait cutout; skipped for reduced-motion users. */
+function FloatingPortrait() {
+  const reduceMotion = useReducedMotion();
+  return (
+    <motion.div
+      animate={reduceMotion ? undefined : { y: [0, -14, 0] }}
+      transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+      className="relative w-72 sm:w-80 md:w-[26rem] aspect-[15/16]"
+    >
+      <Image
+        src="/profile-cutout.png"
+        alt="Shikha Upadhyay"
+        fill
+        priority
+        className="object-contain transition-transform duration-500 hover:scale-[1.02]"
+      />
+    </motion.div>
+  );
+}
 
 export default function Hero() {
   return (
@@ -130,22 +150,26 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* RIGHT SIDE */}
+        {/* RIGHT SIDE — portrait, staged with a soft backdrop card and a grounding shadow */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="flex justify-center md:justify-end"
+          className="relative flex justify-center md:justify-end items-end min-h-[420px] md:min-h-[560px]"
         >
-          <div className="relative w-72 md:w-96 aspect-[15/16]">
-            <Image
-              src="/profile-cutout.png"
-              alt="Shikha Upadhyay"
-              fill
-              priority
-              className="object-contain transition duration-500 hover:scale-105"
-            />
-          </div>
+          {/* Backdrop card gives the cutout a "stage" instead of floating on empty space */}
+          <div
+            aria-hidden
+            className="absolute right-2 md:right-12 bottom-4 w-60 h-80 md:w-72 md:h-[24rem] rounded-[2.5rem] bg-gradient-to-br from-purple-500/15 to-blue-500/15 border border-white/5 -rotate-6 -z-10"
+          />
+
+          {/* Soft contact shadow anchors the figure to the ground */}
+          <div
+            aria-hidden
+            className="absolute bottom-3 right-1/2 translate-x-1/2 md:right-16 md:translate-x-0 w-44 h-9 bg-black/40 blur-2xl rounded-full -z-10"
+          />
+
+          <FloatingPortrait />
         </motion.div>
       </div>
     </section>

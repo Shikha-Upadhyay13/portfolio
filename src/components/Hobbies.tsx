@@ -1,13 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import Reveal from "@/components/ui/Reveal";
+import MediaFilmstrip from "@/components/ui/MediaFilmstrip";
 import { hobbies } from "@/data/hobbies";
 
-/** Alternating tilts so the filmstrip reads like scattered printed photos, not a grid. */
-const TILTS = ["-rotate-3", "rotate-2", "-rotate-2", "rotate-3", "-rotate-1", "rotate-1"];
-
 export default function Hobbies() {
+  const [featured, ...rest] = hobbies;
+
   return (
     <section id="hobbies" className="py-24 px-6 max-w-[1400px] mx-auto">
       <Reveal className="mb-14 text-center">
@@ -20,36 +19,46 @@ export default function Hobbies() {
       </Reveal>
 
       <div className="space-y-20">
-        {hobbies.map((hobby) => (
-          <div key={hobby.title} className="space-y-8">
-            <Reveal className="max-w-2xl mx-auto text-center space-y-3">
-              <h3 className="text-2xl font-semibold">{hobby.title}</h3>
-              <p className="accent-text font-medium text-sm uppercase tracking-wide">
-                {hobby.tagline}
-              </p>
-              <p className="text-gray-300 leading-relaxed">{hobby.description}</p>
-            </Reveal>
+        {/* Featured hobby, full width */}
+        <div className="space-y-8">
+          <Reveal className="max-w-2xl mx-auto text-center space-y-3">
+            <h3 className="text-2xl font-semibold">{featured.title}</h3>
+            <p className="accent-text font-medium text-sm uppercase tracking-wide">
+              {featured.tagline}
+            </p>
+            <p className="text-gray-300 leading-relaxed">{featured.description}</p>
+          </Reveal>
 
-            <Reveal delay={0.1}>
-              <div className="flex gap-6 overflow-x-auto no-scrollbar fade-x py-8 px-4 snap-x snap-mandatory">
-                {hobby.photos.map((photo, i) => (
-                  <div
-                    key={photo.src}
-                    className={`relative shrink-0 w-48 h-60 sm:w-56 sm:h-72 snap-center rounded-sm overflow-hidden border-4 border-white/95 bg-white shadow-xl shadow-black/50 transition-transform duration-300 ease-out hover:!rotate-0 hover:scale-105 hover:z-10 ${TILTS[i % TILTS.length]}`}
-                  >
-                    <Image
-                      src={photo.src}
-                      alt={photo.alt}
-                      fill
-                      sizes="(max-width: 640px) 60vw, 224px"
-                      className="object-cover"
-                    />
-                  </div>
-                ))}
+          <Reveal delay={0.1}>
+            <MediaFilmstrip items={featured.media} />
+          </Reveal>
+        </div>
+
+        {/* Remaining hobbies, side by side with a divider instead of stacked */}
+        <div className="relative grid md:grid-cols-2 divide-y divide-white/10 md:divide-y-0 gap-y-12">
+          {rest.map((hobby, i) => (
+            <Reveal
+              key={hobby.title}
+              delay={i * 0.1}
+              className={`space-y-6 ${i === 0 ? "pt-0 md:pr-10" : "pt-12 md:pt-0 md:pl-10"}`}
+            >
+              <div className="text-center space-y-3">
+                <h3 className="text-2xl font-semibold">{hobby.title}</h3>
+                <p className="accent-text font-medium text-sm uppercase tracking-wide">
+                  {hobby.tagline}
+                </p>
+                <p className="text-gray-300 leading-relaxed">{hobby.description}</p>
               </div>
+              <MediaFilmstrip items={hobby.media} />
             </Reveal>
-          </div>
-        ))}
+          ))}
+
+          {/* Vertical split between the two columns, desktop only */}
+          <div
+            aria-hidden
+            className="hidden md:block absolute inset-y-0 left-1/2 -translate-x-1/2 w-px bg-white/10"
+          />
+        </div>
       </div>
     </section>
   );

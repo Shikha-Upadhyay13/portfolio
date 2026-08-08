@@ -1,3 +1,19 @@
+// Shown as a header collage for the whole Leadership section, not tied to one card.
+export const leadershipPhotos = [
+  {
+    src: "/images/leadership/ecell-member-badge.jpg",
+    alt: "E-Cell member badge — Shikha Upadhyay, Marketing & PR",
+  },
+  {
+    src: "/images/leadership/ecell-event-audience.jpg",
+    alt: "Audience at an E-Cell event",
+  },
+  {
+    src: "/images/leadership/ecell-event-attendee.jpg",
+    alt: "Attending an E-Cell event",
+  },
+];
+
 export const leadership = [
   {
     club: "Entrepreneurship Cell (E-Cell)",
