@@ -1,25 +1,13 @@
-// Shown as a header collage for the whole Leadership section, not tied to one card.
-export const leadershipPhotos = [
-  {
-    src: "/images/leadership/ecell-member-badge.jpg",
-    alt: "E-Cell member badge — Shikha Upadhyay, Marketing & PR",
-  },
-  {
-    src: "/images/leadership/ecell-event-audience.jpg",
-    alt: "Audience at an E-Cell event",
-  },
-  {
-    src: "/images/leadership/ecell-event-attendee.jpg",
-    alt: "Attending an E-Cell event",
-  },
-];
-
 export const leadership = [
   {
     club: "Entrepreneurship Cell (E-Cell)",
     role: "Marketing & Public Relations Team Member",
     description:
       "Contributed to outreach strategies, created promotional content, and supported team efforts to increase event participation and engagement.",
+    photo: {
+      src: "/images/leadership/ecell-member-badge.jpg",
+      alt: "E-Cell member badge — Shikha Upadhyay, Marketing & PR",
+    },
   },
   {
     club: "Echo Club – Echo Speaks",
@@ -28,10 +16,14 @@ export const leadership = [
       "Participated in speeches, debates, and anchoring events, strengthening communication skills and active engagement within the club.",
   },
   {
-    club: "Vriti – Entrepreneurship Club",
-    role: "Research & Development Member",
+    club: "Tarang – Dance Club",
+    role: "Performer & Team Member",
     description:
-      "Engaged in workshops, idea pitching sessions, and startup culture discussions focused on innovation and business development.",
+      "Performed in college-level cultural events and contributed to organizing performances and annual functions.",
+    photo: {
+      src: "/images/leadership/ecell-event-attendee.jpg",
+      alt: "At a college event",
+    },
   },
   {
     club: "Yukti Club",
@@ -40,9 +32,13 @@ export const leadership = [
       "Prepared event content, managed documentation, and contributed captions and promotional material for college events.",
   },
   {
-    club: "Tarang – Dance Club",
-    role: "Performer & Team Member",
+    club: "Vriti – Entrepreneurship Club",
+    role: "Research & Development Member",
     description:
-      "Performed in college-level cultural events and contributed to organizing performances and annual functions.",
+      "Engaged in workshops, idea pitching sessions, and startup culture discussions focused on innovation and business development.",
+    photo: {
+      src: "/images/leadership/ecell-event-audience.jpg",
+      alt: "Audience at a college event",
+    },
   },
 ];

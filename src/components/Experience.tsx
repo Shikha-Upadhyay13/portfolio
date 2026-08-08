@@ -1,9 +1,14 @@
 "use client";
 
+import { Award } from "lucide-react";
 import { experiences } from "@/data/experience";
 import Reveal from "@/components/ui/Reveal";
 
 export default function Experience() {
+  const openCertificate = (id: string) => {
+    window.dispatchEvent(new CustomEvent("open-certificate", { detail: { id } }));
+  };
+
   return (
     <section id="experience" className="py-24 px-6 max-w-[1400px] mx-auto">
       {/* Section Header */}
@@ -25,10 +30,22 @@ export default function Experience() {
               <span className="absolute left-0 top-8 bottom-8 w-[3px] rounded-full bg-gradient-to-b from-purple-400 to-blue-500" />
 
               <div className="pl-4">
-                <div className="mb-4">
-                  <h3 className="text-xl font-semibold">{exp.company}</h3>
-                  <p className="text-purple-300">{exp.role}</p>
-                  <p className="text-sm text-gray-500">{exp.duration}</p>
+                <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
+                  <div>
+                    <h3 className="text-xl font-semibold">{exp.company}</h3>
+                    <p className="text-purple-300">{exp.role}</p>
+                    <p className="text-sm text-gray-500">{exp.duration}</p>
+                  </div>
+
+                  {exp.certificateId && (
+                    <button
+                      onClick={() => openCertificate(exp.certificateId!)}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-full glass accent-border text-gray-300 hover:text-white transition shrink-0"
+                    >
+                      <Award className="w-3.5 h-3.5" />
+                      Certificate
+                    </button>
+                  )}
                 </div>
 
                 <ul className="space-y-2 text-gray-400">
