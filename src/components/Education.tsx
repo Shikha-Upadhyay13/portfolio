@@ -1,8 +1,36 @@
 "use client";
 
-import Image from "next/image";
 import { education } from "@/data/education";
 import Reveal from "@/components/ui/Reveal";
+
+function EduCard({
+  degree,
+  institution,
+  score,
+  duration,
+  align = "left",
+}: {
+  degree: string;
+  institution: string;
+  score: string;
+  duration: string;
+  align?: "left" | "right";
+}) {
+  const textAlign = align === "right" ? "text-right" : "text-left";
+  const durationAlign = align === "right" ? "text-left" : "text-right";
+  return (
+    <div className="rounded-2xl border border-white/10 bg-black/40 backdrop-blur-xl p-8 transition-all duration-300 hover:border-purple-400/40 hover:-translate-y-1">
+      <p className={`${durationAlign} text-sm font-mono tracking-wider text-purple-300/80`}>
+        {duration}
+      </p>
+      <h3 className={`${textAlign} text-2xl font-semibold mt-3`}>{degree}</h3>
+      <p className={`${textAlign} text-sm uppercase tracking-wide text-gray-500 mt-2`}>
+        {institution}
+      </p>
+      <p className={`${textAlign} text-base text-gray-300 mt-6`}>{score}</p>
+    </div>
+  );
+}
 
 export default function Education() {
   return (
@@ -13,35 +41,43 @@ export default function Education() {
         </h2>
       </Reveal>
 
-      <div className="group/edu space-y-8 max-w-3xl mx-auto">
-        {education.map((item, index) => (
-          <Reveal key={index} direction="up">
-            <div className="flex flex-col sm:flex-row rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-300 hover:border-purple-400/50 hover:-translate-y-1 group-hover/edu:opacity-50 hover:!opacity-100">
-              <div className="relative w-full h-48 sm:h-auto sm:w-64 shrink-0">
-                <Image
-                  src={item.image}
-                  alt={`${item.institution} campus`}
-                  fill
-                  sizes="(max-width: 640px) 100vw, 256px"
-                  className="object-cover"
-                />
-              </div>
+      <div className="relative max-w-5xl mx-auto">
+        {/* Dashed timeline spine, desktop only */}
+        <div className="hidden md:block absolute left-1/2 top-2 bottom-2 w-px -translate-x-1/2 border-l border-dashed border-white/15" />
 
-              <div className="relative flex-1 p-6 sm:p-8 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-                <span className="absolute left-0 top-8 bottom-8 w-[3px] rounded-full bg-gradient-to-b from-purple-400 to-blue-500" />
+        <div className="space-y-12 md:space-y-20">
+          {education.map((item, index) => {
+            const onLeft = index % 2 === 0;
+            // B.Tech (0) and Class X (2) read right-aligned; Intermediate (1) stays left.
+            const align = index === 1 ? "left" : "right";
 
-                <div className="sm:pl-4">
-                  <h3 className="text-xl font-semibold">{item.degree}</h3>
-                  <p className="text-purple-300">{item.institution}</p>
-                  <p className="text-sm text-gray-400 mt-1">{item.score}</p>
-                </div>
-                <p className="text-sm text-gray-500 shrink-0 sm:pl-4">
-                  {item.duration}
-                </p>
+            return (
+              <div key={index} className="relative md:grid md:grid-cols-2 md:gap-16 items-center">
+                {/* Dot marker on the spine, desktop only */}
+                <span className="hidden md:flex absolute left-1/2 top-10 -translate-x-1/2 -translate-y-1/2 z-10 items-center justify-center">
+                  <span className="absolute w-7 h-7 rounded-full bg-purple-500/20" />
+                  <span className="relative w-3.5 h-3.5 rounded-full bg-purple-400 ring-4 ring-[#0b0b0f]" />
+                </span>
+
+                {onLeft ? (
+                  <>
+                    <Reveal direction="right">
+                      <EduCard {...item} align={align} />
+                    </Reveal>
+                    <div aria-hidden />
+                  </>
+                ) : (
+                  <>
+                    <div aria-hidden className="hidden md:block" />
+                    <Reveal direction="left">
+                      <EduCard {...item} align={align} />
+                    </Reveal>
+                  </>
+                )}
               </div>
-            </div>
-          </Reveal>
-        ))}
+            );
+          })}
+        </div>
       </div>
     </section>
   );
