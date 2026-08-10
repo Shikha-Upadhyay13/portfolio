@@ -133,6 +133,25 @@ export default function Achievements() {
               </p>
               <h3 className="text-2xl md:text-3xl font-semibold">{item.title}</h3>
               <p className="accent-text font-medium">{item.meta}</p>
+
+              {item.stats && (
+                <div className="flex flex-wrap gap-2 pt-1">
+                  {item.stats.map((stat) => (
+                    <span
+                      key={stat.label}
+                      className="inline-flex items-baseline gap-1.5 px-3 py-1.5 rounded-full border border-[#47F1FF]/40 bg-[#47F1FF]/10"
+                    >
+                      <span className="text-sm font-semibold text-[#47F1FF]">
+                        {stat.value}
+                      </span>
+                      <span className="text-[11px] uppercase tracking-wide text-gray-400">
+                        {stat.label}
+                      </span>
+                    </span>
+                  ))}
+                </div>
+              )}
+
               <p className="text-gray-300 leading-relaxed max-w-md">
                 {item.description}
               </p>

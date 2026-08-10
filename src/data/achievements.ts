@@ -4,12 +4,19 @@ export type AchievementPhoto = {
   caption: string;
 };
 
+export type AchievementStat = {
+  value: string;
+  label: string;
+};
+
 export type Achievement = {
   eyebrow: string;
   title: string;
   meta: string;
   description: string;
   photos: AchievementPhoto[];
+  /** Shown as small stat chips instead of repeating the numbers in `meta`. */
+  stats?: AchievementStat[];
 };
 
 export const achievements: Achievement[] = [
@@ -74,9 +81,14 @@ export const achievements: Achievement[] = [
   {
     eyebrow: "Salesforce",
     title: "Trailhead Ranger & 2026 Agentblazer Innovator",
-    meta: "116 Badges · 105,875+ Points · 7 Trails",
+    meta: "Salesforce Trailhead",
     description:
-      "Reached Trailhead Ranger rank on Salesforce with 116 badges and over 105,000 points across 7 trails, and was recognized as a 2026 Agentblazer Innovator for applying Salesforce and Agentforce skills through hands-on practice.",
+      "Reached Trailhead Ranger rank on Salesforce, and was recognized as a 2026 Agentblazer Innovator for applying Salesforce and Agentforce skills through hands-on practice.",
+    stats: [
+      { value: "116", label: "Badges" },
+      { value: "105,875+", label: "Points" },
+      { value: "7", label: "Trails" },
+    ],
     photos: [
       {
         src: "/images/achievements/salesforce-trailhead-profile.jpg",
