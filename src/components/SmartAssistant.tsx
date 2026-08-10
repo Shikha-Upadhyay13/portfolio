@@ -14,7 +14,9 @@ const quickReplies = [
   "What skills do you have?",
   "Tell me about your projects",
   "What is your experience?",
-  "Education?",
+  "Tell me about your achievements",
+  "What hackathons have you done?",
+  "How can I contact you?",
 ];
 
 export default function SmartAssistant() {
@@ -84,7 +86,7 @@ export default function SmartAssistant() {
 
       const reply =
         intent === "unknown"
-          ? "You can ask me about my skills, projects, experience, leadership, or education."
+          ? "I can talk about my skills, projects, experience, achievements, certifications, hackathons, leadership, education, hobbies, or how to reach me — try asking about one of those!"
           : resumeData[intent as keyof typeof resumeData].trim();
 
       setLoading(false);
@@ -157,7 +159,9 @@ export default function SmartAssistant() {
                   {chat.length === 0 && (
                     <p className="text-gray-400 text-sm leading-relaxed">
                       Hi! I&apos;m Shikha&apos;s portfolio assistant. Ask me about
-                      her skills, projects, experience, leadership, or education.
+                      her skills, projects, experience, achievements,
+                      certifications, hackathons, leadership, education, or
+                      hobbies.
                     </p>
                   )}
 
