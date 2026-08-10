@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { leadership } from "@/data/leadership";
 import Reveal from "@/components/ui/Reveal";
+import MediaFilmstrip from "@/components/ui/MediaFilmstrip";
 
 function ClubCard({
   club,
@@ -35,10 +35,9 @@ export default function Leadership() {
         {leadership.map((item, index) => {
           const cardOnLeft = index % 2 === 0;
 
-          if (!item.photo) {
-            return (
+          return (
+            <div key={index} className={item.media ? "space-y-8" : undefined}>
               <Reveal
-                key={index}
                 direction={cardOnLeft ? "right" : "left"}
                 className={`max-w-xl ${cardOnLeft ? "mr-auto" : "ml-auto"}`}
               >
@@ -46,41 +45,14 @@ export default function Leadership() {
                   <ClubCard {...item} />
                 </div>
               </Reveal>
-            );
-          }
 
-          return (
-            <div key={index} className="grid md:grid-cols-2 items-center gap-8 md:gap-16">
-              <Reveal
-                direction={cardOnLeft ? "right" : "left"}
-                className={cardOnLeft ? "md:order-1" : "md:order-2"}
-              >
-                <div className="group-hover/lead:opacity-50 hover:!opacity-100 transition-opacity">
-                  <ClubCard {...item} />
-                </div>
-              </Reveal>
-
-              <Reveal
-                direction={cardOnLeft ? "left" : "right"}
-                delay={0.1}
-                className={`hidden md:flex ${cardOnLeft ? "md:order-2 justify-start" : "md:order-1 justify-end"}`}
-              >
-                <div className="relative w-full max-w-md aspect-[4/5]">
-                  <div
-                    aria-hidden
-                    className="absolute -inset-8 -z-10 bg-[#47F1FF]/12 blur-3xl rounded-full"
-                  />
-                  <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-black/50 transition-transform duration-300 hover:scale-[1.03]">
-                    <Image
-                      src={item.photo.src}
-                      alt={item.photo.alt}
-                      fill
-                      sizes="(max-width: 768px) 0px, 448px"
-                      className="object-cover"
-                    />
-                  </div>
-                </div>
-              </Reveal>
+              {/* Photos live with the club they actually belong to, shown as a
+                  scattered strip rather than forced beside unrelated cards. */}
+              {item.media && (
+                <Reveal delay={0.1}>
+                  <MediaFilmstrip items={item.media} center />
+                </Reveal>
+              )}
             </div>
           );
         })}

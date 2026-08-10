@@ -1,13 +1,28 @@
+import type { MediaItem } from "@/types/media";
+
 export const leadership = [
   {
     club: "Entrepreneurship Cell (E-Cell)",
     role: "Marketing & Public Relations Team Member",
     description:
       "Contributed to outreach strategies, created promotional content, and supported team efforts to increase event participation and engagement.",
-    photo: {
-      src: "/images/leadership/ecell-member-badge.jpg",
-      alt: "E-Cell member badge — Shikha Upadhyay, Marketing & PR",
-    },
+    media: [
+      {
+        type: "image",
+        src: "/images/leadership/ecell-member-badge.jpg",
+        alt: "E-Cell member badge — Shikha Upadhyay, Marketing & PR",
+      },
+      {
+        type: "image",
+        src: "/images/leadership/ecell-event-audience.jpg",
+        alt: "Audience at an E-Cell event",
+      },
+      {
+        type: "image",
+        src: "/images/leadership/ecell-event-attendee.jpg",
+        alt: "Attending an E-Cell event",
+      },
+    ] satisfies MediaItem[],
   },
   {
     club: "Echo Club – Echo Speaks",
@@ -20,10 +35,6 @@ export const leadership = [
     role: "Performer & Team Member",
     description:
       "Performed in college-level cultural events and contributed to organizing performances and annual functions.",
-    photo: {
-      src: "/images/leadership/ecell-event-attendee.jpg",
-      alt: "At a college event",
-    },
   },
   {
     club: "Yukti Club",
@@ -36,9 +47,5 @@ export const leadership = [
     role: "Research & Development Member",
     description:
       "Engaged in workshops, idea pitching sessions, and startup culture discussions focused on innovation and business development.",
-    photo: {
-      src: "/images/leadership/ecell-event-audience.jpg",
-      alt: "Audience at a college event",
-    },
   },
 ];
