@@ -101,7 +101,6 @@ body {
 /* Primary button — outlined in the accent rather than filled, since a solid
    bright-cyan background reads poorly against white text */
 .accent-btn {
-  position: relative;
   color: var(--accent-1);
   font-weight: 600;
   background: transparent;
