@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Search } from "lucide-react";
 
 const links = [
   { id: "about", label: "About" },
@@ -72,16 +73,19 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Command palette trigger */}
+          {/* Command palette trigger — icon-only on mobile (also doubles as
+              mobile section navigation, since the link list above is
+              desktop-only), full "Search ⌘K" hint from sm and up */}
           <button
             onClick={() =>
               window.dispatchEvent(new CustomEvent("open-command-palette"))
             }
             aria-label="Open command palette"
-            className="hidden sm:inline-flex items-center gap-2 px-3 py-2 rounded-lg glass text-gray-400 transition accent-border hover:text-white"
+            className="inline-flex items-center gap-2 px-3 py-2 rounded-lg glass text-gray-400 transition accent-border hover:text-white"
           >
-            <span className="text-xs">Search</span>
-            <kbd className="text-[10px] border border-white/15 rounded px-1.5 py-0.5">
+            <Search className="w-4 h-4 sm:hidden" />
+            <span className="hidden sm:inline text-xs">Search</span>
+            <kbd className="hidden sm:inline text-[10px] border border-white/15 rounded px-1.5 py-0.5">
               ⌘K
             </kbd>
           </button>

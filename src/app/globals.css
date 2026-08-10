@@ -147,6 +147,27 @@ body {
   border-color: var(--accent-1) !important;
 }
 
+/* ───────────── Unified interaction feedback (site-wide) ─────────────
+   Every button/link gets the same tactile press response by default.
+   More specific rules (.accent-btn:active, etc.) still win the cascade
+   via higher specificity, so per-component hover treatments are unaffected. */
+button,
+a,
+[role="button"] {
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+button:active,
+a:active,
+[role="button"]:active {
+  transform: scale(0.96);
+}
+button:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--accent-1);
+  outline-offset: 2px;
+}
+
 /* Hide scrollbar on horizontally-dragged filmstrips (Hobbies section) */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
