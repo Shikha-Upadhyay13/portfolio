@@ -38,15 +38,14 @@ export default function Skills() {
                 {skillGroup.category}
               </h3>
 
-              <div className="grid grid-cols-[repeat(auto-fill,minmax(84px,1fr))] gap-3">
+              <div className="grid grid-cols-[repeat(auto-fill,minmax(72px,1fr))] gap-4">
                 {skillGroup.items.map((item, i) => {
                   const { icon: Icon, color } = getSkillIcon(item);
                   return (
-                    <div
-                      key={i}
-                      className="flex flex-col items-center gap-2.5 p-3 rounded-xl bg-white/[0.03] border border-white/10 text-center transition-all duration-200 hover:border-white/25 hover:bg-white/[0.08] hover:-translate-y-1"
-                    >
-                      <Icon className="w-9 h-9 shrink-0" style={{ color }} />
+                    <div key={i} className="flex flex-col items-center gap-2 text-center group">
+                      <div className="w-14 h-14 rounded-2xl bg-black flex items-center justify-center transition-transform duration-200 group-hover:-translate-y-1 group-hover:scale-105">
+                        <Icon className="w-8 h-8 shrink-0" style={{ color }} />
+                      </div>
                       <span className="text-[11px] leading-tight text-gray-400">
                         {item}
                       </span>
