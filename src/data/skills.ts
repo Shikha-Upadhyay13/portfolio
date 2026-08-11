@@ -1,7 +1,6 @@
 export const skills = [
   {
     category: "AI & Generative AI",
-    color: "#47F1FF",
     items: [
       "RAG Pipelines",
       "Prompt Engineering",
@@ -14,7 +13,6 @@ export const skills = [
   },
   {
     category: "Machine Learning & Data",
-    color: "#FB923C",
     items: [
       "Machine Learning",
       "Deep Learning",
@@ -26,12 +24,10 @@ export const skills = [
   },
   {
     category: "Agentic Workflows & Automation",
-    color: "#C084FC",
     items: ["LangChain", "LangGraph", "LangSmith", "N8N", "Make"],
   },
   {
     category: "Programming",
-    color: "#60A5FA",
     items: [
       "Python",
       "Java",
@@ -46,12 +42,10 @@ export const skills = [
   },
   {
     category: "Databases & Vector Search",
-    color: "#2DD4BF",
     items: ["MySQL", "Firebase", "FAISS", "Chroma", "Vector Databases"],
   },
   {
     category: "Frontend & Backend",
-    color: "#F472B6",
     items: [
       "React.js (Vite)",
       "Next.js",
@@ -64,7 +58,6 @@ export const skills = [
   },
   {
     category: "Web Platforms & Tools",
-    color: "#4ADE80",
     items: ["Git", "GitHub", "Wix Studio", "Figma"],
   },
 ];
