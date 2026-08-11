@@ -53,6 +53,7 @@ export const projects: Project[] = [
     github: "https://github.com/Shikha-Upadhyay13/nykaa-ecommerce-clone",
     highlight: "3D models + AI chatbot",
     category: "Web App",
+    featured: true,
   },
   {
     title: "Smart Image Compressor",
