@@ -1,33 +1,48 @@
 "use client";
 
-import { education } from "@/data/education";
+import Image from "next/image";
+import { education, type EducationEntry } from "@/data/education";
 import Reveal from "@/components/ui/Reveal";
 
 function EduCard({
-  degree,
   institution,
-  score,
-  duration,
+  image,
+  milestones,
   align = "left",
-}: {
-  degree: string;
-  institution: string;
-  score: string;
-  duration: string;
-  align?: "left" | "right";
-}) {
+}: EducationEntry & { align?: "left" | "right" }) {
   const textAlign = align === "right" ? "text-right" : "text-left";
-  const durationAlign = align === "right" ? "text-left" : "text-right";
+
   return (
-    <div className="rounded-2xl border border-white/10 bg-black/40 backdrop-blur-xl p-8 transition-all duration-300 hover:border-[#47F1FF]/40 hover:-translate-y-1">
-      <p className={`${durationAlign} text-sm font-mono tracking-wider text-[#47F1FF]/80`}>
-        {duration}
-      </p>
-      <h3 className={`${textAlign} text-2xl font-semibold mt-3`}>{degree}</h3>
-      <p className={`${textAlign} text-sm uppercase tracking-wide text-gray-500 mt-2`}>
-        {institution}
-      </p>
-      <p className={`${textAlign} text-base text-gray-300 mt-6`}>{score}</p>
+    <div className="rounded-2xl border border-white/10 bg-black/40 backdrop-blur-xl overflow-hidden transition-all duration-300 hover:border-[#47F1FF]/40 hover:-translate-y-1">
+      <div className="relative aspect-[16/9]">
+        <Image
+          src={image}
+          alt={`${institution} campus`}
+          fill
+          sizes="(max-width: 768px) 100vw, 45vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+        <p
+          className={`absolute bottom-3 ${
+            align === "right" ? "right-4 text-right" : "left-4 text-left"
+          } text-sm font-medium uppercase tracking-wide text-white/90`}
+        >
+          {institution}
+        </p>
+      </div>
+
+      <div className="p-8 divide-y divide-white/10">
+        {milestones.map((m, i) => (
+          <div key={m.degree} className={i > 0 ? "pt-5 mt-5" : ""}>
+            <p className={`${textAlign} text-sm font-mono tracking-wider text-[#47F1FF]/80`}>
+              {m.duration}
+            </p>
+            <h3 className={`${textAlign} text-2xl font-semibold mt-2`}>{m.degree}</h3>
+            <p className={`${textAlign} text-base text-gray-300 mt-3`}>{m.score}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -48,11 +63,10 @@ export default function Education() {
         <div className="space-y-12 md:space-y-20">
           {education.map((item, index) => {
             const onLeft = index % 2 === 0;
-            // B.Tech (0) and Class X (2) read right-aligned; Intermediate (1) stays left.
-            const align = index === 1 ? "left" : "right";
+            const align = onLeft ? "right" : "left";
 
             return (
-              <div key={index} className="relative md:grid md:grid-cols-2 md:gap-16 items-center">
+              <div key={item.institution} className="relative md:grid md:grid-cols-2 md:gap-16 items-center">
                 {/* Dot marker on the spine, desktop only */}
                 <span className="hidden md:flex absolute left-1/2 top-10 -translate-x-1/2 -translate-y-1/2 z-10 items-center justify-center">
                   <span className="absolute w-7 h-7 rounded-full bg-[#47F1FF]/20" />
