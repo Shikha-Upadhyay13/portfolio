@@ -17,12 +17,16 @@ export default function ProjectCard({
   isTopMatch = false,
   isDimmed = false,
   showFeaturedBadge = true,
+  fullWidth = false,
 }: {
   project: Project;
   index?: number;
   isTopMatch?: boolean;
   isDimmed?: boolean;
   showFeaturedBadge?: boolean;
+  /** Spans both grid columns — used for the home teaser's flagship cards.
+   * Independent of `project.featured` so the full /projects grid can stay uniform. */
+  fullWidth?: boolean;
 }) {
   const isPlaceholder = project.github.startsWith(PLACEHOLDER_REPO);
 
@@ -43,7 +47,7 @@ export default function ProjectCard({
           ? "border-[#47F1FF]/70 shadow-[0_20px_60px_-20px_rgba(71,241,255,0.4)]"
           : "border-white/10"
       } ${isDimmed ? "opacity-30 saturate-50" : ""} ${
-        project.featured ? "md:col-span-2" : ""
+        fullWidth ? "md:col-span-2" : ""
       }`}
     >
       {/* Top row: category + featured/best-match marker */}

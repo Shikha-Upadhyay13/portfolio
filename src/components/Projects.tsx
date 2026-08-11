@@ -20,8 +20,8 @@ export default function Projects() {
         </p>
       </Reveal>
 
-      {/* Bento grid — featured projects span both columns. Sibling cards dim
-          on hover so the focused one stands out. */}
+      {/* Flagship cards span both columns. Sibling cards dim on hover so the
+          focused one stands out. */}
       <div className="group/cards grid md:grid-cols-2 gap-6">
         {featured.map((project, index) => (
           <ProjectCard
@@ -29,6 +29,7 @@ export default function Projects() {
             project={project}
             index={index}
             showFeaturedBadge={false}
+            fullWidth
           />
         ))}
       </div>

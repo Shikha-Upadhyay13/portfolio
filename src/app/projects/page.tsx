@@ -90,19 +90,39 @@ export default function ProjectsPage() {
           Back to portfolio
         </Link>
 
-        <Reveal>
-          <h1 className="text-3xl md:text-4xl font-semibold accent-text">
-            All Projects
-          </h1>
-          <p className="text-gray-400 mt-3 max-w-xl">
-            {projects.length} projects across {CATEGORIES.length - 1}{" "}
-            categories — search ranks them live, like a lightweight
-            retrieval pass.
-          </p>
-        </Reveal>
+        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+          <Reveal>
+            <h1 className="text-3xl md:text-4xl font-semibold accent-text">
+              All Projects
+            </h1>
+            <p className="text-gray-400 mt-3 max-w-xl">
+              {projects.length} projects across {CATEGORIES.length - 1}{" "}
+              categories — search ranks them live, like a lightweight
+              retrieval pass.
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.05} className="w-full md:w-72 shrink-0">
+            <div className="relative">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+              <input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search projects..."
+                className="glass w-full pl-11 pr-4 py-3 rounded-xl text-sm outline-none focus:ring-1 focus:ring-[#47F1FF]/50 placeholder:text-gray-500"
+              />
+            </div>
+            <p className="text-xs text-gray-500 mt-2 h-4">
+              {hasQuery &&
+                (matchCount > 0
+                  ? `${matchCount} match${matchCount === 1 ? "" : "es"}, ranked by relevance`
+                  : "No matches — try a different word")}
+            </p>
+          </Reveal>
+        </div>
 
         {/* Category filter pills */}
-        <Reveal delay={0.05} className="flex flex-wrap gap-2 mt-8">
+        <Reveal delay={0.08} className="flex flex-wrap gap-2 mt-8">
           {CATEGORIES.map((c) => (
             <button
               key={c}
@@ -116,25 +136,6 @@ export default function ProjectsPage() {
               {c}
             </button>
           ))}
-        </Reveal>
-
-        {/* Search */}
-        <Reveal delay={0.08} className="max-w-lg mt-6">
-          <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
-            <input
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search projects — try “security” or “chatbot”"
-              className="glass w-full pl-11 pr-4 py-3 rounded-xl text-sm outline-none focus:ring-1 focus:ring-[#47F1FF]/50 placeholder:text-gray-500"
-            />
-          </div>
-          <p className="text-xs text-gray-500 mt-2 h-4">
-            {hasQuery &&
-              (matchCount > 0
-                ? `${matchCount} match${matchCount === 1 ? "" : "es"}, ranked by relevance`
-                : "No matches — try a different word")}
-          </p>
         </Reveal>
 
         <div className="group/cards grid md:grid-cols-2 gap-6 mt-8">
