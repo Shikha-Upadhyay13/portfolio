@@ -11,17 +11,28 @@ const SkillsMarquee = dynamic(() => import("@/components/ui/SkillsMarquee"), {
 
 const allSkills = skills.flatMap((group) => group.items);
 
+// Spread round-robin across 3 rows so each row mixes categories rather than
+// running through them in blocks, and scroll alternate rows in opposite
+// directions for a fuller, more dynamic wall of skills.
+const ROWS = 3;
+const rows: string[][] = Array.from({ length: ROWS }, () => []);
+allSkills.forEach((item, i) => rows[i % ROWS].push(item));
+
 export default function Skills() {
   return (
-    <section id="skills" className="py-24 max-w-[1400px] mx-auto overflow-hidden">
+    <section id="skills" className="py-32 max-w-[1400px] mx-auto overflow-hidden">
       <h2 className="text-3xl md:text-4xl font-semibold text-center mb-4 text-[#47F1FF] px-6">
         Skills
       </h2>
-      <p className="text-center text-gray-500 text-sm mb-14 px-6">
+      <p className="text-center text-gray-500 text-sm mb-16 px-6">
         Drag to explore — it keeps drifting on its own.
       </p>
 
-      <SkillsMarquee items={allSkills} />
+      <div className="space-y-10 md:space-y-14">
+        {rows.map((row, i) => (
+          <SkillsMarquee key={i} items={row} direction={i % 2 === 0 ? "left" : "right"} />
+        ))}
+      </div>
     </section>
   );
 }

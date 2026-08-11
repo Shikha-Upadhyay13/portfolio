@@ -4,24 +4,30 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useMotionValue, animate, type AnimationPlaybackControls } from "framer-motion";
 import { getSkillIcon } from "@/data/skillIcons";
 
-const LOOP_SECONDS = 45; // time to travel one full set at rest
+const LOOP_SECONDS = 55; // time to travel one full set at rest
 
 function SkillChip({ item }: { item: string }) {
   const { icon: Icon, color } = getSkillIcon(item);
   return (
-    <div className="flex flex-col items-center gap-2.5 text-center shrink-0 w-24 px-2">
-      <div className="w-16 h-16 rounded-2xl bg-black flex items-center justify-center">
-        <Icon
-          className="w-8 h-8 shrink-0"
-          style={{ color, filter: `drop-shadow(0 0 9px ${color}80)` }}
-        />
+    <div className="flex flex-col items-center gap-3 text-center shrink-0 w-32 px-3">
+      <div
+        className="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-black flex items-center justify-center"
+        style={{ boxShadow: `0 0 16px 1px ${color}4d` }}
+      >
+        <Icon className="w-10 h-10 md:w-12 md:h-12 shrink-0" style={{ color }} />
       </div>
-      <span className="text-[11px] leading-tight text-gray-500">{item}</span>
+      <span className="text-sm leading-tight text-gray-400">{item}</span>
     </div>
   );
 }
 
-export default function SkillsMarquee({ items }: { items: string[] }) {
+export default function SkillsMarquee({
+  items,
+  direction = "left",
+}: {
+  items: string[];
+  direction?: "left" | "right";
+}) {
   const trackRef = useRef<HTMLDivElement>(null);
   const controlsRef = useRef<AnimationPlaybackControls | null>(null);
   const x = useMotionValue(0);
@@ -45,19 +51,42 @@ export default function SkillsMarquee({ items }: { items: string[] }) {
 
   const startLoop = () => {
     if (!setWidth) return;
-    const current = x.get();
-    const normalized = ((current % setWidth) + setWidth) % setWidth;
-    x.set(-normalized);
-    const remaining = setWidth - normalized;
 
-    controlsRef.current = animate(x, -setWidth, {
-      duration: (remaining / setWidth) * LOOP_SECONDS,
-      ease: "linear",
-      onComplete: () => {
-        x.set(0);
-        startLoop();
-      },
-    });
+    if (direction === "left") {
+      const current = x.get();
+      const normalized = ((current % setWidth) + setWidth) % setWidth;
+      x.set(-normalized);
+      const remaining = setWidth - normalized;
+
+      controlsRef.current = animate(x, -setWidth, {
+        duration: (remaining / setWidth) * LOOP_SECONDS,
+        ease: "linear",
+        onComplete: () => {
+          x.set(0);
+          startLoop();
+        },
+      });
+    } else {
+      const current = x.get();
+      // When current sits exactly on a boundary (fresh start at -setWidth,
+      // or right after a wraparound reset), the modulo below evaluates to
+      // 0 — meaning "arrived" rather than "full lap to go" — which produces
+      // a zero-duration animate() call. That completes synchronously,
+      // re-invoking startLoop() in a tight recursive loop that pegs the
+      // main thread. Treat an exact-zero result as a full lap instead.
+      const distanceFromZero =
+        ((-current % setWidth) + setWidth) % setWidth || setWidth;
+      x.set(-distanceFromZero);
+
+      controlsRef.current = animate(x, 0, {
+        duration: (distanceFromZero / setWidth) * LOOP_SECONDS,
+        ease: "linear",
+        onComplete: () => {
+          x.set(-setWidth);
+          startLoop();
+        },
+      });
+    }
   };
 
   const pause = () => controlsRef.current?.stop();
