@@ -1,8 +1,7 @@
 "use client";
 
-import { Sparkle } from "lucide-react";
 import { skills } from "@/data/skills";
-import { skillIcons } from "@/data/skillIcons";
+import { getSkillIcon } from "@/data/skillIcons";
 import { motion } from "framer-motion";
 
 export default function Skills() {
@@ -39,17 +38,19 @@ export default function Skills() {
                 {skillGroup.category}
               </h3>
 
-              <div className="flex flex-wrap gap-2.5">
+              <div className="grid grid-cols-[repeat(auto-fill,minmax(84px,1fr))] gap-3">
                 {skillGroup.items.map((item, i) => {
-                  const Icon = skillIcons[item] ?? Sparkle;
+                  const { icon: Icon, color } = getSkillIcon(item);
                   return (
-                    <span
+                    <div
                       key={i}
-                      className="inline-flex items-center gap-2 pl-2.5 pr-3.5 py-2 text-sm rounded-full bg-white/5 border border-white/10 text-gray-300 transition-all duration-200 hover:bg-[#47F1FF]/15 hover:border-[#47F1FF]/60 hover:text-white hover:-translate-y-0.5"
+                      className="flex flex-col items-center gap-2.5 p-3 rounded-xl bg-white/[0.03] border border-white/10 text-center transition-all duration-200 hover:border-white/25 hover:bg-white/[0.08] hover:-translate-y-1"
                     >
-                      <Icon className="w-4 h-4 text-[#47F1FF] shrink-0" />
-                      {item}
-                    </span>
+                      <Icon className="w-9 h-9 shrink-0" style={{ color }} />
+                      <span className="text-[11px] leading-tight text-gray-400">
+                        {item}
+                      </span>
+                    </div>
                   );
                 })}
               </div>
