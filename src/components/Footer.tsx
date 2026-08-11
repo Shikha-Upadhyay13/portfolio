@@ -21,16 +21,16 @@ export default function Footer() {
               <h4 className="font-semibold">Quick Links</h4>
               <ul className="text-gray-400 space-y-1">
                 <li>
-                  <a href="#about">About</a>
+                  <a href="/#about">About</a>
                 </li>
                 <li>
-                  <a href="#projects">Projects</a>
+                  <a href="/#projects">Projects</a>
                 </li>
                 <li>
-                  <a href="#experience">Experience</a>
+                  <a href="/#experience">Experience</a>
                 </li>
                 <li>
-                  <a href="#contact">Contact</a>
+                  <a href="/#contact">Contact</a>
                 </li>
               </ul>
             </div>
@@ -39,10 +39,22 @@ export default function Footer() {
               <h4 className="font-semibold">Connect</h4>
               <ul className="text-gray-400 space-y-1">
                 <li>
-                  <a href="#">LinkedIn</a>
+                  <a
+                    href="https://www.linkedin.com/in/shikha-upadhyay-2955aa2b8"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    LinkedIn
+                  </a>
                 </li>
                 <li>
-                  <a href="#">GitHub</a>
+                  <a
+                    href="https://github.com/Shikha-Upadhyay13"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    GitHub
+                  </a>
                 </li>
                 <li>
                   <a href="mailto:upadhyayshikha2005@gmail.com">Email</a>

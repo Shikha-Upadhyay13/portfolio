@@ -2,10 +2,13 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
-import { Maximize2, X } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, Maximize2 } from "lucide-react";
 import { certifications } from "@/data/certifications";
 import Reveal from "@/components/ui/Reveal";
+import CertificateLightbox from "@/components/ui/CertificateLightbox";
+
+const featured = certifications.filter((c) => c.featured);
 
 export default function Certifications() {
   const [openId, setOpenId] = useState<string | null>(null);
@@ -32,15 +35,6 @@ export default function Certifications() {
     return () => window.removeEventListener("open-certificate", onOpenCertificate);
   }, []);
 
-  useEffect(() => {
-    if (!openId) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") close();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [openId, close]);
-
   return (
     <section id="certifications" className="py-24 px-6 max-w-[1400px] mx-auto">
       <Reveal className="mb-14 text-center">
@@ -53,7 +47,7 @@ export default function Certifications() {
       </Reveal>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {certifications.map((cert, i) => (
+        {featured.map((cert, i) => (
           <Reveal key={cert.id} delay={(i % 3) * 0.05}>
             <button
               id={`cert-${cert.id}`}
@@ -92,59 +86,17 @@ export default function Certifications() {
         ))}
       </div>
 
-      <AnimatePresence>
-        {active && (
-          <motion.div
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <div
-              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
-              onClick={close}
-            />
+      <Reveal delay={0.15} className="mt-12 flex justify-center">
+        <Link
+          href="/certifications"
+          className="inline-flex items-center gap-2 px-5 py-3 rounded-full glass accent-border text-sm font-medium text-gray-200 hover:text-white transition group"
+        >
+          View all {certifications.length} certifications
+          <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+        </Link>
+      </Reveal>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-              className="relative w-full max-w-4xl h-[85vh] rounded-2xl border border-white/10 bg-[#101015] shadow-2xl overflow-hidden flex flex-col"
-            >
-              <button
-                onClick={close}
-                aria-label="Close"
-                className="absolute top-3 right-3 z-10 w-9 h-9 flex items-center justify-center rounded-full glass text-gray-300 hover:text-white transition"
-              >
-                <X className="w-4 h-4" />
-              </button>
-
-              <div className="relative flex-1 min-h-0 bg-[#0c0c10]">
-                <Image
-                  src={active.image}
-                  alt={`${active.title} certificate`}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 900px"
-                  className="object-contain"
-                  priority
-                />
-              </div>
-
-              <div className="p-5 sm:p-6 border-t border-white/10 shrink-0 max-h-[30vh] overflow-y-auto">
-                <h3 className="text-lg font-semibold">{active.title}</h3>
-                <p className="text-sm accent-text font-medium mt-1">{active.issuer}</p>
-                <p className="text-xs text-gray-500 uppercase tracking-wide mt-1">
-                  {active.date}
-                </p>
-                <p className="text-sm text-gray-400 leading-relaxed mt-2">
-                  {active.description}
-                </p>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <CertificateLightbox active={active} onClose={close} />
     </section>
   );
 }

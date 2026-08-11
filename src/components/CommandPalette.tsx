@@ -35,7 +35,13 @@ export default function CommandPalette() {
 
   const go = (hash: string) => () => {
     setOpen(false);
-    document.getElementById(hash)?.scrollIntoView({ behavior: "smooth" });
+    const el = document.getElementById(hash);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    } else {
+      // Section doesn't exist on this page (e.g. opened from /certifications) — go home to it.
+      window.location.href = `/#${hash}`;
+    }
   };
 
   const openExternal = (url: string) => () => {

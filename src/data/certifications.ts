@@ -5,6 +5,8 @@ export type Certification = {
   date: string;
   description: string;
   image: string;
+  /** Shown on the home page teaser; the rest live on the full /certifications page. */
+  featured?: boolean;
 };
 
 export const certifications: Certification[] = [
@@ -16,6 +18,7 @@ export const certifications: Certification[] = [
     description:
       "Completed IBM's foundational course on big data concepts, tools, and architecture on cognitiveclass.ai, powered by the IBM Developer Skills Network.",
     image: "/images/certifications/big-data-101-ibm.jpg",
+    featured: true,
   },
   {
     id: "claude-code-in-action",
@@ -25,6 +28,7 @@ export const certifications: Certification[] = [
     description:
       "Completed Anthropic's course on using Claude Code for real-world development workflows.",
     image: "/images/certifications/claude-code-in-action.jpg",
+    featured: true,
   },
   {
     id: "goldman-sachs-risk-simulation",
@@ -52,6 +56,7 @@ export const certifications: Certification[] = [
     description:
       "Completed an 8-week virtual internship covering Salesforce fundamentals — org setup, data management, security, developer fundamentals, process automation, and UI — plus hands-on super badges including Apex Specialist and Object Relationships.",
     image: "/images/certifications/salesforce-developer-agentblazer.jpg",
+    featured: true,
   },
   {
     id: "ai-for-all-aware",

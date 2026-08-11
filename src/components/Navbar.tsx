@@ -52,7 +52,7 @@ export default function Navbar() {
     >
       <div className="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="text-lg font-semibold accent-text">
+        <a href="/" className="text-lg font-semibold accent-text">
           Shikha.dev
         </a>
 
@@ -62,7 +62,7 @@ export default function Navbar() {
             {links.map(({ id, label }) => (
               <a
                 key={id}
-                href={`#${id}`}
+                href={`/#${id}`}
                 data-active={active === id}
                 className={`nav-underline transition-colors ${
                   active === id ? "text-white" : "text-gray-400 hover:text-white"
