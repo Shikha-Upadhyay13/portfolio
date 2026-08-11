@@ -10,12 +10,17 @@ function SkillChip({ item }: { item: string }) {
   const { icon: Icon, color } = getSkillIcon(item);
   return (
     <div className="flex flex-col items-center gap-3 text-center shrink-0 w-32 px-3">
-      <div
+      <motion.div
+        role="button"
+        tabIndex={0}
+        whileHover={{ scale: 1.1, y: -4 }}
+        whileTap={{ scale: 1.25 }}
+        transition={{ type: "spring", stiffness: 400, damping: 15 }}
         className="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-black flex items-center justify-center"
         style={{ boxShadow: `0 0 16px 1px ${color}4d` }}
       >
         <Icon className="w-10 h-10 md:w-12 md:h-12 shrink-0" style={{ color }} />
-      </div>
+      </motion.div>
       <span className="text-sm leading-tight text-gray-400">{item}</span>
     </div>
   );
@@ -96,7 +101,7 @@ export default function SkillsMarquee({
     <div className="overflow-hidden fade-x">
       <motion.div
         ref={trackRef}
-        className="flex cursor-grab active:cursor-grabbing"
+        className="flex"
         style={{ x }}
         drag="x"
         dragElastic={0}
