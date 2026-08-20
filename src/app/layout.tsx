@@ -1,3 +1,4 @@
+import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 import CustomCursor from "@/components/CustomCursor";
 import CursorRipple from "@/components/CursorRipple";
@@ -5,6 +6,23 @@ import ScrollProgress from "@/components/ScrollProgress";
 import Spotlight from "@/components/Spotlight";
 import CommandPalette from "@/components/CommandPalette";
 import SmartAssistant from "@/components/SmartAssistant";
+
+// Display face for headings/logo — geometric and techy, gives the brand real
+// personality instead of leaning on the accent color alone. Inter carries
+// body copy for maximum legibility. Both self-host via next/font (build-time,
+// no runtime request, no layout shift).
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
 
 export const metadata = {
   title: "Shikha Upadhyay | AI Engineer",
@@ -20,7 +38,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable}`}>
       <body className="relative bg-[#0b0b0f] text-white overflow-x-hidden">
         {/* Soft static ambient glow (sits under the cursor spotlight) */}
         <div className="fixed top-40 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-[#47F1FF]/8 blur-[150px] rounded-full -z-20" />
