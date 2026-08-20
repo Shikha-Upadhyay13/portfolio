@@ -33,7 +33,7 @@ export default function Card({
       {accentRail && (
         <span
           aria-hidden
-          className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl bg-accent"
+          className="absolute left-0 top-8 bottom-8 w-[3px] rounded-full bg-accent"
         />
       )}
       {children}

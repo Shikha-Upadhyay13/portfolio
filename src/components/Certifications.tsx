@@ -7,6 +7,7 @@ import { certifications } from "@/data/certifications";
 import Reveal from "@/components/ui/Reveal";
 import CertificateLightbox from "@/components/ui/CertificateLightbox";
 import CertificationCard from "@/components/ui/CertificationCard";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 const featured = certifications.filter((c) => c.featured);
 
@@ -37,14 +38,10 @@ export default function Certifications() {
 
   return (
     <section id="certifications" className="py-24 px-6 max-w-[1400px] mx-auto">
-      <Reveal className="mb-14 text-center">
-        <h2 className="text-3xl md:text-4xl font-semibold accent-text">
-          Certifications
-        </h2>
-        <p className="text-gray-400 mt-3 max-w-xl mx-auto">
-          Courses, simulations, and programs I've completed along the way.
-        </p>
-      </Reveal>
+      <SectionHeading
+        title="Certifications"
+        subtitle="Courses, simulations, and programs I've completed along the way."
+      />
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {featured.map((cert, i) => (
