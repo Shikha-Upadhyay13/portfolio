@@ -18,13 +18,13 @@ export default function CertificationCard({
     <button
       id={`cert-${cert.id}`}
       onClick={onOpen}
-      className={`h-full w-full text-left flex flex-col rounded-2xl border bg-white/5 backdrop-blur-xl overflow-hidden transition-all duration-300 hover:border-[#47F1FF]/50 hover:-translate-y-1 ${
+      className={`h-full w-full text-left flex flex-col rounded-2xl border bg-white/5 backdrop-blur-xl overflow-hidden transition-all duration-300 hover:border-accent/50 hover:-translate-y-1 ${
         isHighlighted
-          ? "border-[#47F1FF] ring-2 ring-[#47F1FF]/60 shadow-[0_0_40px_-8px_rgba(71,241,255,0.6)]"
+          ? "border-accent ring-2 ring-accent/60 shadow-[0_0_40px_-8px_rgba(71,241,255,0.6)]"
           : "border-white/10"
       }`}
     >
-      <div className="group relative aspect-[4/3] bg-[#0c0c10]">
+      <div className="group relative aspect-[4/3] bg-panel">
         <Image
           src={cert.image}
           alt={`${cert.title} certificate`}
@@ -40,7 +40,7 @@ export default function CertificationCard({
       <div className="p-5 flex flex-col gap-2 flex-1">
         <h3 className="text-base font-semibold leading-snug">{cert.title}</h3>
         <p className="text-sm accent-text font-medium">{cert.issuer}</p>
-        <p className="text-xs text-gray-500 uppercase tracking-wide">{cert.date}</p>
+        <p className="text-xs text-gray-400 uppercase tracking-wide">{cert.date}</p>
         <p className="text-sm text-gray-400 leading-relaxed mt-1">
           {cert.description}
         </p>

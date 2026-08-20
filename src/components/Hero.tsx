@@ -3,22 +3,10 @@
 import Image from "next/image";
 import { TypeAnimation } from "react-type-animation";
 import { motion, useReducedMotion } from "framer-motion";
+import { EASE_OUT_EXPO, fadeUp, staggerContainer } from "@/lib/animations";
 
-const container = {
-  hidden: {},
-  show: {
-    transition: { staggerChildren: 0.12, delayChildren: 0.1 },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 24 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
-  },
-};
+const container = staggerContainer();
+const item = fadeUp;
 
 const stats = [
   { value: "6+", label: "Projects" },
@@ -154,7 +142,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.8, ease: EASE_OUT_EXPO }}
           className="relative flex justify-center md:justify-end items-end min-h-[420px] md:min-h-[560px]"
         >
           {/* Backdrop card gives the cutout a "stage" instead of floating on empty space */}

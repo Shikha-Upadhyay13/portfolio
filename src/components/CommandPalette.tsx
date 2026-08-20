@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { modalBackdrop, modalPanel, modalPanelTransition } from "@/lib/animations";
 import {
   Command,
   User,
@@ -32,6 +33,7 @@ export default function CommandPalette() {
   const [query, setQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
 
   const go = (hash: string) => () => {
     setOpen(false);
@@ -105,14 +107,16 @@ export default function CommandPalette() {
     };
   }, []);
 
-  // Reset + focus on open
+  // Reset + focus on open; return focus to whatever triggered it on close
   useEffect(() => {
     if (open) {
+      triggerRef.current = document.activeElement as HTMLElement | null;
       setQuery("");
       setActiveIndex(0);
       const t = setTimeout(() => inputRef.current?.focus(), 50);
       return () => clearTimeout(t);
     }
+    triggerRef.current?.focus?.();
   }, [open]);
 
   useEffect(() => {
@@ -137,9 +141,10 @@ export default function CommandPalette() {
       {open && (
         <motion.div
           className="fixed inset-0 z-[100] flex items-start justify-center pt-[15vh] px-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          variants={modalBackdrop}
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
         >
           {/* Backdrop */}
           <div
@@ -149,21 +154,29 @@ export default function CommandPalette() {
 
           {/* Panel */}
           <motion.div
-            initial={{ opacity: 0, y: -12, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -12, scale: 0.98 }}
-            transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-            className="relative w-full max-w-lg rounded-2xl border border-white/10 bg-[#101015]/95 shadow-2xl overflow-hidden"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Command palette"
+            variants={modalPanel}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            transition={modalPanelTransition}
+            className="relative w-full max-w-lg rounded-2xl border border-white/10 bg-panel/95 shadow-2xl overflow-hidden"
             onKeyDown={onListKey}
           >
             {/* Search */}
             <div className="flex items-center gap-3 px-4 py-3 border-b border-white/10">
-              <Command className="w-4 h-4 text-[#47F1FF]" />
+              <Command className="w-4 h-4 text-accent" />
               <input
                 ref={inputRef}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Type a command or search…"
+                aria-label="Search commands"
+                role="combobox"
+                aria-expanded="true"
+                aria-controls="command-palette-results"
                 className="flex-1 bg-transparent outline-none text-sm placeholder:text-gray-500"
               />
               <kbd className="text-[10px] text-gray-500 border border-white/10 rounded px-1.5 py-0.5">
@@ -172,7 +185,11 @@ export default function CommandPalette() {
             </div>
 
             {/* Results */}
-            <div className="max-h-72 overflow-y-auto py-2">
+            <div
+              id="command-palette-results"
+              role="listbox"
+              className="max-h-72 overflow-y-auto py-2"
+            >
               {filtered.length === 0 && (
                 <p className="px-4 py-6 text-center text-sm text-gray-500">
                   No results
@@ -183,15 +200,17 @@ export default function CommandPalette() {
                 return (
                   <button
                     key={item.label}
+                    role="option"
+                    aria-selected={i === activeIndex}
                     onClick={item.action}
                     onMouseEnter={() => setActiveIndex(i)}
                     className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm text-left transition ${
                       i === activeIndex
-                        ? "bg-[#47F1FF]/15 text-white"
+                        ? "bg-accent/15 text-white"
                         : "text-gray-300"
                     }`}
                   >
-                    <Icon className="w-4 h-4 text-[#47F1FF]" />
+                    <Icon className="w-4 h-4 text-accent" />
                     <span className="flex-1">{item.label}</span>
                     <span className="text-xs text-gray-500">{item.hint}</span>
                   </button>
