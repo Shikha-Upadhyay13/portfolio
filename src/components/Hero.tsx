@@ -4,6 +4,7 @@ import Image from "next/image";
 import { TypeAnimation } from "react-type-animation";
 import { motion, useReducedMotion } from "framer-motion";
 import { EASE_OUT_EXPO, fadeUp, staggerContainer } from "@/lib/animations";
+import Button from "@/components/ui/Button";
 
 const container = staggerContainer();
 const item = fadeUp;
@@ -71,7 +72,7 @@ export default function Hero() {
           {/* Animated Role */}
           <motion.div
             variants={item}
-            className="text-2xl md:text-3xl font-semibold text-gray-300 h-10"
+            className="text-2xl md:text-3xl font-semibold text-gray-300 h-10 font-display"
           >
             <TypeAnimation
               sequence={[
@@ -111,15 +112,12 @@ export default function Hero() {
 
           {/* CTA Buttons */}
           <motion.div variants={item} className="flex gap-4 pt-2">
-            <a href="#projects" className="accent-btn px-6 py-3 rounded-xl">
+            <Button href="#projects" variant="accent" size="md">
               View Projects
-            </a>
-            <a
-              href="#contact"
-              className="glass px-6 py-3 rounded-xl transition accent-border"
-            >
+            </Button>
+            <Button href="#contact" variant="ghost" size="md">
               Contact Me
-            </a>
+            </Button>
           </motion.div>
 
           {/* Stats row */}
