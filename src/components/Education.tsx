@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { education, type EducationEntry } from "@/data/education";
 import Reveal from "@/components/ui/Reveal";
+import SectionHeading from "@/components/ui/SectionHeading";
+import Card from "@/components/ui/Card";
 
 function EduCard({
   institution,
@@ -13,7 +15,7 @@ function EduCard({
   const textAlign = align === "right" ? "text-right" : "text-left";
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-black/40 backdrop-blur-xl overflow-hidden transition-all duration-300 hover:border-[#47F1FF]/40 hover:-translate-y-1">
+    <Card padding="md" className="overflow-hidden !p-0">
       <div className="relative aspect-[16/9]">
         <Image
           src={image}
@@ -43,18 +45,14 @@ function EduCard({
           </div>
         ))}
       </div>
-    </div>
+    </Card>
   );
 }
 
 export default function Education() {
   return (
     <section id="education" className="py-24 px-6 max-w-[1400px] mx-auto">
-      <Reveal className="mb-16 text-center">
-        <h2 className="text-3xl md:text-4xl font-semibold accent-text">
-          Education
-        </h2>
-      </Reveal>
+      <SectionHeading title="Education" />
 
       <div className="relative max-w-5xl mx-auto">
         {/* Dashed timeline spine, desktop only */}

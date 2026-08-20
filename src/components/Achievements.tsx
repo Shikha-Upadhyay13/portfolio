@@ -5,6 +5,9 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
+import SectionHeading from "@/components/ui/SectionHeading";
+import Badge from "@/components/ui/Badge";
+import Button from "@/components/ui/Button";
 import { achievements, type AchievementPhoto } from "@/data/achievements";
 
 /** Stacked-photo depths behind the front card: offset, tilt, scale, fade. */
@@ -56,7 +59,7 @@ function PhotoStack({ photos }: { photos: AchievementPhoto[] }) {
               animate={depth}
               transition={{ type: "spring", stiffness: 260, damping: 26 }}
               style={{ touchAction: "pan-y" }}
-              className="absolute inset-0 rounded-2xl overflow-hidden border border-white/10 bg-[#111115] shadow-2xl shadow-black/50 p-2 cursor-grab active:cursor-grabbing"
+              className="absolute inset-0 rounded-2xl overflow-hidden border border-white/10 bg-panel shadow-2xl shadow-black/50 p-2 cursor-grab active:cursor-grabbing"
             >
               <div className="relative w-full h-full rounded-lg overflow-hidden">
                 <Image
@@ -64,7 +67,7 @@ function PhotoStack({ photos }: { photos: AchievementPhoto[] }) {
                   alt={photo.alt}
                   fill
                   sizes="(max-width: 768px) 90vw, 380px"
-                  className="object-contain bg-[#0c0c10]"
+                  className="object-contain bg-panel"
                   priority={i === 0}
                   draggable={false}
                 />
@@ -76,36 +79,41 @@ function PhotoStack({ photos }: { photos: AchievementPhoto[] }) {
 
       {/* Controls */}
       <div className="flex items-center gap-4 mt-6">
-        <button
+        <Button
+          variant="ghost"
+          size="icon"
           aria-label="Previous photo"
           onClick={() => go(-1)}
-          className="w-9 h-9 flex items-center justify-center rounded-full glass accent-border text-gray-400 hover:text-white transition"
+          className="text-gray-400"
         >
           <ChevronLeft className="w-4 h-4" />
-        </button>
+        </Button>
 
         <div className="flex gap-1.5">
           {photos.map((_, i) => (
             <button
               key={i}
               aria-label={`Go to photo ${i + 1}`}
+              aria-current={i === current ? "true" : undefined}
               onClick={() => setCurrent(i)}
               className={`h-1.5 rounded-full transition-all ${
                 i === current
-                  ? "w-5 bg-[#47F1FF]"
+                  ? "w-5 bg-accent"
                   : "w-1.5 bg-white/20"
               }`}
             />
           ))}
         </div>
 
-        <button
+        <Button
+          variant="ghost"
+          size="icon"
           aria-label="Next photo"
           onClick={() => go(1)}
-          className="w-9 h-9 flex items-center justify-center rounded-full glass accent-border text-gray-400 hover:text-white transition"
+          className="text-gray-400"
         >
           <ChevronRight className="w-4 h-4" />
-        </button>
+        </Button>
       </div>
 
       <p className="mt-3 text-sm text-gray-400 text-center max-w-xs">
@@ -118,11 +126,7 @@ function PhotoStack({ photos }: { photos: AchievementPhoto[] }) {
 export default function Achievements() {
   return (
     <section id="achievements" className="py-24 px-6 max-w-[1400px] mx-auto">
-      <Reveal className="mb-14 text-center">
-        <h2 className="text-3xl md:text-4xl font-semibold accent-text">
-          Achievements
-        </h2>
-      </Reveal>
+      <SectionHeading title="Achievements" />
 
       <div className="space-y-20">
         {achievements.map((item) => (
@@ -137,17 +141,14 @@ export default function Achievements() {
               {item.stats && (
                 <div className="flex flex-wrap gap-2 pt-1">
                   {item.stats.map((stat) => (
-                    <span
-                      key={stat.label}
-                      className="inline-flex items-baseline gap-1.5 px-3 py-1.5 rounded-full border border-[#47F1FF]/40 bg-[#47F1FF]/10"
-                    >
-                      <span className="text-sm font-semibold text-[#47F1FF]">
+                    <Badge key={stat.label} tone="accent" className="!items-baseline normal-case tracking-normal">
+                      <span className="text-sm font-semibold text-accent">
                         {stat.value}
                       </span>
                       <span className="text-[11px] uppercase tracking-wide text-gray-400">
                         {stat.label}
                       </span>
-                    </span>
+                    </Badge>
                   ))}
                 </div>
               )}

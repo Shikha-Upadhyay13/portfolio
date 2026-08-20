@@ -1,6 +1,7 @@
 "use client";
 
 import Reveal from "@/components/ui/Reveal";
+import SectionHeading from "@/components/ui/SectionHeading";
 import MediaFilmstrip from "@/components/ui/MediaFilmstrip";
 import { hobbies } from "@/data/hobbies";
 
@@ -9,14 +10,10 @@ export default function Hobbies() {
 
   return (
     <section id="hobbies" className="py-24 px-6 max-w-[1400px] mx-auto">
-      <Reveal className="mb-14 text-center">
-        <h2 className="text-3xl md:text-4xl font-semibold accent-text">
-          Hobbies & Passion
-        </h2>
-        <p className="text-gray-400 mt-3 max-w-xl mx-auto">
-          Life beyond the terminal — the pursuits that keep me curious and grounded.
-        </p>
-      </Reveal>
+      <SectionHeading
+        title="Hobbies & Passion"
+        subtitle="Life beyond the terminal — the pursuits that keep me curious and grounded."
+      />
 
       <div className="space-y-20">
         {/* Featured hobby, full width */}

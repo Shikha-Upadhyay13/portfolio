@@ -1,20 +1,32 @@
 "use client";
 
-import Reveal from "@/components/ui/Reveal";
+import { useState, type FormEvent } from "react";
+import SectionHeading from "@/components/ui/SectionHeading";
+import Button from "@/components/ui/Button";
+
+const CONTACT_EMAIL = "upadhyayshikha2005@gmail.com";
 
 export default function Contact() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const subject = `Portfolio contact from ${name}`;
+    const body = `${message}\n\n— ${name} (${email})`;
+    const mailtoLink = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoLink;
+  };
+
   return (
     <section id="contact" className="py-24 px-6 max-w-[1400px] mx-auto">
-      {/* Section Header */}
-      <Reveal className="mb-16 text-center">
-        <h2 className="text-3xl md:text-4xl font-semibold accent-text">
-          Contact
-        </h2>
-        <p className="text-gray-400 mt-4">
-          Open to AI, ML, and GenAI opportunities. Let’s build something
-          impactful.
-        </p>
-      </Reveal>
+      <SectionHeading
+        title="Contact"
+        subtitle="Open to AI, ML, and GenAI opportunities. Let’s build something impactful."
+      />
 
       {/* Layout */}
       <div className="grid md:grid-cols-2 gap-12">
@@ -23,10 +35,10 @@ export default function Contact() {
           <div>
             <h3 className="font-semibold">Email</h3>
             <a
-              href="mailto:upadhyayshikha2005@gmail.com"
+              href={`mailto:${CONTACT_EMAIL}`}
               className="text-gray-400 hover:underline"
             >
-              upadhyayshikha2005@gmail.com
+              {CONTACT_EMAIL}
             </a>
           </div>
 
@@ -56,37 +68,55 @@ export default function Contact() {
         </div>
 
         {/* Right Side - Contact Form */}
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
-            <label className="block text-sm mb-2">Name</label>
+            <label htmlFor="contact-name" className="block text-sm mb-2">
+              Name
+            </label>
             <input
+              id="contact-name"
+              name="name"
               type="text"
               className="w-full p-3 rounded-md border bg-transparent"
               placeholder="Your name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
 
           <div>
-            <label className="block text-sm mb-2">Email</label>
+            <label htmlFor="contact-email" className="block text-sm mb-2">
+              Email
+            </label>
             <input
+              id="contact-email"
+              name="email"
               type="email"
               className="w-full p-3 rounded-md border bg-transparent"
               placeholder="your@email.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
           <div>
-            <label className="block text-sm mb-2">Message</label>
+            <label htmlFor="contact-message" className="block text-sm mb-2">
+              Message
+            </label>
             <textarea
+              id="contact-message"
+              name="message"
               rows={4}
               className="w-full p-3 rounded-md border bg-transparent"
               placeholder="Write your message..."
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
             />
           </div>
 
-          <button type="submit" className="px-6 py-3 rounded-md border">
+          <Button type="submit" variant="accent" size="md">
             Send Message
-          </button>
+          </Button>
         </form>
       </div>
     </section>

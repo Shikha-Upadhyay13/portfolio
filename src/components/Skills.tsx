@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import SectionHeading from "@/components/ui/SectionHeading";
 import { skills } from "@/data/skills";
 
 // Client-only: measures its own scroll width to build a seamless loop, which
@@ -21,12 +22,11 @@ allSkills.forEach((item, i) => rows[i % ROWS].push(item));
 export default function Skills() {
   return (
     <section id="skills" className="py-32 max-w-[1400px] mx-auto overflow-hidden">
-      <h2 className="text-3xl md:text-4xl font-semibold text-center mb-4 text-[#47F1FF] px-6">
-        Skills
-      </h2>
-      <p className="text-center text-gray-500 text-sm mb-16 px-6">
-        Drag to explore — it keeps drifting on its own.
-      </p>
+      <SectionHeading
+        title="Skills"
+        subtitle="Drag to explore — it keeps drifting on its own."
+        className="px-6"
+      />
 
       <div className="space-y-10 md:space-y-14">
         {rows.map((row, i) => (
