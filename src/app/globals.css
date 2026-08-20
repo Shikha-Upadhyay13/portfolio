@@ -30,6 +30,9 @@ h3,
 .font-display {
   font-family: var(--font-display), var(--font-sans), sans-serif;
 }
+.font-mono {
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
 
 /* Smooth scrolling + nav offset so the sticky navbar doesn't cover headings */
 html {

@@ -1,86 +1,97 @@
 "use client";
 
-import { Database, MessageSquare, Search, Workflow } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
-import Card from "@/components/ui/Card";
 
-const focusAreas = [
-  {
-    icon: Search,
-    title: "RAG Pipelines & Retrieval Optimization",
-    description:
-      "Designing retrieval systems that ground LLM outputs in real, verifiable context instead of memorized guesses.",
-  },
-  {
-    icon: Workflow,
-    title: "Agentic AI System Design",
-    description:
-      "Building multi-step agentic workflows that reason, plan, and act reliably rather than one-shot prompting.",
-  },
-  {
-    icon: MessageSquare,
-    title: "LLM Integration & Prompt Engineering",
-    description:
-      "Wiring LLMs into production systems with prompt design that holds up outside a demo notebook.",
-  },
-  {
-    icon: Database,
-    title: "Vector Databases & Embeddings",
-    description:
-      "Working with embeddings and vector search to power fast, accurate retrieval at scale.",
-  },
-];
+/** Renders Shikha's profile as a syntax-highlighted object literal, styled
+ * like a code editor tab — a more genuine, on-brand alternative to a generic
+ * icon-card grid for an AI engineer's About section. */
+function ProfileCodeBlock() {
+  return (
+    <div className="rounded-2xl border border-white/10 bg-panel overflow-hidden shadow-2xl shadow-black/40">
+      {/* Window chrome */}
+      <div className="flex items-center gap-2 px-4 py-3 border-b border-white/10 bg-white/[0.03]">
+        <span className="w-2.5 h-2.5 rounded-full bg-red-400/70" />
+        <span className="w-2.5 h-2.5 rounded-full bg-yellow-400/70" />
+        <span className="w-2.5 h-2.5 rounded-full bg-green-400/70" />
+        <span className="ml-3 text-xs text-gray-500 font-mono">about.ts</span>
+      </div>
+
+      <pre className="p-6 text-[13px] sm:text-sm leading-relaxed font-mono overflow-x-auto">
+        <code>
+          <span className="text-accent">const</span>{" "}
+          <span className="text-gray-200">engineer</span>{" "}
+          <span className="text-gray-500">=</span>{" "}
+          <span className="text-gray-500">{"{"}</span>
+          {"\n  "}
+          <span className="text-gray-300">name:</span>{" "}
+          <span className="text-amber-300">&quot;Shikha Upadhyay&quot;</span>
+          <span className="text-gray-500">,</span>
+          {"\n  "}
+          <span className="text-gray-300">role:</span>{" "}
+          <span className="text-amber-300">&quot;AI Engineer&quot;</span>
+          <span className="text-gray-500">,</span>
+          {"\n  "}
+          <span className="text-gray-300">focus:</span>{" "}
+          <span className="text-gray-500">[</span>
+          {"\n    "}
+          <span className="text-amber-300">&quot;RAG Pipelines&quot;</span>
+          <span className="text-gray-500">,</span>
+          {"\n    "}
+          <span className="text-amber-300">&quot;Agentic Workflows&quot;</span>
+          <span className="text-gray-500">,</span>
+          {"\n    "}
+          <span className="text-amber-300">&quot;LLM Integration&quot;</span>
+          <span className="text-gray-500">,</span>
+          {"\n    "}
+          <span className="text-amber-300">&quot;Vector Search&quot;</span>
+          <span className="text-gray-500">,</span>
+          {"\n  "}
+          <span className="text-gray-500">],</span>
+          {"\n  "}
+          <span className="text-gray-300">approach:</span>{" "}
+          <span className="text-amber-300">
+            &quot;reliability-first, production-grade AI&quot;
+          </span>
+          <span className="text-gray-500">,</span>
+          {"\n"}
+          <span className="text-gray-500">{"}"}</span>
+          <span className="text-accent">;</span>
+          <span
+            aria-hidden
+            className="inline-block w-[7px] h-4 bg-accent ml-0.5 align-middle animate-pulse"
+          />
+        </code>
+      </pre>
+    </div>
+  );
+}
 
 export default function About() {
   return (
     <section id="about" className="py-24 px-6 max-w-[1400px] mx-auto">
       <SectionHeading title="About" />
 
-      <div className="grid lg:grid-cols-5 gap-12 items-start">
-        {/* Narrative — a display-font pull statement first, supporting detail after */}
-        <div className="lg:col-span-2 space-y-6">
-          <Reveal direction="right">
-            <p className="font-display text-2xl md:text-[1.75rem] font-semibold leading-snug">
-              I design <span className="accent-text">intelligent AI systems</span>{" "}
-              that hold up outside the demo.
-            </p>
-          </Reveal>
+      <div className="grid lg:grid-cols-2 gap-12 items-center">
+        {/* Narrative */}
+        <Reveal direction="right" className="space-y-5 text-gray-300 leading-relaxed text-lg">
+          <p>
+            I am an AI Engineer focused on building structured and reliable
+            intelligent systems. My work centers around Retrieval-Augmented
+            Generation (RAG), LLM integration, and agentic workflows.
+          </p>
+          <p>
+            Rather than experimenting in isolation, I design architectures that
+            combine machine learning, vector search, and reasoning pipelines to
+            reduce hallucinations and improve production reliability. My goal is
+            to bridge model intelligence with scalable real-world applications.
+          </p>
+        </Reveal>
 
-          <Reveal direction="right" delay={0.1}>
-            <div className="space-y-5 text-gray-400 leading-relaxed">
-              <p>
-                I am an AI Engineer focused on building structured and reliable
-                intelligent systems. My work centers around Retrieval-Augmented
-                Generation (RAG), LLM integration, and agentic workflows.
-              </p>
-              <p>
-                Rather than experimenting in isolation, I design architectures
-                that combine machine learning, vector search, and reasoning
-                pipelines to reduce hallucinations and improve production
-                reliability. My goal is to bridge model intelligence with
-                scalable real-world applications.
-              </p>
-            </div>
-          </Reveal>
-        </div>
-
-        {/* Core Focus — a 2x2 grid of icon cards instead of a bare bulleted list */}
-        <div className="lg:col-span-3 grid sm:grid-cols-2 gap-4">
-          {focusAreas.map(({ icon: Icon, title, description }, i) => (
-            <Reveal key={title} delay={0.08 * i}>
-              <Card padding="md" className="h-full">
-                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
-                  <Icon className="w-5 h-5 text-accent" />
-                </div>
-                <h3 className="font-semibold mb-1.5 leading-snug">{title}</h3>
-                <p className="text-sm text-gray-400 leading-relaxed">
-                  {description}
-                </p>
-              </Card>
-            </Reveal>
-          ))}
-        </div>
+        {/* Profile-as-code panel */}
+        <Reveal direction="left" delay={0.1}>
+          <ProfileCodeBlock />
+        </Reveal>
       </div>
     </section>
   );

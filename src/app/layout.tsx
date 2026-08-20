@@ -1,4 +1,4 @@
-import { Space_Grotesk, Inter } from "next/font/google";
+import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import CustomCursor from "@/components/CustomCursor";
 import CursorRipple from "@/components/CursorRipple";
@@ -24,6 +24,14 @@ const inter = Inter({
   display: "swap",
 });
 
+// Monospace, used sparingly for code-styled treatments (e.g. About's profile block).
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
 export const metadata = {
   title: "Shikha Upadhyay | AI Engineer",
   description: "AI Engineer building RAG systems and agentic workflows.",
@@ -38,7 +46,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable}`}>
+    <html
+      lang="en"
+      className={`${spaceGrotesk.variable} ${inter.variable} ${jetBrainsMono.variable}`}
+    >
       <body className="relative bg-[#0b0b0f] text-white overflow-x-hidden">
         {/* Soft static ambient glow (sits under the cursor spotlight) */}
         <div className="fixed top-40 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-[#47F1FF]/8 blur-[150px] rounded-full -z-20" />
