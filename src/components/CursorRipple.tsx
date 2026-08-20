@@ -11,23 +11,27 @@ export default function CursorRipple() {
       ripple.style.top = `${e.clientY}px`;
       document.body.appendChild(ripple);
 
-      document.addEventListener("mousedown", () => {
-        document.body.classList.add("cursor-click");
-      });
-
-      document.addEventListener("mouseup", () => {
-        document.body.classList.remove("cursor-click");
-      });
-
       setTimeout(() => {
         ripple.remove();
       }, 800);
     };
 
+    const handleMouseDown = () => {
+      document.body.classList.add("cursor-click");
+    };
+
+    const handleMouseUp = () => {
+      document.body.classList.remove("cursor-click");
+    };
+
     window.addEventListener("click", createRipple);
+    document.addEventListener("mousedown", handleMouseDown);
+    document.addEventListener("mouseup", handleMouseUp);
 
     return () => {
       window.removeEventListener("click", createRipple);
+      document.removeEventListener("mousedown", handleMouseDown);
+      document.removeEventListener("mouseup", handleMouseUp);
     };
   }, []);
 

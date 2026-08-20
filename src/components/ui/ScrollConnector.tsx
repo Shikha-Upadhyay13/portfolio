@@ -41,12 +41,12 @@ export default function ScrollConnector() {
       <div className="relative w-px h-full bg-white/10 overflow-visible">
         <motion.div
           style={{ height: reduceMotion ? "100%" : height }}
-          className="absolute top-0 left-0 w-px bg-gradient-to-b from-[#47F1FF] via-[#47F1FF]/70 to-transparent"
+          className="absolute top-0 left-0 w-px bg-gradient-to-b from-accent via-accent/70 to-transparent"
         />
         {!reduceMotion && (
           <motion.div
             style={{ top: height, opacity: dotOpacity }}
-            className="absolute left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#47F1FF] shadow-[0_0_14px_3px_rgba(71,241,255,0.55)]"
+            className="absolute left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-accent shadow-[0_0_14px_3px_rgba(71,241,255,0.55)]"
           />
         )}
       </div>

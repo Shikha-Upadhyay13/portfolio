@@ -3,9 +3,10 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Lock, Search, Sparkles } from "lucide-react";
 import { PLACEHOLDER_REPO, type Project } from "@/data/projects";
+import { EASE_OUT_EXPO } from "@/lib/animations";
 
 export const CATEGORY_STYLES: Record<string, string> = {
-  "Generative AI": "text-[#47F1FF]/80 bg-[#47F1FF]/10 border-[#47F1FF]/20",
+  "Generative AI": "text-accent/80 bg-accent/10 border-accent/20",
   "Web App": "text-sky-300/80 bg-sky-500/10 border-sky-400/20",
   Security: "text-amber-300/80 bg-amber-500/10 border-amber-400/20",
   "Machine Learning": "text-emerald-300/80 bg-emerald-500/10 border-emerald-400/20",
@@ -39,12 +40,12 @@ export default function ProjectCard({
       transition={{
         duration: 0.5,
         delay: (index % 2) * 0.1,
-        ease: [0.22, 1, 0.36, 1],
-        layout: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+        ease: EASE_OUT_EXPO,
+        layout: { duration: 0.4, ease: EASE_OUT_EXPO },
       }}
-      className={`group/card relative flex flex-col p-6 rounded-2xl bg-white/5 backdrop-blur-xl border transition-all duration-300 hover:border-[#47F1FF]/60 hover:-translate-y-1 hover:bg-white/[0.07] hover:shadow-[0_20px_60px_-20px_rgba(71,241,255,0.35)] group-hover/cards:opacity-50 hover:!opacity-100 ${
+      className={`group/card relative flex flex-col p-6 rounded-2xl bg-white/5 backdrop-blur-xl border transition-all duration-300 hover:border-accent/60 hover:-translate-y-1 hover:bg-white/[0.07] hover:shadow-[0_20px_60px_-20px_rgba(71,241,255,0.35)] group-hover/cards:opacity-50 hover:!opacity-100 ${
         isTopMatch
-          ? "border-[#47F1FF]/70 shadow-[0_20px_60px_-20px_rgba(71,241,255,0.4)]"
+          ? "border-accent/70 shadow-[0_20px_60px_-20px_rgba(71,241,255,0.4)]"
           : "border-white/10"
       } ${isDimmed ? "opacity-30 saturate-50" : ""} ${
         fullWidth ? "md:col-span-2" : ""
@@ -55,13 +56,13 @@ export default function ProjectCard({
         <span
           className={`text-[11px] uppercase tracking-wider px-2.5 py-1 rounded-full border ${
             CATEGORY_STYLES[project.category] ??
-            "text-[#47F1FF]/80 bg-[#47F1FF]/10 border-[#47F1FF]/20"
+            "text-accent/80 bg-accent/10 border-accent/20"
           }`}
         >
           {project.category}
         </span>
         {isTopMatch ? (
-          <span className="inline-flex items-center gap-1 text-[11px] text-[#47F1FF]">
+          <span className="inline-flex items-center gap-1 text-[11px] text-accent">
             <Search className="w-3.5 h-3.5" />
             Best match
           </span>
@@ -80,7 +81,7 @@ export default function ProjectCard({
       <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
 
       {/* Highlight / outcome chip */}
-      <p className="text-sm text-[#47F1FF]/80 mb-3">→ {project.highlight}</p>
+      <p className="text-sm text-accent/80 mb-3">→ {project.highlight}</p>
 
       {/* Description */}
       <p className="text-gray-400 text-sm mb-5 leading-relaxed flex-1">
@@ -110,7 +111,7 @@ export default function ProjectCard({
           href={project.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-sm text-[#47F1FF] hover:text-[#8AF6FF] font-medium group-hover/card:gap-2 transition-all"
+          className="inline-flex items-center gap-1 text-sm text-accent hover:text-[#8AF6FF] font-medium group-hover/card:gap-2 transition-all"
         >
           View Repository
           <ArrowUpRight className="w-4 h-4" />
