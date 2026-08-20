@@ -27,9 +27,9 @@ const inter = Inter({
 export const metadata = {
   title: "Shikha Upadhyay | AI Engineer",
   description: "AI Engineer building RAG systems and agentic workflows.",
-  icons: {
-    icon: "/profile-cutout.png",
-  },
+  // Favicon comes from the src/app/icon.png + apple-icon.png file convention
+  // (auto-optimized, multi-size) instead of pointing metadata at the raw
+  // 2.3MB profile-cutout.png, which browsers would fetch unoptimized.
 };
 
 export default function RootLayout({
