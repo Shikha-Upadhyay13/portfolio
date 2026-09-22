@@ -10,9 +10,9 @@ const container = staggerContainer();
 const item = fadeUp;
 
 const stats = [
-  { value: "6+", label: "Projects" },
-  { value: "20+", label: "Technologies" },
-  { value: "AI", label: "B.Tech Major" },
+  { value: "3+", label: "RAG Systems" },
+  { value: "Multimodal", label: "Ingestion" },
+  { value: "FastAPI + FAISS", label: "Stack" },
 ];
 
 /** Gentle idle float for the portrait cutout; skipped for reduced-motion users. */
@@ -93,9 +93,9 @@ export default function Hero() {
             variants={item}
             className="text-lg text-gray-400 max-w-xl leading-relaxed"
           >
-            I design intelligent AI systems using Retrieval-Augmented Generation,
-            agentic workflows, and scalable LLM architectures focused on
-            reliability and real-world deployment.
+            I build production RAG systems and agentic workflows that ground LLMs
+            in real data — reducing hallucinations and shipping reliable AI
+            applications with FastAPI, vector search, and structured retrieval.
           </motion.p>
 
           {/* Skill Pills */}
