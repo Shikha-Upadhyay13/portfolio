@@ -1,7 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Skills from "@/components/Skills";
-import HowIWork from "@/components/HowIWork";
 import About from "@/components/About";
 import ScrollConnector from "@/components/ui/ScrollConnector";
 import Projects from "@/components/Projects";
@@ -25,7 +24,6 @@ export default function Home() {
       <Experience />
       <Education />
       <Skills />
-      <HowIWork />
       <Projects />
       <Achievements />
       <Certifications />

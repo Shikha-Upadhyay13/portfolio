@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Search } from "lucide-react";
 import Button from "@/components/ui/Button";
 import MobileNav from "@/components/MobileNav";
-import { NAV_LINKS, SCROLL_SPY_IDS } from "@/data/navLinks";
+import { DESKTOP_NAV_LINKS, SCROLL_SPY_IDS } from "@/data/navLinks";
 
 export default function Navbar() {
   const [active, setActive] = useState("home");
@@ -49,8 +49,8 @@ export default function Navbar() {
         </a>
 
         <div className="flex items-center gap-4 md:gap-8 text-sm">
-          <div className="hidden md:flex items-center gap-8">
-            {NAV_LINKS.map(({ id, label }) => (
+          <div className="hidden md:flex items-center gap-6">
+            {DESKTOP_NAV_LINKS.map(({ id, label }) => (
               <a
                 key={id}
                 href={`/#${id}`}

@@ -15,7 +15,6 @@ import {
   Trophy,
   Users,
   Heart,
-  Workflow,
   Mail,
   FileDown,
   Github,
@@ -56,7 +55,6 @@ export default function CommandPalette() {
     () => [
       { label: "About", hint: "Jump to section", icon: User, action: go("about") },
       { label: "Skills", hint: "Jump to section", icon: Wrench, action: go("skills") },
-      { label: "How I Work", hint: "Jump to section", icon: Workflow, action: go("how-i-work") },
       { label: "Projects", hint: "Jump to section", icon: FolderGit2, action: go("projects") },
       { label: "Experience", hint: "Jump to section", icon: Briefcase, action: go("experience") },
       { label: "Education", hint: "Jump to section", icon: GraduationCap, action: go("education") },
