@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ArchitectureDiagram from "@/components/ArchitectureDiagram";
 import Button from "@/components/ui/Button";
 import { CATEGORY_STYLES } from "@/components/ui/ProjectCard";
 import { getCaseStudy, getCaseStudySlugs } from "@/data/caseStudies";
@@ -77,22 +78,7 @@ export default async function CaseStudyPage({
 
         <section className="mb-12">
           <h2 className="text-2xl font-semibold mb-6 font-display">Architecture</h2>
-          <ol className="space-y-4">
-            {caseStudy.architecture.map((step, i) => (
-              <li
-                key={step.step}
-                className="flex gap-4 p-4 rounded-xl glass"
-              >
-                <span className="flex-shrink-0 w-8 h-8 rounded-full border border-accent/40 flex items-center justify-center text-sm accent-text font-mono">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <h3 className="font-semibold mb-1">{step.step}</h3>
-                  <p className="text-sm text-gray-400">{step.detail}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
+          <ArchitectureDiagram steps={caseStudy.architecture} />
         </section>
 
         <section className="mb-12">
