@@ -77,6 +77,12 @@ export default function RootLayout({
         <JsonLd />
       </head>
       <body className="relative bg-[#0b0b0f] text-white overflow-x-hidden">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-[#0b0b0f] focus:border focus:border-accent focus:text-accent"
+        >
+          Skip to content
+        </a>
         {/* Soft static ambient glow (sits under the cursor spotlight) */}
         <div className="fixed top-40 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-[#47F1FF]/8 blur-[150px] rounded-full -z-20" />
         <div className="fixed bottom-0 right-0 w-[500px] h-[500px] bg-[#47F1FF]/8 blur-[150px] rounded-full -z-20" />

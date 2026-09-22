@@ -16,7 +16,7 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <>
+    <div id="main-content">
       <Navbar />
       <Hero />
       <ScrollConnector />
@@ -32,6 +32,6 @@ export default function Home() {
       <Hobbies />
       <Contact />
       <Footer />
-    </>
+    </div>
   );
 }
