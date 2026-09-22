@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { motion, useMotionValue, useSpring, useMotionTemplate } from "framer-motion";
+import { useFinePointer } from "@/hooks/useFinePointer";
 
 /**
  * A large radial glow that follows the cursor — the page's "signature" effect.
@@ -9,6 +10,7 @@ import { motion, useMotionValue, useSpring, useMotionTemplate } from "framer-mot
  * the pointer leaves the window.
  */
 export default function Spotlight() {
+  const enabled = useFinePointer();
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -18,7 +20,8 @@ export default function Spotlight() {
   const background = useMotionTemplate`radial-gradient(140px circle at ${sx}px ${sy}px, rgba(71,241,255,0.16), rgba(71,241,255,0.08) 40%, transparent 70%)`;
 
   useEffect(() => {
-    // Start centered so there's a glow before the first mouse move
+    if (!enabled) return;
+
     x.set(window.innerWidth / 2);
     y.set(window.innerHeight * 0.4);
 
@@ -28,7 +31,9 @@ export default function Spotlight() {
     };
     window.addEventListener("mousemove", move);
     return () => window.removeEventListener("mousemove", move);
-  }, [x, y]);
+  }, [enabled, x, y]);
+
+  if (!enabled) return null;
 
   return (
     <motion.div

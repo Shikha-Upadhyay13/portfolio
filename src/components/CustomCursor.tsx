@@ -2,18 +2,20 @@
 
 import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useFinePointer } from "@/hooks/useFinePointer";
 
 export default function CustomCursor() {
-  // Raw pointer position
+  const enabled = useFinePointer();
   const x = useMotionValue(-100);
   const y = useMotionValue(-100);
   const [hovering, setHovering] = useState(false);
 
-  // Spring-smoothed values give the ring a fluid, weighty trail
   const ringX = useSpring(x, { stiffness: 350, damping: 28, mass: 0.6 });
   const ringY = useSpring(y, { stiffness: 350, damping: 28, mass: 0.6 });
 
   useEffect(() => {
+    if (!enabled) return;
+
     const move = (e: MouseEvent) => {
       x.set(e.clientX);
       y.set(e.clientY);
@@ -36,11 +38,12 @@ export default function CustomCursor() {
       document.removeEventListener("mouseover", over);
       document.removeEventListener("mouseout", out);
     };
-  }, [x, y]);
+  }, [enabled, x, y]);
+
+  if (!enabled) return null;
 
   return (
     <>
-      {/* Outer ring (spring-smoothed, grows on interactive hover) */}
       <motion.div
         className="fixed top-0 left-0 w-9 h-9 rounded-full pointer-events-none z-[9999] border border-accent/50 backdrop-blur-[1px]"
         style={{ x: ringX, y: ringY, translateX: "-50%", translateY: "-50%" }}
@@ -48,7 +51,6 @@ export default function CustomCursor() {
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
       />
 
-      {/* Inner dot (snappy, follows raw position) */}
       <motion.div
         className="fixed top-0 left-0 w-2 h-2 rounded-full pointer-events-none z-[9999] bg-accent"
         style={{ x, y, translateX: "-50%", translateY: "-50%" }}

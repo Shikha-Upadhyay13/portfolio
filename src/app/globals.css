@@ -100,14 +100,9 @@ body {
     transform: translate(-50%, -50%) scale(6);
   }
 }
-body {
-  cursor: none;
-}
-
-/* Hide the custom cursor on touch devices (no hover/fine pointer) */
-@media (hover: none), (pointer: coarse) {
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
   body {
-    cursor: auto;
+    cursor: none;
   }
 }
 
