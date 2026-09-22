@@ -8,6 +8,7 @@ export const NAV_LINKS: NavLink[] = [
   { id: "experience", label: "Experience" },
   { id: "education", label: "Education" },
   { id: "skills", label: "Skills" },
+  { id: "how-i-work", label: "How I Work" },
   { id: "projects", label: "Projects" },
   { id: "achievements", label: "Achievements" },
   { id: "certifications", label: "Certifications" },
