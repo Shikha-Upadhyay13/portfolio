@@ -1,7 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Lock, Search, Sparkles } from "lucide-react";
+import { ArrowUpRight, BookOpen, Lock, Search, Sparkles } from "lucide-react";
 import { PLACEHOLDER_REPO, type Project } from "@/data/projects";
 import { EASE_OUT_EXPO } from "@/lib/animations";
 
@@ -100,23 +101,34 @@ export default function ProjectCard({
         ))}
       </div>
 
-      {/* Link */}
-      {isPlaceholder ? (
-        <span className="inline-flex items-center gap-1.5 text-sm text-gray-500">
-          <Lock className="w-4 h-4" />
-          Repo coming soon
-        </span>
-      ) : (
-        <a
-          href={project.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-sm text-accent hover:text-[#8AF6FF] font-medium group-hover/card:gap-2 transition-all"
-        >
-          View Repository
-          <ArrowUpRight className="w-4 h-4" />
-        </a>
-      )}
+      {/* Links */}
+      <div className="flex flex-wrap items-center gap-4">
+        {project.caseStudy && (
+          <Link
+            href={`/projects/${project.slug}`}
+            className="inline-flex items-center gap-1 text-sm text-accent hover:text-[#8AF6FF] font-medium group-hover/card:gap-2 transition-all"
+          >
+            Read case study
+            <BookOpen className="w-4 h-4" />
+          </Link>
+        )}
+        {isPlaceholder ? (
+          <span className="inline-flex items-center gap-1.5 text-sm text-gray-500">
+            <Lock className="w-4 h-4" />
+            Repo coming soon
+          </span>
+        ) : (
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-white font-medium group-hover/card:gap-2 transition-all"
+          >
+            View Repository
+            <ArrowUpRight className="w-4 h-4" />
+          </a>
+        )}
+      </div>
     </motion.div>
   );
 }
