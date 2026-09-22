@@ -3,26 +3,18 @@
 import { useEffect, useState } from "react";
 import { Search } from "lucide-react";
 import Button from "@/components/ui/Button";
-
-const links = [
-  { id: "about", label: "About" },
-  { id: "skills", label: "Skills" },
-  { id: "projects", label: "Projects" },
-  { id: "experience", label: "Experience" },
-  { id: "contact", label: "Contact" },
-];
+import MobileNav from "@/components/MobileNav";
+import { NAV_LINKS, SCROLL_SPY_IDS } from "@/data/navLinks";
 
 export default function Navbar() {
-  const [active, setActive] = useState("about");
+  const [active, setActive] = useState("home");
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    // Frosted background once the user scrolls past the hero
     const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    // Scroll-spy: highlight whichever section is centered in the viewport
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -32,7 +24,7 @@ export default function Navbar() {
       { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
     );
 
-    links.forEach(({ id }) => {
+    SCROLL_SPY_IDS.forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
     });
@@ -52,15 +44,13 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
-        {/* Logo */}
         <a href="/" className="text-lg font-semibold accent-text font-display">
           Shikha.dev
         </a>
 
-        {/* Right Side */}
-        <div className="flex items-center gap-6 md:gap-8 text-sm">
+        <div className="flex items-center gap-4 md:gap-8 text-sm">
           <div className="hidden md:flex items-center gap-8">
-            {links.map(({ id, label }) => (
+            {NAV_LINKS.map(({ id, label }) => (
               <a
                 key={id}
                 href={`/#${id}`}
@@ -74,9 +64,6 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Command palette trigger — icon-only on mobile (also doubles as
-              mobile section navigation, since the link list above is
-              desktop-only), full "Search ⌘K" hint from sm and up */}
           <Button
             variant="ghost"
             size="md"
@@ -95,6 +82,8 @@ export default function Navbar() {
           <Button href="/resume.pdf" download variant="ghost" size="md">
             Resume
           </Button>
+
+          <MobileNav />
         </div>
       </div>
     </nav>
