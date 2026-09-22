@@ -6,6 +6,7 @@ import ScrollProgress from "@/components/ScrollProgress";
 import Spotlight from "@/components/Spotlight";
 import CommandPalette from "@/components/CommandPalette";
 import SmartAssistant from "@/components/SmartAssistant";
+import JsonLd from "@/components/JsonLd";
 import {
   SITE_DESCRIPTION,
   SITE_KEYWORDS,
@@ -72,6 +73,9 @@ export default function RootLayout({
       lang="en"
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetBrainsMono.variable}`}
     >
+      <head>
+        <JsonLd />
+      </head>
       <body className="relative bg-[#0b0b0f] text-white overflow-x-hidden">
         {/* Soft static ambient glow (sits under the cursor spotlight) */}
         <div className="fixed top-40 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-[#47F1FF]/8 blur-[150px] rounded-full -z-20" />
