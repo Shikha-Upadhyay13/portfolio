@@ -1,5 +1,7 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { SITE_URL } from "@/lib/site";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -11,6 +13,34 @@ import { getProjectBySlug, PLACEHOLDER_REPO, projects } from "@/data/projects";
 
 export function generateStaticParams() {
   return getCaseStudySlugs().map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
+  const caseStudy = getCaseStudy(slug);
+
+  if (!project || !caseStudy) {
+    return { title: "Project Not Found" };
+  }
+
+  const url = `${SITE_URL}/projects/${slug}`;
+
+  return {
+    title: `${project.title} | Case Study`,
+    description: caseStudy.problem,
+    openGraph: {
+      title: `${project.title} | Case Study`,
+      description: caseStudy.approach,
+      url,
+      type: "article",
+    },
+    alternates: { canonical: url },
+  };
 }
 
 export default async function CaseStudyPage({
