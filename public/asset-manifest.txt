@@ -1,0 +1,10 @@
+Required static assets for the portfolio (all present in this repository):
+- profile-cutout.png
+- profile.jpg
+- resume.pdf
+- images/achievements/*
+- images/certifications/*
+- images/education/*
+- images/hackathons/*
+- images/hobbies/*
+- images/leadership/*
