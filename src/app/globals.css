@@ -57,6 +57,16 @@ body {
   color: #f5f5f5;
 }
 
+/* Text selection — soft cyan tint instead of default browser blue */
+::selection {
+  background: rgba(71, 241, 255, 0.28);
+  color: #f5f5f5;
+}
+::-moz-selection {
+  background: rgba(71, 241, 255, 0.28);
+  color: #f5f5f5;
+}
+
 /* Glass reusable class */
 .glass {
   background: rgba(255, 255, 255, 0.05);
