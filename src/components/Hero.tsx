@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { TypeAnimation } from "react-type-animation";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { EASE_OUT_EXPO, fadeUp, staggerContainer } from "@/lib/animations";
 import Button from "@/components/ui/Button";
 
@@ -15,23 +15,17 @@ const stats = [
   { value: "AI", label: "B.Tech Major" },
 ];
 
-/** Gentle idle float for the portrait cutout; skipped for reduced-motion users. */
-function FloatingPortrait() {
-  const reduceMotion = useReducedMotion();
+function HeroPortrait() {
   return (
-    <motion.div
-      animate={reduceMotion ? undefined : { y: [0, -14, 0] }}
-      transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-      className="relative w-72 sm:w-80 md:w-[26rem] aspect-[15/16]"
-    >
+    <div className="relative w-72 sm:w-80 md:w-[26rem] aspect-[15/16] shrink-0">
       <Image
         src="/profile-cutout.png"
         alt="Shikha Upadhyay"
         fill
         priority
-        className="object-contain transition-transform duration-500 hover:scale-[1.02]"
+        className="object-contain object-bottom transition-transform duration-500 hover:scale-[1.02]"
       />
-    </motion.div>
+    </div>
   );
 }
 
@@ -141,21 +135,21 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: EASE_OUT_EXPO }}
-          className="relative flex justify-center md:justify-end items-end min-h-[420px] md:min-h-[560px]"
+          className="relative flex justify-center md:justify-end items-end min-h-[380px] md:min-h-[520px]"
         >
-          {/* Backdrop card gives the cutout a "stage" instead of floating on empty space */}
+          {/* Backdrop card — aligned to portrait feet */}
           <div
             aria-hidden
-            className="absolute right-2 md:right-12 bottom-4 w-60 h-80 md:w-72 md:h-[24rem] rounded-[2.5rem] bg-[#47F1FF]/12 border border-white/5 -rotate-6 -z-10"
+            className="absolute bottom-0 right-4 md:right-10 w-60 h-[22rem] md:w-72 md:h-[24rem] rounded-[2.5rem] bg-[#47F1FF]/12 border border-white/5 -rotate-6 -z-10"
           />
 
-          {/* Soft contact shadow anchors the figure to the ground */}
+          {/* Ground shadow under the cutout */}
           <div
             aria-hidden
-            className="absolute bottom-3 right-1/2 translate-x-1/2 md:right-16 md:translate-x-0 w-44 h-9 bg-black/40 blur-2xl rounded-full -z-10"
+            className="absolute bottom-0 right-1/2 translate-x-1/2 md:right-14 md:translate-x-0 w-48 h-10 bg-black/50 blur-2xl rounded-full -z-10"
           />
 
-          <FloatingPortrait />
+          <HeroPortrait />
         </motion.div>
       </div>
     </section>
