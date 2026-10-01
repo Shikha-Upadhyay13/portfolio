@@ -17,7 +17,7 @@ export default function Spotlight() {
   const sx = useSpring(x, { stiffness: 60, damping: 20, mass: 0.8 });
   const sy = useSpring(y, { stiffness: 60, damping: 20, mass: 0.8 });
 
-  const background = useMotionTemplate`radial-gradient(140px circle at ${sx}px ${sy}px, rgba(71,241,255,0.16), rgba(71,241,255,0.08) 40%, transparent 70%)`;
+  const background = useMotionTemplate`radial-gradient(110px circle at ${sx}px ${sy}px, rgba(71,241,255,0.09), rgba(71,241,255,0.04) 45%, transparent 72%)`;
 
   useEffect(() => {
     if (!enabled) return;

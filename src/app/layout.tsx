@@ -84,8 +84,8 @@ export default function RootLayout({
           Skip to content
         </a>
         {/* Soft static ambient glow (sits under the cursor spotlight) */}
-        <div className="fixed top-40 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-[#47F1FF]/8 blur-[150px] rounded-full -z-20" />
-        <div className="fixed bottom-0 right-0 w-[500px] h-[500px] bg-[#47F1FF]/8 blur-[150px] rounded-full -z-20" />
+        <div className="fixed top-40 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-[#47F1FF]/5 blur-[150px] rounded-full -z-20" />
+        <div className="fixed bottom-0 right-0 w-[500px] h-[500px] bg-[#47F1FF]/5 blur-[150px] rounded-full -z-20" />
 
         {/* Cursor-following signature glow */}
         <Spotlight />
