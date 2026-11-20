@@ -33,9 +33,9 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center pt-24 pb-8 px-8 max-w-[1400px] mx-auto overflow-hidden"
+      className="relative min-h-[calc(100vh-4rem)] flex items-center pt-20 pb-6 px-4 sm:px-6 md:px-8 max-w-[1400px] mx-auto overflow-hidden"
     >
-      <div className="grid md:grid-cols-2 gap-16 items-center w-full relative z-10">
+      <div className="grid md:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center w-full relative z-10">
         {/* LEFT SIDE */}
         <motion.div
           variants={container}
@@ -135,18 +135,18 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: EASE_OUT_EXPO }}
-          className="relative flex justify-center md:justify-end items-end min-h-[380px] md:min-h-[520px]"
+          className="relative flex justify-center md:justify-end items-end min-h-[340px] md:min-h-[480px]"
         >
           {/* Backdrop card — aligned to portrait feet */}
           <div
             aria-hidden
-            className="absolute bottom-0 right-4 md:right-10 w-60 h-[22rem] md:w-72 md:h-[24rem] rounded-[2.5rem] bg-[#47F1FF]/12 border border-white/5 -rotate-6 -z-10"
+            className="absolute bottom-0 right-0 md:right-4 w-56 h-[20rem] md:w-64 md:h-[22rem] rounded-[2.5rem] bg-[#47F1FF]/12 border border-white/5 -rotate-6 -z-10"
           />
 
           {/* Ground shadow under the cutout */}
           <div
             aria-hidden
-            className="absolute bottom-0 right-1/2 translate-x-1/2 md:right-14 md:translate-x-0 w-48 h-10 bg-black/50 blur-2xl rounded-full -z-10"
+            className="absolute bottom-0 right-1/2 translate-x-1/2 md:right-8 md:translate-x-0 w-44 h-9 bg-black/50 blur-2xl rounded-full -z-10"
           />
 
           <HeroPortrait />
