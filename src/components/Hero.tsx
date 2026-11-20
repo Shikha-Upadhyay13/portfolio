@@ -10,7 +10,7 @@ const container = staggerContainer();
 const item = fadeUp;
 
 const stats = [
-  { value: "6+", label: "Projects" },
+  { value: "10+", label: "Projects" },
   { value: "20+", label: "Technologies" },
   { value: "AI", label: "B.Tech Major" },
 ];

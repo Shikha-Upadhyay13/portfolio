@@ -34,16 +34,49 @@ export const PLACEHOLDER_REPO = "https://github.com/yourusername";
 
 export const projects: Project[] = [
   {
-    title: "Teaser — Multimodal RAG Agent",
+    title: "VoxShield",
+    slug: "voxshield",
+    description:
+      "Smart India Hackathon 2026 project (SIH26104) — reusable AI voice-security core that scores cloned vs. real voices and scam speech separately in real time. FastAPI engine with WebSocket streaming, neural + DSP authenticity checks, and Next.js demo adapters for call monitoring and bank-style hold/MFA flows.",
+    tech: ["FastAPI", "Next.js", "TypeScript", "Whisper", "ONNX"],
+    github: "https://github.com/Shikha-Upadhyay13/VoxShield",
+    highlight: "Live clone & scam-speech detection",
+    category: "Cybersecurity",
+    featured: true,
+  },
+  {
+    title: "Teaser — Agentic Multimodal Chatbot",
     slug: "teaser-multimodal-rag",
     description:
-      "A multimodal Retrieval-Augmented Generation system built with FastAPI, React, FAISS, and LLM APIs that answers queries from text, image, audio, and video inputs. Includes an end-to-end retrieval pipeline — ingestion, chunking, embedding generation, and semantic similarity search — with real-time response streaming for grounded answers across heterogeneous data sources.",
-    tech: ["FastAPI", "React", "FAISS", "LLM APIs"],
+      "An agentic chatbot that plans tool use — search, read, calculate, transcribe, and generate files — across text, image, audio, and video. Includes eval workflows, a FastAPI backend, React frontend, and deployment via Render for grounded multimodal answers.",
+    tech: ["FastAPI", "React", "LLM APIs", "Agentic AI"],
     github: "https://github.com/Shikha-Upadhyay13/Multimodal_Chatbot",
-    highlight: "Text, image, audio & video in one pipeline",
+    highlight: "Tool-planning agent + multimodal inputs",
     category: "Generative AI",
     featured: true,
     caseStudy: true,
+  },
+  {
+    title: "IEEE Paper Builder",
+    slug: "ieee-paper-builder",
+    description:
+      "Drag-and-drop IEEE conference paper editor with a live, paginated two-column preview that stays byte-accurate to IEEE format. Block-based writing, Playwright PDF export from the same DOM as preview, Supabase auth/storage, and a Groq-backed AI assistant for drafting — no manual LaTeX formatting.",
+    tech: ["React", "TypeScript", "Vite", "Supabase", "Playwright", "Groq"],
+    github: "https://github.com/Shikha-Upadhyay13/IEEE",
+    highlight: "IEEE-accurate editor + PDF export",
+    category: "Full Stack",
+    featured: true,
+  },
+  {
+    title: "IT Ticketing Tool",
+    slug: "it-ticketing-tool",
+    description:
+      "Full-stack IT support ticketing system for creating, prioritizing, assigning, and tracking resolution workflows — structured ticket lifecycle, role-based access, and dashboards for support teams.",
+    tech: ["Full Stack", "REST APIs", "SQL"],
+    github: "https://github.com/Shikha-Upadhyay13/Ticketing_tool",
+    highlight: "End-to-end ticket lifecycle",
+    category: "Web App",
+    featured: true,
   },
   {
     title: "Quantix – RAG Math Solver",
@@ -54,7 +87,6 @@ export const projects: Project[] = [
     github: "https://github.com/Shikha-Upadhyay13/Quantix",
     highlight: "Grounds answers in retrieved context",
     category: "Generative AI",
-    featured: true,
     caseStudy: true,
   },
   {
@@ -76,7 +108,6 @@ export const projects: Project[] = [
     github: "https://github.com/Shikha-Upadhyay13/nykaa-ecommerce-clone",
     highlight: "3D models + AI chatbot",
     category: "Web App",
-    featured: true,
   },
   {
     title: "Smart Image Compressor",

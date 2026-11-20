@@ -9,6 +9,8 @@ import { EASE_OUT_EXPO } from "@/lib/animations";
 export const CATEGORY_STYLES: Record<string, string> = {
   "Generative AI": "text-accent/80 bg-accent/10 border-accent/20",
   "Web App": "text-sky-300/80 bg-sky-500/10 border-sky-400/20",
+  "Full Stack": "text-violet-300/80 bg-violet-500/10 border-violet-400/20",
+  Cybersecurity: "text-rose-300/80 bg-rose-500/10 border-rose-400/20",
   Security: "text-amber-300/80 bg-amber-500/10 border-amber-400/20",
   "Machine Learning": "text-emerald-300/80 bg-emerald-500/10 border-emerald-400/20",
 };

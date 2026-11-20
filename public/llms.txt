@@ -8,10 +8,11 @@
 - Specializes in Retrieval-Augmented Generation (RAG), LLM integration, vector search, and agentic workflows
 
 ## Key Projects
-- Teaser — Multimodal RAG Agent: FastAPI + React + FAISS pipeline for text, image, audio, and video queries
-- Quantix — RAG Math Solver: LangChain + FAISS system for grounded step-by-step math solutions
-- Travel Information RAG Agent: Document-grounded travel policy Q&A
-- Nykaa-Inspired E-Commerce Site: 3D models, animations, and AI chatbot
+- VoxShield: SIH26104 voice clone & scam-speech detection (FastAPI + Next.js)
+- Teaser — Agentic Multimodal Chatbot: tool-planning agent across text, image, audio, video
+- IEEE Paper Builder: drag-and-drop IEEE conference editor with live preview and PDF export
+- IT Ticketing Tool: full-stack support ticket lifecycle
+- Quantix — RAG Math Solver: grounded step-by-step math solutions
 
 ## Core Skills
 RAG Pipelines, LangChain, LangGraph, Python, FastAPI, FAISS, Vector Databases, LLM Integration, Prompt Engineering, React, Next.js, Machine Learning, SQL

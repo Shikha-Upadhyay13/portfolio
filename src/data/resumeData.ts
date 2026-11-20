@@ -26,9 +26,9 @@ Beyond implementation, I focus on scalability, clean architecture, and real-worl
   projects: `
 I enjoy building practical AI-driven applications that solve real problems rather than just experimental prototypes.
 
-One of my key projects is Quantix — a Retrieval-Augmented Generation system designed to retrieve contextual data before generating responses. The goal was to improve reliability and minimize hallucinations in AI outputs.
+Major projects include VoxShield (Smart India Hackathon — real-time voice clone and scam-speech detection), Teaser — an agentic multimodal chatbot with tool planning, IEEE Paper Builder (drag-and-drop IEEE conference formatting with live preview and PDF export), and a full-stack IT Ticketing Tool.
 
-I also built a Smart Image Compressor using Flask and Pillow, where I implemented backend image processing logic and created a clean user-facing interface.
+I also built Quantix — a RAG math solver that grounds LLM steps in retrieved formulas — plus applications like the Smart Image Compressor using Flask and Pillow.
 
 In the machine learning domain, I worked on Penguin Species Classification, implementing models such as Logistic Regression, SVM, Decision Tree, and KNN. The project focused on model comparison, evaluation metrics, and performance analysis.
 
