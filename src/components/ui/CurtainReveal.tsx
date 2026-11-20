@@ -19,8 +19,12 @@ export default function CurtainReveal({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
-  const inView = useInView(ref, { once: true, amount: 0.28, margin: "-40px" });
+  // Replay every visit: open while in view, close when you leave so the next
+  // scroll-in can part the curtains again.
+  const inView = useInView(ref, { once: false, amount: 0.22, margin: "-60px 0px" });
   const open = reduceMotion || inView;
+  const openMs = reduceMotion ? 0.01 : 1.45;
+  const closeMs = reduceMotion ? 0.01 : 0.55;
 
   return (
     <div
@@ -35,7 +39,11 @@ export default function CurtainReveal({
             ? { opacity: 1, scale: 1 }
             : { opacity: 0.35, scale: 0.985 }
         }
-        transition={{ duration: 1.1, ease: EASE_OUT_EXPO, delay: reduceMotion ? 0 : 0.35 }}
+        transition={{
+          duration: open ? 1.1 : closeMs,
+          ease: EASE_OUT_EXPO,
+          delay: open && !reduceMotion ? 0.35 : 0,
+        }}
         className="relative z-0"
       >
         {children}
@@ -47,7 +55,10 @@ export default function CurtainReveal({
         <motion.div
           initial={false}
           animate={open ? { opacity: 0 } : { opacity: 1 }}
-          transition={{ duration: reduceMotion ? 0.01 : 0.9, ease: EASE_OUT_EXPO }}
+          transition={{
+            duration: open ? (reduceMotion ? 0.01 : 0.9) : closeMs,
+            ease: EASE_OUT_EXPO,
+          }}
           className="absolute inset-0 bg-[#0a0608]/85"
         />
 
@@ -56,9 +67,9 @@ export default function CurtainReveal({
           initial={false}
           animate={open ? { y: "-110%" } : { y: 0 }}
           transition={{
-            duration: reduceMotion ? 0.01 : 1.15,
+            duration: open ? (reduceMotion ? 0.01 : 1.15) : closeMs,
             ease: OPEN_EASE,
-            delay: reduceMotion ? 0 : 0.05,
+            delay: open && !reduceMotion ? 0.05 : 0,
           }}
           className="absolute inset-x-0 top-0 z-30 h-[14%] min-h-[52px] origin-top"
           style={{
@@ -87,16 +98,29 @@ export default function CurtainReveal({
         </motion.div>
 
         {/* Left curtain */}
-        <CurtainPanel side="left" open={open} reduceMotion={!!reduceMotion} />
+        <CurtainPanel
+          side="left"
+          open={open}
+          openMs={openMs}
+          closeMs={closeMs}
+        />
 
         {/* Right curtain */}
-        <CurtainPanel side="right" open={open} reduceMotion={!!reduceMotion} />
+        <CurtainPanel
+          side="right"
+          open={open}
+          openMs={openMs}
+          closeMs={closeMs}
+        />
 
         {/* Center rope / parting highlight */}
         <motion.div
           initial={false}
           animate={open ? { opacity: 0, scaleY: 0.6 } : { opacity: 1, scaleY: 1 }}
-          transition={{ duration: 0.55, ease: EASE_OUT_EXPO }}
+          transition={{
+            duration: open ? 0.55 : closeMs,
+            ease: EASE_OUT_EXPO,
+          }}
           className="absolute inset-y-[12%] left-1/2 z-40 w-px origin-center -translate-x-1/2"
           style={{
             background:
@@ -112,11 +136,13 @@ export default function CurtainReveal({
 function CurtainPanel({
   side,
   open,
-  reduceMotion,
+  openMs,
+  closeMs,
 }: {
   side: "left" | "right";
   open: boolean;
-  reduceMotion: boolean;
+  openMs: number;
+  closeMs: number;
 }) {
   const isLeft = side === "left";
 
@@ -132,9 +158,9 @@ function CurtainPanel({
           : { x: "0%", skewX: 0 }
       }
       transition={{
-        duration: reduceMotion ? 0.01 : 1.45,
+        duration: open ? openMs : closeMs,
         ease: OPEN_EASE,
-        delay: reduceMotion ? 0 : 0.12,
+        delay: open && openMs > 0.05 ? 0.12 : 0,
       }}
       className={`absolute bottom-0 top-[10%] z-20 w-[52%] ${
         isLeft ? "left-0 origin-left" : "right-0 origin-right"
