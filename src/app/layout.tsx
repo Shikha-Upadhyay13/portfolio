@@ -6,6 +6,7 @@ import ScrollProgress from "@/components/ScrollProgress";
 import Spotlight from "@/components/Spotlight";
 import CommandPalette from "@/components/CommandPalette";
 import SmartAssistant from "@/components/SmartAssistant";
+import IntroSplash from "@/components/IntroSplash";
 import JsonLd from "@/components/JsonLd";
 import {
   SITE_DESCRIPTION,
@@ -91,6 +92,8 @@ export default function RootLayout({
         <Spotlight />
 
         <ScrollProgress />
+
+        <IntroSplash />
 
         {children}
 
