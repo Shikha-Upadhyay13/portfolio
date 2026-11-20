@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
+import ContactVisual from "@/components/ContactVisual";
 import { SOCIAL_LINKS } from "@/lib/site";
 
 const CONTACT_EMAIL = SOCIAL_LINKS.email;
@@ -113,8 +114,8 @@ export default function Contact() {
       {/* Equal-width, equal-height panels */}
       <div className="grid md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
         {/* Left */}
-        <div className="flex flex-col h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6 md:p-8">
-          <div className="inline-flex items-center gap-2 self-start px-3 py-1.5 text-xs rounded-full border border-emerald-400/25 bg-emerald-400/10 text-emerald-300 mb-5">
+        <div className="flex flex-col h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6 md:p-8 overflow-hidden">
+          <div className="inline-flex items-center gap-2 self-start px-3 py-1.5 text-xs rounded-full border border-emerald-400/25 bg-emerald-400/10 text-emerald-300 mb-4">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60 animate-ping" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
@@ -122,16 +123,17 @@ export default function Contact() {
             Available for opportunities
           </div>
 
-          <h3 className="text-2xl font-semibold font-display leading-snug">
+          <ContactVisual />
+
+          <h3 className="mt-2 text-xl md:text-2xl font-semibold font-display leading-snug">
             Let’s talk about{" "}
             <span className="accent-text">building with AI</span>
           </h3>
-          <p className="mt-3 text-gray-400 text-sm leading-relaxed">
-            Prefer email or LinkedIn. I usually reply within a day or two — use
-            the form for a structured note in your mail client.
+          <p className="mt-2 text-gray-400 text-sm leading-relaxed">
+            Prefer email or LinkedIn. I usually reply within a day or two.
           </p>
 
-          <div className="mt-6 flex-1 flex flex-col gap-3">
+          <div className="mt-5 flex-1 flex flex-col gap-3">
             <div className="flex items-stretch gap-2">
               <a href={`mailto:${CONTACT_EMAIL}`} className={`${channelClass} flex-1`}>
                 <Mail className="w-4 h-4 text-accent shrink-0" />

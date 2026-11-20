@@ -14,7 +14,7 @@ export default function Projects() {
     <section id="projects" className="py-24 px-8 max-w-[1400px] mx-auto">
       <SectionHeading
         title="Projects"
-        subtitle="Practical AI systems and applications, not just experiments."
+        subtitle="Featured builds below — 30+ repositories on GitHub across AI, full-stack, and ML."
       />
 
       {/* Flagship cards span both columns. Sibling cards dim on hover so the

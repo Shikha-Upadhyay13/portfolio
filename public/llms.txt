@@ -8,11 +8,13 @@
 - Specializes in Retrieval-Augmented Generation (RAG), LLM integration, vector search, and agentic workflows
 
 ## Key Projects
+30+ public repositories on GitHub (https://github.com/Shikha-Upadhyay13?tab=repositories). Highlights:
 - VoxShield: SIH26104 voice clone & scam-speech detection (FastAPI + Next.js)
 - Teaser — Agentic Multimodal Chatbot: tool-planning agent across text, image, audio, video
 - IEEE Paper Builder: drag-and-drop IEEE conference editor with live preview and PDF export
 - IT Ticketing Tool: full-stack support ticket lifecycle
 - Quantix — RAG Math Solver: grounded step-by-step math solutions
+- DogBuddy, Handwritten-Notes-to-Speech, CalcifyX, and more
 
 ## Core Skills
 RAG Pipelines, LangChain, LangGraph, Python, FastAPI, FAISS, Vector Databases, LLM Integration, Prompt Engineering, React, Next.js, Machine Learning, SQL
