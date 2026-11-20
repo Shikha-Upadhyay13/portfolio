@@ -87,6 +87,7 @@ export const projects: Project[] = [
     github: "https://github.com/Shikha-Upadhyay13/Quantix",
     highlight: "Grounds answers in retrieved context",
     category: "Generative AI",
+    featured: true,
     caseStudy: true,
   },
   {
