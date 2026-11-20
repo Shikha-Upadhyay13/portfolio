@@ -11,6 +11,37 @@ export type Hackathon = {
 
 export const hackathons: Hackathon[] = [
   {
+    title: "VoxShield — Real-Time Voice-Clone Detection",
+    team: "Team Eternals",
+    event:
+      "Smart India Hackathon 2026 Internal Hackathon · Dept. of Information Technology · Sep 10–11, 2026",
+    award: "Top 5",
+    description:
+      "A cloned voice doesn’t need a password — it needs a phone call, a little urgency, and a financial conversation that sounds familiar enough to trust. Team Eternals built an AI system for real-time voice-clone detection wired to financial-fraud signals: if the voice is fake, the transaction shouldn’t go through. The stack mattered less than the room — shared ownership, fast decisions, zero theatre. We made the Top 5. The next round is still unwritten.",
+    media: [
+      {
+        type: "image",
+        src: "/images/hackathons/sih-eternals-banner.png",
+        alt: "Team Eternals with faculty at the SIH-2026 Internal Hackathon banner",
+      },
+      {
+        type: "image",
+        src: "/images/hackathons/sih-eternals-stairs.jpg",
+        alt: "Team Eternals posing on the campus staircase during SIH 2026",
+      },
+      {
+        type: "image",
+        src: "/images/hackathons/sih-eternals-lab.jpg",
+        alt: "Team Eternals in the computer lab during the SIH internal hackathon",
+      },
+      {
+        type: "image",
+        src: "/images/hackathons/sih-eternals-selfie.jpg",
+        alt: "Team Eternals celebrating outdoors after the SIH Top 5 announcement",
+      },
+    ],
+  },
+  {
     title: "Guido — Smart Campus Assistance Rover",
     team: "Team BiriyaniOS",
     event: "National-Level Hackathon, CMR College of Engineering & Technology · 36 hours",

@@ -10,11 +10,28 @@ export default function IntroSplash() {
   const reduceMotion = useReducedMotion();
   const [visible, setVisible] = useState(true);
 
+  // Always land on the hero after reload — ignore restored scroll / #hash.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+    if (window.location.hash) {
+      history.replaceState(
+        null,
+        "",
+        window.location.pathname + window.location.search
+      );
+    }
+    window.scrollTo(0, 0);
+  }, []);
+
   useEffect(() => {
     if (!visible) return;
 
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    window.scrollTo(0, 0);
 
     const delay = reduceMotion ? 400 : INTRO_MS;
     const t = setTimeout(finish, delay);
@@ -27,6 +44,7 @@ export default function IntroSplash() {
   }, [visible, reduceMotion]);
 
   const finish = () => {
+    window.scrollTo(0, 0);
     setVisible(false);
     document.body.style.overflow = "";
   };

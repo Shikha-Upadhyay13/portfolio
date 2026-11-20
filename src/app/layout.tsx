@@ -76,6 +76,12 @@ export default function RootLayout({
     >
       <head>
         <JsonLd />
+        {/* Run before paint so reload doesn't restore mid-page scroll */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if('scrollRestoration' in history)history.scrollRestoration='manual';if(location.hash)history.replaceState(null,'',location.pathname+location.search);window.scrollTo(0,0);}catch(e){}`,
+          }}
+        />
       </head>
       <body className="relative bg-[#0b0b0f] text-white overflow-x-hidden">
         <a

@@ -3,21 +3,18 @@
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 
-/** Renders Shikha's profile as a syntax-highlighted object literal, styled
- * like a code editor tab — a more genuine, on-brand alternative to a generic
- * icon-card grid for an AI engineer's About section. */
+/** Profile as a syntax-highlighted object literal — on-brand for an AI engineer. */
 function ProfileCodeBlock() {
   return (
-    <div className="rounded-2xl border border-white/10 bg-panel overflow-hidden shadow-2xl shadow-black/40">
-      {/* Window chrome */}
-      <div className="flex items-center gap-2 px-4 py-3 border-b border-white/10 bg-white/[0.03]">
-        <span className="w-2.5 h-2.5 rounded-full bg-red-400/70" />
-        <span className="w-2.5 h-2.5 rounded-full bg-yellow-400/70" />
-        <span className="w-2.5 h-2.5 rounded-full bg-green-400/70" />
-        <span className="ml-3 text-xs text-gray-500 font-mono">about.ts</span>
+    <div className="overflow-hidden rounded-2xl border border-white/10 bg-panel shadow-2xl shadow-black/40">
+      <div className="flex items-center gap-2 border-b border-white/10 bg-white/[0.03] px-4 py-3">
+        <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
+        <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/70" />
+        <span className="h-2.5 w-2.5 rounded-full bg-green-400/70" />
+        <span className="ml-3 font-mono text-xs text-gray-500">about.ts</span>
       </div>
 
-      <pre className="p-6 text-[13px] sm:text-sm leading-relaxed font-mono overflow-x-auto">
+      <pre className="overflow-x-auto p-6 font-mono text-[13px] leading-relaxed sm:text-sm">
         <code>
           <span className="text-accent">const</span>{" "}
           <span className="text-gray-200">engineer</span>{" "}
@@ -59,7 +56,7 @@ function ProfileCodeBlock() {
           <span className="text-accent">;</span>
           <span
             aria-hidden
-            className="inline-block w-[7px] h-4 bg-accent ml-0.5 align-middle animate-pulse"
+            className="ml-0.5 inline-block h-4 w-[7px] animate-pulse align-middle bg-accent"
           />
         </code>
       </pre>
@@ -69,12 +66,14 @@ function ProfileCodeBlock() {
 
 export default function About() {
   return (
-    <section id="about" className="py-24 px-6 max-w-[1400px] mx-auto">
+    <section id="about" className="mx-auto max-w-[1400px] px-6 py-24">
       <SectionHeading title="About" />
 
-      <div className="grid lg:grid-cols-2 gap-12 items-center">
-        {/* Narrative */}
-        <Reveal direction="right" className="space-y-5 text-gray-300 leading-relaxed text-lg">
+      <div className="grid items-center gap-12 lg:grid-cols-2">
+        <Reveal
+          direction="right"
+          className="space-y-5 text-lg leading-relaxed text-gray-300"
+        >
           <p>
             I am an AI Engineer focused on building structured and reliable
             intelligent systems. My work centers around Retrieval-Augmented
@@ -88,7 +87,6 @@ export default function About() {
           </p>
         </Reveal>
 
-        {/* Profile-as-code panel */}
         <Reveal direction="left" delay={0.1}>
           <ProfileCodeBlock />
         </Reveal>
