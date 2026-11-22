@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { EASE_OUT_EXPO } from "@/lib/animations";
 
-const INTRO_MS = 2800;
+const INTRO_MS = 1200;
 
 export default function IntroSplash() {
   const reduceMotion = useReducedMotion();
@@ -60,9 +60,9 @@ export default function IntroSplash() {
           initial={{ opacity: 1 }}
           exit={{
             opacity: 0,
-            scale: 1.04,
-            filter: "blur(8px)",
-            transition: { duration: 0.65, ease: EASE_OUT_EXPO },
+            scale: 1.02,
+            filter: "blur(6px)",
+            transition: { duration: 0.35, ease: EASE_OUT_EXPO },
           }}
           className="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-[#0b0b0f] overflow-hidden"
         >
@@ -75,7 +75,7 @@ export default function IntroSplash() {
             <motion.div
               initial={reduceMotion ? false : { opacity: 0, scale: 0.35, rotate: -45 }}
               animate={{ opacity: 1, scale: 1, rotate: 45 }}
-              transition={{ duration: 0.7, ease: EASE_OUT_EXPO }}
+              transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
               className="w-10 h-10 md:w-12 md:h-12 rounded-md bg-[#47F1FF] mb-8 shadow-[0_0_40px_rgba(71,241,255,0.45)]"
               aria-hidden
             />
@@ -83,7 +83,7 @@ export default function IntroSplash() {
             <motion.p
               initial={reduceMotion ? false : { opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.22, duration: 0.6, ease: EASE_OUT_EXPO }}
+              transition={{ delay: 0.1, duration: 0.4, ease: EASE_OUT_EXPO }}
               className="text-4xl md:text-6xl font-bold font-display tracking-tight"
             >
               <span className="accent-text">Shikha</span>
@@ -93,7 +93,7 @@ export default function IntroSplash() {
             <motion.p
               initial={reduceMotion ? false : { opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.42, duration: 0.55, ease: EASE_OUT_EXPO }}
+              transition={{ delay: 0.2, duration: 0.35, ease: EASE_OUT_EXPO }}
               className="mt-4 text-sm md:text-base text-gray-400 tracking-[0.2em] uppercase"
             >
               AI Engineer · RAG · Agentic Systems
@@ -103,7 +103,7 @@ export default function IntroSplash() {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.55 }}
+                transition={{ delay: 0.25 }}
                 className="mt-10 w-40 h-[2px] rounded-full bg-white/10 overflow-hidden"
                 aria-hidden
               >
@@ -111,7 +111,7 @@ export default function IntroSplash() {
                   className="h-full bg-[#47F1FF]"
                   initial={{ width: "0%" }}
                   animate={{ width: "100%" }}
-                  transition={{ delay: 0.6, duration: 1.85, ease: "linear" }}
+                  transition={{ delay: 0.28, duration: 0.85, ease: "linear" }}
                 />
               </motion.div>
             )}
