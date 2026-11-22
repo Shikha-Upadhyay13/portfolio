@@ -21,24 +21,23 @@ allSkills.forEach((item, i) => rows[i % ROWS].push(item));
 
 export default function Skills() {
   return (
-    <section
-      id="skills"
-      className="mx-auto max-w-[1400px] overflow-x-hidden py-24 md:py-32"
-    >
-      <SectionHeading
-        title="Skills"
-        subtitle="Drag to explore — it keeps drifting on its own."
-        className="px-6"
-      />
+    <section id="skills" className="w-full overflow-x-hidden py-24 md:py-32">
+      <div className="mx-auto max-w-[1400px]">
+        <SectionHeading
+          title="Skills"
+          subtitle="Drag to explore — it keeps drifting on its own."
+          className="px-6"
+        />
 
-      <div className="space-y-6 md:space-y-8">
-        {rows.map((row, i) => (
-          <SkillsMarquee
-            key={i}
-            items={row}
-            direction={i % 2 === 0 ? "left" : "right"}
-          />
-        ))}
+        <div className="space-y-6 md:space-y-8">
+          {rows.map((row, i) => (
+            <SkillsMarquee
+              key={i}
+              items={row}
+              direction={i % 2 === 0 ? "left" : "right"}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
