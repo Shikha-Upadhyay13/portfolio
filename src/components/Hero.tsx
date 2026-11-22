@@ -62,9 +62,10 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-[100dvh] flex items-center pt-20 pb-10 px-4 sm:px-6 md:px-8 max-w-[1400px] mx-auto overflow-hidden"
+      className="relative min-h-[100dvh] w-full overflow-hidden"
     >
-      <div className="grid md:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center w-full relative z-10">
+      <div className="relative z-10 mx-auto flex min-h-[100dvh] max-w-[1400px] items-center px-4 pb-10 pt-20 sm:px-6 md:px-8">
+      <div className="grid w-full items-center gap-8 md:grid-cols-2 md:gap-10 lg:gap-12">
         {/* LEFT SIDE */}
         <motion.div
           variants={container}
@@ -168,6 +169,7 @@ export default function Hero() {
         >
           <HeroPortrait />
         </motion.div>
+      </div>
       </div>
     </section>
   );
