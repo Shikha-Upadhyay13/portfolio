@@ -6,7 +6,7 @@ import ScrollConnector from "@/components/ui/ScrollConnector";
 import Projects from "@/components/Projects";
 import Experience from "@/components/Experience";
 import Education from "@/components/Education";
-import Achievements from "@/components/Achievements";
+import { AchievementsPreview } from "@/components/Achievements";
 import Certifications from "@/components/Certifications";
 import Hackathons from "@/components/Hackathons";
 import Leadership from "@/components/Leadership";
@@ -25,7 +25,7 @@ export default function Home() {
       <Education />
       <Skills />
       <Projects />
-      <Achievements />
+      <AchievementsPreview />
       <Certifications />
       <Hackathons />
       <Leadership />
