@@ -2,13 +2,18 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { Download, FileText, X } from "lucide-react";
+import { Download, ExternalLink, FileText, X } from "lucide-react";
 
 export const RESUME_SRC = "/resume.pdf";
-export const RESUME_PREVIEW_SRC = "/images/resume-preview.webp";
+/** High-res PNG of all PDF pages stacked for sharp, fast preview. */
+export const RESUME_PREVIEW_SRC = "/images/resume-preview.png";
 export const RESUME_FILENAME = "Shikha-Upadhyay-Resume.pdf";
 export const OPEN_RESUME_PREVIEW = "open-resume-preview";
 export const PRELOAD_RESUME_PREVIEW = "preload-resume-preview";
+
+/** Intrinsic size of the stacked 2-page preview PNG. */
+const PREVIEW_WIDTH = 1488;
+const PREVIEW_HEIGHT = 4234;
 
 export function openResumePreview() {
   window.dispatchEvent(new CustomEvent(OPEN_RESUME_PREVIEW));
@@ -19,14 +24,15 @@ export function preloadResumePreview() {
 }
 
 /**
- * Resume preview modal — static raster preview (instant), Download = real PDF.
+ * Resume preview modal — thin white chrome + dark stage,
+ * scrollable full multi-page preview.
  */
 export default function ResumePreview() {
   const [open, setOpen] = useState(false);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLElement | null>(null);
 
-  // Warm the preview image into cache on mount / hover.
   useEffect(() => {
     const img = new window.Image();
     img.decoding = "async";
@@ -63,6 +69,10 @@ export default function ResumePreview() {
     window.addEventListener("keydown", onKey);
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    // Reset scroll so page 1 is visible when reopening
+    requestAnimationFrame(() => {
+      if (scrollRef.current) scrollRef.current.scrollTop = 0;
+    });
     return () => {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
@@ -78,7 +88,6 @@ export default function ResumePreview() {
     triggerRef.current?.focus?.();
   }, [open]);
 
-  // Stay mounted — toggling visibility avoids open delay from remount/animation.
   return (
     <div
       className={`fixed inset-0 z-[110] items-center justify-center p-3 sm:p-6 md:p-10 ${
@@ -95,11 +104,11 @@ export default function ResumePreview() {
         role="dialog"
         aria-modal="true"
         aria-labelledby="resume-preview-title"
-        className="relative flex h-[min(92vh,880px)] w-full max-w-5xl flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#f8f8f9] shadow-2xl"
+        className="relative flex h-[min(94vh,920px)] w-full max-w-4xl flex-col overflow-hidden rounded-2xl bg-white p-2 shadow-2xl sm:p-2.5"
       >
-        <div className="flex shrink-0 items-center justify-between gap-3 border-b border-black/8 bg-white px-4 py-3 sm:px-5">
+        <div className="flex shrink-0 items-center justify-between gap-3 rounded-t-xl bg-white px-3 pb-3 pt-1 sm:px-4">
           <div className="flex min-w-0 items-center gap-3">
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-stone-100 text-stone-700">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-teal-50 text-teal-700">
               <FileText className="h-5 w-5" />
             </span>
             <div className="min-w-0">
@@ -109,11 +118,22 @@ export default function ResumePreview() {
               >
                 Shikha Upadhyay - Resume
               </h2>
-              <p className="text-xs text-stone-500">PDF Document</p>
+              <p className="text-xs text-stone-500">
+                2 pages · scroll to see both
+              </p>
             </div>
           </div>
 
           <div className="flex shrink-0 items-center gap-2">
+            <a
+              href={RESUME_SRC}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-stone-200 px-3 py-2 text-sm font-medium text-stone-700 transition hover:bg-stone-50"
+            >
+              <ExternalLink className="h-4 w-4" />
+              <span className="hidden sm:inline">Open PDF</span>
+            </a>
             <a
               href={RESUME_SRC}
               download={RESUME_FILENAME}
@@ -134,16 +154,25 @@ export default function ResumePreview() {
           </div>
         </div>
 
-        <div className="relative min-h-0 flex-1 bg-[#1a1a1c] p-2 sm:p-3">
-          <div className="relative flex h-full items-start justify-center overflow-auto rounded-lg border border-white/10 bg-[#111113]">
-            <Image
-              src={RESUME_PREVIEW_SRC}
-              alt="Shikha Upadhyay resume preview"
-              width={1200}
-              height={1600}
-              priority
-              className="h-auto w-full max-w-3xl bg-white object-contain shadow-lg"
-            />
+        {/* Dark stage — explicit scroll so both pages are reachable */}
+        <div className="relative flex min-h-0 flex-1 flex-col overflow-hidden rounded-xl bg-[#2a2a2e]">
+          <div
+            ref={scrollRef}
+            tabIndex={0}
+            className="min-h-0 flex-1 overflow-y-scroll overscroll-contain px-3 py-4 sm:px-6 sm:py-5 [scrollbar-gutter:stable]"
+          >
+            <div className="mx-auto w-full max-w-[820px] space-y-0 pb-8">
+              <Image
+                src={RESUME_PREVIEW_SRC}
+                alt="Shikha Upadhyay resume — page 1 and page 2"
+                width={PREVIEW_WIDTH}
+                height={PREVIEW_HEIGHT}
+                priority
+                quality={100}
+                unoptimized
+                className="h-auto w-full rounded-sm bg-white shadow-[0_8px_40px_rgba(0,0,0,0.45)]"
+              />
+            </div>
           </div>
         </div>
       </div>
