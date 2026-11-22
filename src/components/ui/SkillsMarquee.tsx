@@ -1,25 +1,37 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, useMotionValue, animate, type AnimationPlaybackControls } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  animate,
+  type AnimationPlaybackControls,
+} from "framer-motion";
 import { getSkillIcon } from "@/data/skillIcons";
 
-const LOOP_SECONDS = 55; // time to travel one full set at rest
+const LOOP_SECONDS = 55;
 
 function SkillChip({ item }: { item: string }) {
   const { icon: Icon, color } = getSkillIcon(item);
   return (
-    <div className="flex flex-col items-center gap-3 text-center shrink-0 w-32 px-3">
+    <div className="flex w-32 shrink-0 flex-col items-center gap-3 px-3 text-center">
       <motion.div
         role="button"
         tabIndex={0}
-        whileHover={{ scale: 1.1, y: -4 }}
-        whileTap={{ scale: 1.25 }}
-        transition={{ type: "spring", stiffness: 400, damping: 15 }}
-        className="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-black flex items-center justify-center"
-        style={{ boxShadow: `0 0 16px 1px ${color}4d` }}
+        whileHover={{ scale: 1.12, y: -6 }}
+        whileTap={{ scale: 1.06 }}
+        transition={{ type: "spring", stiffness: 400, damping: 18 }}
+        className="relative z-0 flex h-20 w-20 items-center justify-center rounded-2xl bg-black hover:z-20 md:h-24 md:w-24"
+        style={{
+          boxShadow: `0 0 16px 1px ${color}4d`,
+          // Keep the full rounded shape while scaling (no flat clipped edge)
+          transformOrigin: "center center",
+        }}
       >
-        <Icon className="w-10 h-10 md:w-12 md:h-12 shrink-0" style={{ color }} />
+        <Icon
+          className="h-10 w-10 shrink-0 md:h-12 md:w-12"
+          style={{ color }}
+        />
       </motion.div>
       <span className="text-sm leading-tight text-gray-400">{item}</span>
     </div>
@@ -73,12 +85,6 @@ export default function SkillsMarquee({
       });
     } else {
       const current = x.get();
-      // When current sits exactly on a boundary (fresh start at -setWidth,
-      // or right after a wraparound reset), the modulo below evaluates to
-      // 0 — meaning "arrived" rather than "full lap to go" — which produces
-      // a zero-duration animate() call. That completes synchronously,
-      // re-invoking startLoop() in a tight recursive loop that pegs the
-      // main thread. Treat an exact-zero result as a full lap instead.
       const distanceFromZero =
         ((-current % setWidth) + setWidth) % setWidth || setWidth;
       x.set(-distanceFromZero);
@@ -98,7 +104,9 @@ export default function SkillsMarquee({
   const resume = () => startLoop();
 
   return (
-    <div className="overflow-hidden fade-x">
+    // Vertical padding lives INSIDE overflow-hidden so glow + hover scale
+    // aren't chopped flat across the top of each tile.
+    <div className="fade-x overflow-hidden py-5">
       <motion.div
         ref={trackRef}
         className="flex"
