@@ -5,6 +5,13 @@ import type { MediaItem } from "@/types/media";
 
 const TILTS = ["-rotate-3", "rotate-2", "-rotate-2", "rotate-3", "-rotate-1", "rotate-1"];
 
+const FRAME: Record<"classic" | "neon", string> = {
+  classic:
+    "border-4 border-white/95 bg-white shadow-xl shadow-black/50",
+  neon:
+    "border-2 border-accent/70 bg-[#0b0b0f] shadow-[0_0_18px_rgba(71,241,255,0.35),0_0_40px_rgba(71,241,255,0.12)] ring-1 ring-accent/30",
+};
+
 function MediaFrame({ item, className }: { item: MediaItem; className: string }) {
   if (item.type === "video") {
     return (
@@ -34,29 +41,30 @@ function MediaFrame({ item, className }: { item: MediaItem; className: string })
 }
 
 /**
- * Scattered-polaroid filmstrip for 2+ items (drag/scroll horizontally).
- * A single item gets one larger, straight-on card instead of a tiny tilted strip.
- *
- * `center`: when the items comfortably fit the container (few items), center
- * them instead of bunching to the left -- only use this when you're sure the
- * row won't need to overflow-scroll, since centering an overflowing flex row
- * can make the start of the scroll unreachable in some browsers.
+ * Filmstrip for 2+ media items.
+ * `variant="neon"` — cyan glow border for a futuristic look (hackathons / clubs).
  */
 export default function MediaFilmstrip({
   items,
   center = false,
+  variant = "classic",
 }: {
   items: MediaItem[];
   center?: boolean;
+  variant?: "classic" | "neon";
 }) {
+  const frame = FRAME[variant];
+
   if (items.length === 1) {
     const item = items[0];
     return (
       <div className="flex justify-center">
-        <div className="relative w-full max-w-lg aspect-video rounded-sm overflow-hidden border-4 border-white/95 bg-white shadow-xl shadow-black/50">
+        <div
+          className={`relative aspect-video w-full max-w-lg overflow-hidden rounded-lg ${frame}`}
+        >
           {item.type === "video" ? (
             <video
-              className="w-full h-full object-contain bg-black"
+              className="h-full w-full object-contain bg-black"
               controls
               muted
               loop
@@ -83,20 +91,26 @@ export default function MediaFilmstrip({
 
   return (
     <div
-      className={`flex gap-6 overflow-x-auto no-scrollbar fade-x py-8 px-4 snap-x snap-mandatory ${
+      className={`no-scrollbar fade-x flex gap-6 overflow-x-auto px-4 py-8 snap-x snap-mandatory ${
         center ? "justify-center" : ""
       }`}
     >
       {items.map((item, i) => (
         <div
           key={item.src}
-          className={`relative shrink-0 w-48 h-60 sm:w-56 sm:h-72 snap-center rounded-sm overflow-hidden border-4 border-white/95 bg-white shadow-xl shadow-black/50 transition-transform duration-300 ease-out hover:!rotate-0 hover:scale-105 hover:z-10 ${TILTS[i % TILTS.length]}`}
+          className={`relative h-60 w-48 shrink-0 snap-center overflow-hidden rounded-lg transition-transform duration-300 ease-out hover:!rotate-0 hover:scale-105 hover:z-10 sm:h-72 sm:w-56 ${frame} ${
+            variant === "classic" ? TILTS[i % TILTS.length] : "rotate-0"
+          } ${
+            variant === "neon"
+              ? "hover:border-accent hover:shadow-[0_0_28px_rgba(71,241,255,0.5)]"
+              : ""
+          }`}
         >
           <MediaFrame
             item={item}
             className={
               item.type === "video"
-                ? "w-full h-full object-cover bg-black"
+                ? "h-full w-full object-cover bg-black"
                 : "object-cover"
             }
           />

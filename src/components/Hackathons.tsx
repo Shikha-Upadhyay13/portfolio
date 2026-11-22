@@ -95,7 +95,7 @@ export default function Hackathons() {
         </Reveal>
 
         <Reveal delay={0.08}>
-          <MediaFilmstrip items={hack.media} center />
+          <MediaFilmstrip items={hack.media} center variant="neon" />
         </Reveal>
       </div>
     </section>
