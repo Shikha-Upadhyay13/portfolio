@@ -16,7 +16,7 @@ export default function Hobbies() {
         subtitle="Life beyond the terminal — the pursuits that keep me curious and grounded."
       />
 
-      <CurtainReveal className="border border-white/10 bg-[#0c0a0b]/40 p-6 md:p-10">
+      <CurtainReveal className="border border-pink-500/20 bg-[#120810]/50 p-6 md:p-10">
         <div className="space-y-20">
           {/* Featured hobby, full width */}
           <div className="space-y-8">
