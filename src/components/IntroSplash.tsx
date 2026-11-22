@@ -127,7 +127,7 @@ export default function IntroSplash() {
                 aria-hidden
               >
                 <motion.div
-                  className="h-full bg-[#47F1FF]"
+                  className="h-full bg-accent"
                   initial={{ width: "0%" }}
                   animate={{ width: "100%" }}
                   transition={{ delay: 0.28, duration: 0.85, ease: "linear" }}

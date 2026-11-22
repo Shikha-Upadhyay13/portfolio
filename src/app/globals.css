@@ -21,26 +21,39 @@ html.dark {
   --accent-glow: rgba(71, 241, 255, 0.45);
   --ring: rgba(255, 255, 255, 0.1);
   --selection-fg: #f5f5f5;
+  --spotlight-core: rgba(71, 241, 255, 0.09);
+  --spotlight-mid: rgba(71, 241, 255, 0.04);
+  --sparkle-1: #e8e8ec;
+  --sparkle-2: #ffffff;
+  --sparkle-3: #a1a1aa;
+  --sparkle-flash: rgba(255, 255, 255, 0.28);
 }
 
 html.light {
+  /* Hobbies cream + black system, site-wide */
   color-scheme: light;
-  --bg: #f4f5f7;
-  --bg-soft: #eef0f3;
-  --bg-raised: #ffffff;
-  --bg-panel: #ffffff;
-  --text: #171717;
-  --text-muted: #5b6472;
-  --border: rgba(15, 23, 42, 0.12);
-  --glass-bg: rgba(255, 255, 255, 0.72);
-  --glass-border: rgba(15, 23, 42, 0.1);
-  --nav-scrolled: rgba(255, 255, 255, 0.82);
-  --surface-hover: rgba(15, 23, 42, 0.04);
-  --accent-1: #0891b2;
-  --accent-2: #0e7490;
-  --accent-glow: rgba(8, 145, 178, 0.35);
-  --ring: rgba(15, 23, 42, 0.12);
-  --selection-fg: #0f172a;
+  --bg: #fff8dc;
+  --bg-soft: #fff3c4;
+  --bg-raised: #fffbf0;
+  --bg-panel: #fffcf0;
+  --text: #1c1917;
+  --text-muted: #57534e;
+  --border: rgba(120, 53, 15, 0.12);
+  --glass-bg: rgba(255, 251, 240, 0.82);
+  --glass-border: rgba(120, 53, 15, 0.12);
+  --nav-scrolled: rgba(255, 248, 220, 0.88);
+  --surface-hover: rgba(120, 53, 15, 0.06);
+  --accent-1: #1c1917;
+  --accent-2: #292524;
+  --accent-glow: rgba(28, 25, 23, 0.22);
+  --ring: rgba(120, 53, 15, 0.14);
+  --selection-fg: #1c1917;
+  --spotlight-core: rgba(120, 53, 15, 0.1);
+  --spotlight-mid: rgba(120, 53, 15, 0.04);
+  --sparkle-1: #1c1917;
+  --sparkle-2: #292524;
+  --sparkle-3: #44403c;
+  --sparkle-flash: rgba(28, 25, 23, 0.22);
 }
 
 /* Registers tokens as Tailwind utilities: `bg-page`, `bg-raised`, `text-fg`,
@@ -192,6 +205,15 @@ body {
   color: transparent;
 }
 
+/* Light mode: solid black headings (cream palette), not cyan gradient */
+html.light .accent-text {
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+  -webkit-text-fill-color: #000;
+  color: #000;
+}
+
 /* Primary button — outlined in the accent rather than filled, since a solid
    bright-cyan background reads poorly against white text */
 .accent-btn {
@@ -303,20 +325,20 @@ a:focus-visible,
 
 /* ───────────── Light-mode readability helpers ─────────────
    Soft remaps for the most common dark-only utility stacks so the
-   first light-mode pass stays usable without rewriting every file. */
+   cream + black pass stays usable without rewriting every file. */
 html.light .text-white {
   color: var(--text);
 }
 html.light .text-gray-200,
 html.light .text-gray-300 {
-  color: #334155;
+  color: #44403c;
 }
 html.light .text-gray-400,
 html.light .text-gray-500 {
-  color: #64748b;
+  color: #78716c;
 }
 html.light .text-gray-600 {
-  color: #94a3b8;
+  color: #a8a29e;
 }
 html.light .border-white\/10,
 html.light .border-white\/\[0\.07\],
@@ -331,7 +353,7 @@ html.light .bg-white\/\[0\.04\],
 html.light .bg-white\/\[0\.05\],
 html.light .bg-white\/\[0\.055\],
 html.light .bg-white\/\[0\.06\] {
-  background-color: color-mix(in srgb, var(--text) 4%, transparent);
+  background-color: color-mix(in srgb, var(--text) 5%, transparent);
 }
 html.light .hover\:bg-white\/5:hover,
 html.light .hover\:bg-white\/10:hover,
@@ -349,18 +371,146 @@ html.light .bg-black\/60,
 html.light .bg-black\/75,
 html.light .bg-black\/80,
 html.light .bg-black\/85 {
-  background-color: rgba(15, 23, 42, 0.45);
+  background-color: rgba(28, 25, 23, 0.4);
 }
 html.light .divide-white\/10 > :not([hidden]) ~ :not([hidden]) {
   border-color: var(--border);
 }
 
-/* Keep cream hobbies section intentional in both themes */
-html.light #hobbies {
-  border-color: rgba(15, 23, 42, 0.08);
+/* Soften neon cyan accents that were tuned for dark only */
+html.light .text-accent,
+html.light .text-\[\#47F1FF\],
+html.light .glow-text {
+  color: #000;
+}
+html.light .bg-\[\#47F1FF\]\/10,
+html.light .bg-\[\#47F1FF\]\/20,
+html.light .bg-\[\#47F1FF\]\/35,
+html.light .bg-accent\/5,
+html.light .bg-accent\/10,
+html.light .bg-accent\/15,
+html.light .bg-accent\/20 {
+  background-color: rgba(120, 53, 15, 0.08);
+}
+html.light .border-accent\/30,
+html.light .border-accent\/40,
+html.light .border-accent\/50 {
+  border-color: rgba(28, 25, 23, 0.22);
+}
+html.light .shadow-\[0_0_12px_rgba\(71\,241\,255\,0\.35\)\],
+html.light .shadow-\[0_0_18px_rgba\(71\,241\,255\,0\.5\)\] {
+  --tw-shadow-color: rgba(28, 25, 23, 0.12);
 }
 
 /* Soften neon watermark / shadows that were tuned for dark only */
 html.light .shadow-black\/50 {
-  --tw-shadow-color: rgba(15, 23, 42, 0.18);
+  --tw-shadow-color: rgba(28, 25, 23, 0.16);
+}
+
+/* ───────────── Light mode: cream shade banding per section ─────────────
+   Each home section gets a distinct cream so the page reads as soft bands.
+   ::before full-bleeds past max-w constrained sections. */
+html.light #home,
+html.light #about,
+html.light #experience,
+html.light #education,
+html.light #skills,
+html.light #projects,
+html.light #achievements,
+html.light #certifications,
+html.light #hackathons,
+html.light #leadership,
+html.light #hobbies,
+html.light #contact,
+html.light footer {
+  position: relative;
+  isolation: isolate;
+}
+
+html.light #home::before,
+html.light #about::before,
+html.light #experience::before,
+html.light #education::before,
+html.light #skills::before,
+html.light #projects::before,
+html.light #achievements::before,
+html.light #certifications::before,
+html.light #hackathons::before,
+html.light #leadership::before,
+html.light #hobbies::before,
+html.light #contact::before,
+html.light footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Home — soft cream (less bright), full-bleed */
+html.light #home {
+  background-color: #f3e6b8;
+}
+html.light #home::before {
+  display: none;
+}
+/* Bridge between hero and about — same cream so no odd stripe */
+html.light .scroll-connector {
+  background-color: #f3e6b8;
+}
+html.light #about {
+  background-color: #fff3c4;
+}
+html.light #about::before {
+  display: none;
+}
+html.light #experience::before {
+  background-color: #ffefb5;
+}
+html.light #education::before {
+  background-color: #fff8dc;
+}
+html.light #skills {
+  background-color: #fff1c0;
+}
+html.light #skills::before {
+  display: none;
+}
+html.light #projects::before {
+  background-color: #ffe9ad;
+}
+html.light #achievements::before {
+  background-color: #fff3c4;
+}
+html.light #certifications::before {
+  background-color: #fff8dc;
+}
+html.light #hackathons::before {
+  background-color: #ffefb5;
+}
+html.light #leadership::before {
+  background-color: #ffedb8;
+}
+html.light #hobbies::before {
+  background-color: #fff3c4;
+}
+/* Contact — light brown band */
+html.light #contact::before {
+  background-color: #e0c9a8;
+}
+html.light footer::before {
+  background-color: #d9c09a;
+}
+
+/* Kill opaque raised fills so the cream bands show through */
+html.light #achievements,
+html.light #leadership {
+  background-color: transparent;
+}
+html.light #hobbies {
+  background-color: transparent;
+  color: var(--text);
 }
