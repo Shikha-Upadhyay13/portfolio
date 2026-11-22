@@ -61,8 +61,11 @@ export default function Education() {
       <SectionHeading title="Education" />
 
       <div className="relative mx-auto max-w-5xl">
-        {/* Dashed timeline spine, desktop only */}
-        <div className="absolute bottom-2 left-1/2 top-2 hidden w-px -translate-x-1/2 border-l border-dashed border-white/15 md:block" />
+        {/* Solid timeline spine connecting the dots (desktop) */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute bottom-10 left-1/2 top-10 hidden w-0.5 -translate-x-1/2 bg-accent/35 md:block"
+        />
 
         <div className="space-y-12 md:space-y-20">
           {education.map((item, index) => {
@@ -76,8 +79,8 @@ export default function Education() {
               >
                 {/* Dot marker on the spine, desktop only */}
                 <span className="absolute left-1/2 top-10 z-10 hidden -translate-x-1/2 -translate-y-1/2 items-center justify-center md:flex">
-                  <span className="absolute h-7 w-7 rounded-full bg-[#47F1FF]/20" />
-                  <span className="relative h-3.5 w-3.5 rounded-full bg-accent ring-4 ring-page" />
+                  <span className="absolute h-7 w-7 rounded-full bg-accent/15" />
+                  <span className="relative h-3.5 w-3.5 rounded-full bg-accent ring-4 ring-[color-mix(in_srgb,var(--bg)_92%,transparent)]" />
                 </span>
 
                 {onLeft ? (
