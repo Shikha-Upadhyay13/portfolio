@@ -17,15 +17,43 @@ const stats = [
 
 function HeroPortrait() {
   return (
-    <div className="relative z-10 h-[22rem] w-72 shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-panel shadow-2xl shadow-black/40 transition-transform duration-500 hover:scale-[1.02] sm:h-[26rem] sm:w-80 md:h-[28rem] md:w-[24rem]">
-      <Image
-        src="/profile.jpg"
-        alt="Shikha Upadhyay"
-        width={768}
-        height={960}
-        priority
-        className="h-full w-full object-cover object-top"
+    <div className="relative z-10 w-72 shrink-0 sm:w-80 md:w-[24rem]">
+      {/* Soft cyan wash behind the frame */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -inset-8 -z-10 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(71,241,255,0.16),transparent_68%)] blur-2xl"
       />
+
+      {/* Light gradient rim */}
+      <div
+        className="relative rounded-sm p-px shadow-2xl shadow-black/50"
+        style={{
+          background:
+            "linear-gradient(145deg, rgba(71,241,255,0.45), rgba(255,255,255,0.18) 35%, rgba(71,241,255,0.12) 65%, rgba(255,255,255,0.28))",
+        }}
+      >
+        <div className="relative h-[22rem] overflow-hidden rounded-[3px] bg-[#050507] sm:h-[26rem] md:h-[28rem]">
+          {/* Tiny blue bloom inside the frame */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute left-[16%] top-[18%] h-48 w-48 rounded-full bg-accent/20 blur-[52px]"
+          />
+
+          <Image
+            src="/profile.jpg"
+            alt="Shikha Upadhyay"
+            width={768}
+            height={960}
+            priority
+            className="relative z-[1] h-full w-full object-cover object-top"
+          />
+        </div>
+      </div>
+
+      <div className="mt-3 flex items-center justify-between gap-3 font-mono text-[10px] uppercase tracking-[0.14em] text-gray-500 sm:text-[11px]">
+        <span>Portrait · 2026</span>
+        <span>B.Tech AI · VJIT</span>
+      </div>
     </div>
   );
 }
