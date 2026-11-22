@@ -24,24 +24,24 @@ const DEPTH = [
   { x: 38, y: 30, rotate: 12, scale: 0.92, zIndex: 10, opacity: 0.55 },
 ];
 
-/** Fixed positions so the burst is stable across renders / SSR. */
+/** Fixed positions — colors use theme tokens (black on cream, soft white on dark). */
 const SPARKLES = [
-  { left: "4%", top: "6%", size: 28, delay: 0.02, drift: -28, color: "#47F1FF" },
-  { left: "14%", top: "18%", size: 16, delay: 0.12, drift: -18, color: "#FFFFFF" },
-  { left: "24%", top: "4%", size: 22, delay: 0.2, drift: -32, color: "#A5F3FC" },
-  { left: "36%", top: "14%", size: 14, delay: 0.28, drift: -16, color: "#FFFFFF" },
-  { left: "48%", top: "2%", size: 26, delay: 0.08, drift: -36, color: "#47F1FF" },
-  { left: "58%", top: "16%", size: 12, delay: 0.34, drift: -14, color: "#FFFFFF" },
-  { left: "68%", top: "5%", size: 24, delay: 0.06, drift: -26, color: "#67E8F9" },
-  { left: "80%", top: "18%", size: 18, delay: 0.16, drift: -20, color: "#FFFFFF" },
-  { left: "90%", top: "7%", size: 30, delay: 0.22, drift: -30, color: "#47F1FF" },
-  { left: "8%", top: "38%", size: 16, delay: 0.3, drift: -14, color: "#A5F3FC" },
-  { left: "92%", top: "36%", size: 20, delay: 0.26, drift: -18, color: "#47F1FF" },
-  { left: "18%", top: "52%", size: 14, delay: 0.38, drift: -12, color: "#FFFFFF" },
-  { left: "82%", top: "50%", size: 18, delay: 0.32, drift: -16, color: "#67E8F9" },
-  { left: "42%", top: "42%", size: 12, delay: 0.42, drift: -10, color: "#A5F3FC" },
-  { left: "62%", top: "46%", size: 15, delay: 0.36, drift: -12, color: "#FFFFFF" },
-  { left: "30%", top: "30%", size: 10, delay: 0.44, drift: -10, color: "#47F1FF" },
+  { left: "4%", top: "6%", size: 28, delay: 0.02, drift: -28, color: "var(--sparkle-1)" },
+  { left: "14%", top: "18%", size: 16, delay: 0.12, drift: -18, color: "var(--sparkle-2)" },
+  { left: "24%", top: "4%", size: 22, delay: 0.2, drift: -32, color: "var(--sparkle-3)" },
+  { left: "36%", top: "14%", size: 14, delay: 0.28, drift: -16, color: "var(--sparkle-2)" },
+  { left: "48%", top: "2%", size: 26, delay: 0.08, drift: -36, color: "var(--sparkle-1)" },
+  { left: "58%", top: "16%", size: 12, delay: 0.34, drift: -14, color: "var(--sparkle-2)" },
+  { left: "68%", top: "5%", size: 24, delay: 0.06, drift: -26, color: "var(--sparkle-3)" },
+  { left: "80%", top: "18%", size: 18, delay: 0.16, drift: -20, color: "var(--sparkle-2)" },
+  { left: "90%", top: "7%", size: 30, delay: 0.22, drift: -30, color: "var(--sparkle-1)" },
+  { left: "8%", top: "38%", size: 16, delay: 0.3, drift: -14, color: "var(--sparkle-3)" },
+  { left: "92%", top: "36%", size: 20, delay: 0.26, drift: -18, color: "var(--sparkle-1)" },
+  { left: "18%", top: "52%", size: 14, delay: 0.38, drift: -12, color: "var(--sparkle-2)" },
+  { left: "82%", top: "50%", size: 18, delay: 0.32, drift: -16, color: "var(--sparkle-3)" },
+  { left: "42%", top: "42%", size: 12, delay: 0.42, drift: -10, color: "var(--sparkle-3)" },
+  { left: "62%", top: "46%", size: 15, delay: 0.36, drift: -12, color: "var(--sparkle-2)" },
+  { left: "30%", top: "30%", size: 10, delay: 0.44, drift: -10, color: "var(--sparkle-1)" },
 ];
 
 function SparkleIcon({ size, color }: { size: number; color: string }) {
@@ -100,7 +100,8 @@ function AchievementSparkles({ active }: { active: boolean }) {
 
       {/* Bright center flash */}
       <motion.div
-        className="absolute left-1/2 top-12 h-56 w-56 -translate-x-1/2 rounded-full bg-[#47F1FF]/35 blur-3xl"
+        className="absolute left-1/2 top-12 h-56 w-56 -translate-x-1/2 rounded-full blur-3xl"
+        style={{ backgroundColor: "var(--sparkle-flash)" }}
         initial={{ opacity: 0, scale: 0.5 }}
         animate={
           active
