@@ -5,29 +5,29 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { EASE_OUT_EXPO } from "@/lib/animations";
 
 const INTRO_MS = 1200;
+const INTRO_SEEN_KEY = "portfolio-intro-seen";
 
 export default function IntroSplash() {
   const reduceMotion = useReducedMotion();
-  const [visible, setVisible] = useState(true);
+  // Start hidden to avoid SSR flash; decide after mount.
+  const [visible, setVisible] = useState(false);
+  const [ready, setReady] = useState(false);
 
-  // Always land on the hero after reload — ignore restored scroll / #hash.
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    if ("scrollRestoration" in history) {
+    const seen = sessionStorage.getItem(INTRO_SEEN_KEY) === "1";
+    setVisible(!seen);
+    setReady(true);
+
+    // Only lock scroll restoration during the first-visit intro.
+    if (!seen && "scrollRestoration" in history) {
       history.scrollRestoration = "manual";
+    } else if ("scrollRestoration" in history) {
+      history.scrollRestoration = "auto";
     }
-    if (window.location.hash) {
-      history.replaceState(
-        null,
-        "",
-        window.location.pathname + window.location.search
-      );
-    }
-    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
-    if (!visible) return;
+    if (!ready || !visible) return;
 
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -41,13 +41,30 @@ export default function IntroSplash() {
       document.body.style.overflow = prevOverflow;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [visible, reduceMotion]);
+  }, [ready, visible, reduceMotion]);
 
   const finish = () => {
-    window.scrollTo(0, 0);
-    setVisible(false);
+    sessionStorage.setItem(INTRO_SEEN_KEY, "1");
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "auto";
+    }
     document.body.style.overflow = "";
+    setVisible(false);
+
+    // First visit still lands on hero; hash restores only after intro was already seen.
+    const hash = window.location.hash.replace(/^#/, "");
+    if (hash) {
+      // Clear hash on first paint so the hero reads cleanly after splash.
+      history.replaceState(
+        null,
+        "",
+        window.location.pathname + window.location.search
+      );
+    }
+    window.scrollTo(0, 0);
   };
+
+  if (!ready) return null;
 
   return (
     <AnimatePresence>
@@ -64,19 +81,21 @@ export default function IntroSplash() {
             filter: "blur(6px)",
             transition: { duration: 0.35, ease: EASE_OUT_EXPO },
           }}
-          className="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-[#0b0b0f] overflow-hidden"
+          className="fixed inset-0 z-[200] flex flex-col items-center justify-center overflow-hidden bg-[#0b0b0f]"
         >
           <div
             aria-hidden
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(90vw,28rem)] h-[min(90vw,28rem)] rounded-full bg-[#47F1FF]/10 blur-[100px]"
+            className="absolute left-1/2 top-1/2 h-[min(90vw,28rem)] w-[min(90vw,28rem)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#47F1FF]/10 blur-[100px]"
           />
 
-          <div className="relative z-10 flex flex-col items-center text-center px-6">
+          <div className="relative z-10 flex flex-col items-center px-6 text-center">
             <motion.div
-              initial={reduceMotion ? false : { opacity: 0, scale: 0.35, rotate: -45 }}
+              initial={
+                reduceMotion ? false : { opacity: 0, scale: 0.35, rotate: -45 }
+              }
               animate={{ opacity: 1, scale: 1, rotate: 45 }}
               transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
-              className="w-10 h-10 md:w-12 md:h-12 rounded-md bg-[#47F1FF] mb-8 shadow-[0_0_40px_rgba(71,241,255,0.45)]"
+              className="mb-8 h-10 w-10 rounded-md bg-[#47F1FF] shadow-[0_0_40px_rgba(71,241,255,0.45)] md:h-12 md:w-12"
               aria-hidden
             />
 
@@ -84,7 +103,7 @@ export default function IntroSplash() {
               initial={reduceMotion ? false : { opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.4, ease: EASE_OUT_EXPO }}
-              className="text-4xl md:text-6xl font-bold font-display tracking-tight"
+              className="font-display text-4xl font-bold tracking-tight md:text-6xl"
             >
               <span className="accent-text">Shikha</span>
               <span className="text-white">.dev</span>
@@ -94,7 +113,7 @@ export default function IntroSplash() {
               initial={reduceMotion ? false : { opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.35, ease: EASE_OUT_EXPO }}
-              className="mt-4 text-sm md:text-base text-gray-400 tracking-[0.2em] uppercase"
+              className="mt-4 text-sm uppercase tracking-[0.2em] text-gray-400 md:text-base"
             >
               AI Engineer · RAG · Agentic Systems
             </motion.p>
@@ -104,7 +123,7 @@ export default function IntroSplash() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.25 }}
-                className="mt-10 w-40 h-[2px] rounded-full bg-white/10 overflow-hidden"
+                className="mt-10 h-[2px] w-40 overflow-hidden rounded-full bg-white/10"
                 aria-hidden
               >
                 <motion.div
@@ -120,7 +139,7 @@ export default function IntroSplash() {
           <button
             type="button"
             onClick={finish}
-            className="absolute bottom-8 right-8 z-20 text-xs text-gray-500 hover:text-white transition-colors tracking-wide"
+            className="absolute bottom-8 right-8 z-20 text-xs tracking-wide text-gray-500 transition-colors hover:text-white"
           >
             Skip
           </button>

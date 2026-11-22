@@ -13,10 +13,12 @@ import Leadership from "@/components/Leadership";
 import Hobbies from "@/components/Hobbies";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import HomeScrollRestore from "@/components/HomeScrollRestore";
 
 export default function Home() {
   return (
     <div id="main-content">
+      <HomeScrollRestore />
       <Navbar />
       <Hero />
       <ScrollConnector />

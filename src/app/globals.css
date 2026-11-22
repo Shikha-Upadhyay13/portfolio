@@ -34,10 +34,19 @@ h3,
   font-family: var(--font-mono), ui-monospace, monospace;
 }
 
-/* Smooth scrolling + nav offset so the sticky navbar doesn't cover headings */
+/* Smooth, fluid scrolling + nav offset so the sticky navbar doesn't cover headings */
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 6rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    overscroll-behavior-y: contain;
+  }
 }
 
 /* Respect users who prefer reduced motion */

@@ -21,7 +21,7 @@ allSkills.forEach((item, i) => rows[i % ROWS].push(item));
 
 export default function Skills() {
   return (
-    <section id="skills" className="mx-auto max-w-[1400px] overflow-x-hidden py-32">
+    <section id="skills" className="mx-auto max-w-[1400px] overflow-x-hidden py-24 md:py-32">
       <SectionHeading
         title="Skills"
         subtitle="Drag to explore — it keeps drifting on its own."

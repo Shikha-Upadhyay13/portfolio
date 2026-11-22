@@ -5,6 +5,7 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { projects } from "@/data/projects";
 import Reveal from "@/components/ui/Reveal";
 import ProjectCard from "@/components/ui/ProjectCard";
+import { rememberHomeSection } from "@/components/HomeScrollRestore";
 
 const featured = projects.filter((p) => p.featured);
 const [flagship, ...rest] = featured;
@@ -73,6 +74,7 @@ export default function Projects() {
         <Reveal delay={0.12} className="mt-10 flex justify-center">
           <Link
             href="/projects"
+            onClick={() => rememberHomeSection("projects")}
             className="group inline-flex items-center gap-2 rounded-xl border border-white/10 px-5 py-3 text-sm font-medium text-gray-300 transition hover:border-accent/40 hover:text-white"
           >
             View all {projects.length} listed projects

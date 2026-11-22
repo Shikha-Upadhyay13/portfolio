@@ -8,6 +8,7 @@ import Reveal from "@/components/ui/Reveal";
 import CertificateLightbox from "@/components/ui/CertificateLightbox";
 import CertificationCard from "@/components/ui/CertificationCard";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { rememberHomeSection } from "@/components/HomeScrollRestore";
 
 const featured = certifications.filter((c) => c.featured);
 
@@ -58,7 +59,8 @@ export default function Certifications() {
       <Reveal delay={0.15} className="mt-12 flex justify-center">
         <Link
           href="/certifications"
-          className="inline-flex items-center gap-2 px-5 py-3 rounded-full glass accent-border text-sm font-medium text-gray-200 hover:text-white transition group"
+          onClick={() => rememberHomeSection("certifications")}
+          className="group inline-flex items-center gap-2 rounded-full glass accent-border px-5 py-3 text-sm font-medium text-gray-200 transition hover:text-white"
         >
           View all {certifications.length} certifications
           <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />

@@ -75,15 +75,15 @@ export default function About() {
           className="space-y-5 text-lg leading-relaxed text-gray-300"
         >
           <p>
-            I am an AI Engineer focused on building structured and reliable
-            intelligent systems. My work centers around Retrieval-Augmented
-            Generation (RAG), LLM integration, and agentic workflows.
+            I&apos;m focused on AI evaluations, chatbot testing, and analyzing
+            model performance — turning client and design-partner requirements
+            into practical solutions and clearer product quality.
           </p>
           <p>
-            Rather than experimenting in isolation, I design architectures that
-            combine machine learning, vector search, and reasoning pipelines to
-            reduce hallucinations and improve production reliability. My goal is
-            to bridge model intelligence with scalable real-world applications.
+            Day to day that means RAG and agentic LLM apps, eval frameworks,
+            and stakeholder communication: understanding needs, briefing the
+            build team, and walking partners through what the system can do
+            reliably in the real world.
           </p>
         </Reveal>
 

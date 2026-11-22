@@ -30,7 +30,7 @@ export function detectIntent(message: string) {
     experience: ["experience", "intern", "job", "work", "role", "quantum gandiva", "career", "company"],
     achievements: ["achievement", "award", "topper", "won", "trophy", "rank", "ranger", "badge", "trailhead", "agentblazer", "merit"],
     certifications: ["certificat", "course", "udemy", "cisco", "ibm", "qlik", "forage", "simplilearn", "credential"],
-    hackathons: ["hackathon", "guido", "dotpy", "biriyanios", "rover"],
+    hackathons: ["hackathon", "guido", "dotpy", "biriyanios", "rover", "sih", "eternals", "voxshield"],
     leadership: ["leader", "club", "activity", "event", "ecell", "e-cell", "echo", "tarang", "yukti", "vriti", "volunteer"],
     education: ["education", "study", "studied", "degree", "college", "school", "university", "cgpa", "vjit", "kendriya"],
     hobbies: ["hobby", "hobbies", "dance", "bharatanatyam", "reading", "passion", "creative coding", "free time"],

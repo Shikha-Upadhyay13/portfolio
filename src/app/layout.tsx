@@ -76,10 +76,10 @@ export default function RootLayout({
     >
       <head>
         <JsonLd />
-        {/* Run before paint so reload doesn't restore mid-page scroll */}
+        {/* First visit only: land on hero. Later visits / back keep section + hash. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{if('scrollRestoration' in history)history.scrollRestoration='manual';if(location.hash)history.replaceState(null,'',location.pathname+location.search);window.scrollTo(0,0);}catch(e){}`,
+            __html: `try{var seen=sessionStorage.getItem('portfolio-intro-seen')==='1';if(!seen){if('scrollRestoration' in history)history.scrollRestoration='manual';if(location.hash)history.replaceState(null,'',location.pathname+location.search);window.scrollTo(0,0);}else if('scrollRestoration' in history){history.scrollRestoration='auto';}}catch(e){}`,
           }}
         />
       </head>

@@ -62,22 +62,26 @@ export default async function CaseStudyPage({
   return (
     <>
       <Navbar />
-      <main className="pt-24 pb-16 px-6 max-w-4xl mx-auto">
-        <Link
-          href="/projects"
-          className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition mb-8"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to projects
-        </Link>
+      <main className="mx-auto max-w-4xl px-6 pb-16 pt-24">
+        <div className="mb-8 space-y-5">
+          <Link
+            href="/projects"
+            className="inline-flex items-center gap-2 text-sm text-gray-400 transition hover:text-white"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to projects
+          </Link>
 
-        <span
-          className={`inline-block text-[11px] uppercase tracking-wider px-2.5 py-1 rounded-full border mb-4 ${categoryStyle}`}
-        >
-          {project.category}
-        </span>
+          <div>
+            <span
+              className={`inline-block rounded-full border px-2.5 py-1 text-[11px] uppercase tracking-wider ${categoryStyle}`}
+            >
+              {project.category}
+            </span>
+          </div>
+        </div>
 
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 font-display">
+        <h1 className="mb-4 font-display text-4xl font-bold md:text-5xl">
           {project.title}
         </h1>
         <p className="text-accent/80 mb-8">→ {project.highlight}</p>

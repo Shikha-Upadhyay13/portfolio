@@ -19,8 +19,8 @@ export const education: EducationEntry[] = [
     milestones: [
       {
         degree: "B.Tech, Artificial Intelligence",
-        score: "CGPA 9.25 (till 5th semester)",
-        duration: "2023 – Present",
+        score: "CGPA 9.25 · 1st Topper, 3rd Year, Dept. of AI",
+        duration: "2023 – 2027",
       },
     ],
   },

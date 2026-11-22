@@ -16,6 +16,7 @@ import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 import { achievements, type AchievementPhoto } from "@/data/achievements";
 import { EASE_OUT_EXPO } from "@/lib/animations";
+import { rememberHomeSection } from "@/components/HomeScrollRestore";
 
 const DEPTH = [
   { x: 0, y: 0, rotate: 0, scale: 1, zIndex: 30, opacity: 1 },
@@ -148,6 +149,7 @@ export function AchievementsPreview() {
               <li>
                 <Link
                   href="/achievements"
+                  onClick={() => rememberHomeSection("achievements")}
                   className="group relative flex gap-4 rounded-2xl border border-transparent py-3 pl-1 pr-3 transition hover:border-white/10 hover:bg-white/[0.03] md:gap-5 md:pr-4"
                 >
                   {/* Node */}
@@ -213,6 +215,7 @@ export function AchievementsPreview() {
       <Reveal delay={0.15} className="mt-10 flex justify-center">
         <Link
           href="/achievements"
+          onClick={() => rememberHomeSection("achievements")}
           className="group inline-flex items-center gap-2 rounded-xl border border-white/10 px-5 py-3 text-sm font-medium text-gray-300 transition hover:border-accent/40 hover:text-white"
         >
           View full achievements

@@ -22,20 +22,20 @@ export type Achievement = {
 export const achievements: Achievement[] = [
   {
     eyebrow: "Academic Excellence",
-    title: "2nd Topper — B.Tech Artificial Intelligence",
+    title: "1st Topper — B.Tech Artificial Intelligence (3rd Year)",
     meta: "CGPA 9.25 · Vidya Jyothi Institute of Technology",
     description:
-      "Recognized for securing the Second Topper position in the II B.Tech Examinations (AY 2024–25), Department of Artificial Intelligence. Awarded a Certificate of Merit and a Letter of Appreciation by the Principal, along with a memento presented at a college ceremony.",
+      "Current 1st Topper in the 3rd Year, Department of Artificial Intelligence at Vidya Jyothi Institute of Technology (CGPA 9.25). Recognized with a Certificate of Merit, Letter of Appreciation from the Principal, and a memento presented at a college ceremony.",
     photos: [
       {
         src: "/images/achievements/trophy-plaque.jpg",
-        alt: "Memento awarded for securing the 2nd Topper position in the I B.Tech Examinations",
-        caption: "Memento — 2nd Topper, I B.Tech Examinations",
+        alt: "Memento awarded for academic excellence in B.Tech Artificial Intelligence",
+        caption: "Memento — academic excellence, Dept. of AI",
       },
       {
         src: "/images/achievements/certificate-of-merit.jpg",
-        alt: "Certificate of Merit for the Second Topper position, II B.Tech Examination",
-        caption: "Certificate of Merit — II B.Tech, AY 2024–25",
+        alt: "Certificate of Merit for academic standing in B.Tech examinations",
+        caption: "Certificate of Merit — B.Tech, Dept. of AI",
       },
       {
         src: "/images/achievements/letter-of-appreciation.jpg",

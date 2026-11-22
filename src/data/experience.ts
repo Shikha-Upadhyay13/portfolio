@@ -13,8 +13,8 @@ export const experiences: Experience[] = [
     role: "Research Intern",
     duration: "03/2026 – Present",
     description: [
-      "Developed and applied evaluation (Evals) frameworks to assess LLM outputs for accuracy, relevance, and safety.",
-      "Assisted in designing agentic workflows for real-world problem statements.",
+      "Built and evaluated LLM applications using Python, evaluation datasets, automated tests, and trace analysis to assess accuracy, relevance, and safety.",
+      "Lead client and design-partner meetings: understand requirements, translate them into clear instructions for the development team, and walk stakeholders through the application.",
     ],
   },
   {
@@ -23,9 +23,8 @@ export const experiences: Experience[] = [
     duration: "10/2025 – Present",
     certificateId: "salesforce-developer-agentblazer",
     description: [
-      "Gained hands-on experience in Salesforce fundamentals including Apex and Lightning Web Components (LWC).",
-      "Worked on automation workflows and process optimization tasks.",
-      "Earned multiple Salesforce Super Badges including Apex Specialist.",
+      "Worked on Apex, LWC, Flow automation, data modelling, and Salesforce security.",
+      "Earned Apex Specialist Superbadge, Trailhead Ranger (116+ badges, 105K+ points), and Agentblazer Innovator '26.",
     ],
   },
 ];

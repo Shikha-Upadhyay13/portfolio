@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, BookOpen, Lock, Search, Sparkles } from "lucide-react";
 import { PLACEHOLDER_REPO, type Project } from "@/data/projects";
 import { EASE_OUT_EXPO } from "@/lib/animations";
+import { rememberHomeSection } from "@/components/HomeScrollRestore";
 
 export const CATEGORY_STYLES: Record<string, string> = {
   "Generative AI": "text-accent/80 bg-accent/10 border-accent/20",
@@ -99,6 +100,7 @@ export default function ProjectCard({
         ) : (
           <Link
             href={primaryHref}
+            onClick={() => rememberHomeSection("projects")}
             className="absolute inset-0 z-[1]"
             aria-label={`Open ${project.title}`}
           />
@@ -202,6 +204,7 @@ export default function ProjectCard({
             {project.caseStudy ? (
               <Link
                 href={`/projects/${project.slug}`}
+                onClick={() => rememberHomeSection("projects")}
                 className="inline-flex items-center gap-1.5 rounded-lg border border-accent/40 bg-accent/10 px-3 py-1.5 text-sm font-medium text-accent transition hover:bg-accent/20"
               >
                 View project

@@ -34,7 +34,7 @@ export async function POST(request: Request) {
   }
 
   const chunks = retrieveChunks(query, getCorpus());
-  const { answer, sources } = synthesizeAnswer(chunks);
+  const { answer, sources } = synthesizeAnswer(chunks, query);
 
   return NextResponse.json({ answer, sources });
 }

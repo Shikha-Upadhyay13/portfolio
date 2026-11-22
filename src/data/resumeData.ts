@@ -1,95 +1,99 @@
 export const resumeData = {
   about: `
-I'm Shikha Upadhyay, an AI Engineer studying B.Tech in Artificial Intelligence at Vidya Jyothi Institute of Technology. I build RAG pipelines and agentic AI workflows, and I'm currently a Research Intern at Quantum Gandiva AI.
+I'm Shikha Upadhyay, a B.Tech Artificial Intelligence student at Vidya Jyothi Institute of Technology (CGPA 9.25 · 1st Topper, 3rd Year, Dept. of AI) and a Research Intern at Quantum Gandiva AI.
 
-Ask me about my skills, projects, experience, achievements, certifications, hackathons, leadership, education, hobbies, or how to contact me.
+I'm focused on AI evaluations, chatbot testing, and analyzing model performance — translating client and design-partner requirements into practical solutions, communicating findings to development teams, and collaborating with stakeholders to improve product quality and reliability.
+
+Ask me about my skills, projects, experience, achievements, certifications, organizations, education, hobbies, or how to contact me.
   `,
 
   skills: `
-I work primarily at the intersection of Artificial Intelligence and system design, focusing on building intelligent systems that are structured, reliable, and production-ready.
+Technical skills from my current resume:
 
-My core strengths lie in Retrieval-Augmented Generation (RAG) pipelines, where I design systems that retrieve relevant context before generating responses. This significantly improves factual grounding and reduces hallucinations in LLM applications.
+Programming Languages: Java, Python, C, JavaScript, HTML, SQL, CSS
 
-I also design agentic AI workflows — multi-step reasoning systems that break down complex problems into structured tasks.
+Generative AI & LLM Applications: RAG Pipelines, Prompt Engineering, LLM Integration, Embedding Models, Transformers, Chunking & Retrieval Tuning, Machine Learning, Deep Learning
 
-From a technical perspective, I am proficient in:
+Frontend & Backend: React.js (Vite), Next.js, FastAPI, REST APIs, CORS Configuration
 
-• Python, JavaScript, and SQL
-• Machine Learning and Deep Learning
-• LLM integration & prompt engineering
-• Vector databases such as FAISS
-• Embeddings and semantic search systems
+Database Management & Vector Search: MySQL, Firebase, Vector Databases (FAISS, Chroma)
 
-Beyond implementation, I focus on scalability, clean architecture, and real-world deployment considerations.
+Web Platforms & Tools: Git, GitHub, Wix Studio, Figma
+
+Agentic Workflows & Automation: n8n, Make, LangChain, LangGraph
+
+Data visualisation: Power BI, Excel
+
+Salesforce: Apex, SOQL, LWC, Flow Builder, Agentforce, org setup, data management, process automation
+
+Evaluation frameworks & tools: LangSmith, Harbor, Pytest, BrainTrust
   `,
 
   projects: `
-I enjoy building practical AI-driven applications that solve real problems rather than just experimental prototypes.
+Featured projects on my resume:
 
-Major projects include VoxShield (Smart India Hackathon — real-time voice clone and scam-speech detection), Teaser — an agentic multimodal chatbot with tool planning, IEEE Paper Builder (drag-and-drop IEEE conference formatting with live preview and PDF export), and a full-stack IT Ticketing Tool.
+VoxShield — Real-time Voice Clone & Scam-Speech Detection: reusable call-protection middleware that scores voice authenticity and scam speech separately over REST and WebSocket, so hosts never reimplement detection. Designed to embed into host platforms to alert users during a call and recommend the next protective action.
 
-I also built Quantix — a RAG math solver that grounds LLM steps in retrieved formulas — plus applications like the Smart Image Compressor using Flask and Pillow.
+IEEE Paper Builder — Drag and Drop Conference Formatter: replaces manual Word/LaTeX IEEE formatting with a block editor and a live two-column preview aligned to the official conference template (Letter and A4). Auto numbering for figures, tables, and citations, plus PDF export through the same rendering pipeline as the on-screen preview.
 
-In the machine learning domain, I worked on Penguin Species Classification, implementing models such as Logistic Regression, SVM, Decision Tree, and KNN. The project focused on model comparison, evaluation metrics, and performance analysis.
-
-Another project, PassVault, is a secure password manager built using Python and MySQL, focusing on secure storage and structured database design.
-
-Across all projects, I emphasize system clarity, modular design, and practical usability.
+Multimodal Chatbot — Agentic Tool Using Assistant: an agent that plans tool use (search, read documents, calculate, transcribe, OCR, and generate PDF/Word/Excel/PPT/PNG/JPEG). RAG over user-provided files, voice capabilities, LangSmith observability, and an evaluation suite for tool selection and response grounding.
   `,
 
   experience: `
-I'm currently a Research Intern at Quantum Gandiva AI (March 2026 – Present), where I develop evaluation (evals) frameworks to assess LLM outputs for accuracy, relevance, and safety, and help design agentic workflows for real-world problem statements.
+Research Intern, Quantum Gandiva AI (03/2026 – Present):
+• Built and evaluated LLM applications using Python, evaluation datasets, automated tests, and trace analysis to assess accuracy, relevance, and safety.
+• Lead client and design-partner meetings: understand requirements, translate them into clear instructions for the development team, and walk stakeholders through the application.
 
-I'm also part of Salesforce's Agentblazer Champion Program (October 2025 – Present), where I gained hands-on experience with Salesforce fundamentals including Apex and Lightning Web Components, worked on automation workflows, and earned several Salesforce Super Badges including Apex Specialist.
-
-Both roles have sharpened how I think about reliability, evaluation, and real-world deployment — not just building something that works, but proving it works.
+Intern, Salesforce Agentblazer Champion Program (10/2025 – Present):
+• Worked on Apex, LWC, Flow automation, data modelling, and Salesforce security.
+• Earned Apex Specialist Superbadge, Trailhead Ranger (116+ badges, 105K+ points), and Agentblazer Innovator '26.
   `,
 
   achievements: `
-I was recognized as the 2nd Topper in B.Tech Artificial Intelligence at Vidya Jyothi Institute of Technology (CGPA 9.25), earning a Certificate of Merit and a Letter of Appreciation from the Principal.
+I'm the 1st Topper in the 3rd Year, Department of AI at Vidya Jyothi Institute of Technology, with a current CGPA of 9.25.
 
-With Team DotPy, I won a 1st Token of Appreciation at a 24-hour Automation & Generative AI Hackathon hosted by KL University in collaboration with VJIT, where I led the UI/UX design.
-
-On Salesforce Trailhead, I've reached Trailhead Ranger rank with 116 badges and 105,875+ points across 7 trails, and was recognized as a 2026 Agentblazer Innovator.
+On Salesforce Trailhead I've reached Ranger rank (116+ badges, 105K+ points) and was recognized as Agentblazer Innovator '26, including the Apex Specialist Superbadge.
   `,
 
   certifications: `
-I've completed a range of certifications spanning AI, data, and business skills — including Salesforce Developer with the Agentblazer Champion Program (SmartBridge · Salesforce · AICTE), Claude Code in Action (Anthropic), Big Data 101 (IBM), job simulations from Goldman Sachs (Risk) and Deloitte (Data Analytics), Qlik's Data Analytics and Data Literacy certifications, Machine Learning (Simplilearn), Python Essentials 2 (Cisco), and Generative AI productivity training with Microsoft and LinkedIn.
+Certifications listed on my resume include:
+• HTML & CSS (Udemy — 11/2024)
+• Pursuing JavaScript development skills (Udemy — 05/2023)
+• CISCO Networking Academy — Python language (Cisco — 04/2023)
 
-You can see all of them, with the actual certificate images, in the Certifications section of this site.
+Additional certificates are also showcased in the Certifications section of this portfolio site.
   `,
 
   hackathons: `
-I've competed in two hackathons so far. With Team BiriyaniOS, I helped build Guido, a smart campus assistance rover, in a 36-hour national-level hackathon at CMR College of Engineering & Technology — a rover meant to guide visitors around campus conversationally.
-
-With Team DotPy, I led the UI/UX design for a generative AI automation solution at a 24-hour hackathon hosted by KL University and VJIT, which won a 1st Token of Appreciation.
+Hackathon and competition work tied to my projects includes VoxShield (voice clone & scam-speech detection) and related team builds. Ask about VoxShield, Guido, or DotPy for more detail from this portfolio.
   `,
 
   leadership: `
-Beyond technical work, I actively participate in leadership and collaborative initiatives across five clubs at VJIT: Entrepreneurship Cell (Marketing & PR), Echo Club (public speaking), Tarang Dance Club (performer), Yukti Club (content & documentation), and Vriti Entrepreneurship Club (research & development).
+Organisations from my resume:
 
-These roles helped me develop strong coordination, communication, and teamwork skills, and taught me how to manage responsibilities and contribute meaningfully within a team structure.
+E-Cell — Marketing & Public Relations Team Member: helped with outreach, created promotional content, and worked with the team to increase participation in E-Cell events.
 
-I believe technical growth combined with collaborative experience leads to stronger, more impactful problem-solving.
+Echo Club — Public Speaking & Communication Member: engaged in speech delivery, debates, and anchoring events.
+
+Yukti Club — Content Writing & Documentation Team.
+
+Vritti Club — Research & Development (R&D) Member.
   `,
 
   education: `
-I am currently pursuing a B.Tech in Artificial Intelligence at Vidya Jyothi Institute of Technology (2023 – Present, CGPA 9.25 through 5th semester), where I focus on core AI disciplines including Machine Learning, Deep Learning, and Natural Language Processing.
-
-Before that, I completed my Intermediate (2021 – 2023, 77%) and Class X (2021, GPA 8.2) at Kendriya Vidyalaya No. 2 Golconda.
-
-My academic journey is complemented by extensive hands-on project work, ensuring that theoretical knowledge translates into practical application.
+B.Tech, Artificial Intelligence — Vidya Jyothi Institute of Technology (2023 – 2027).
+Current CGPA 9.25 · 1st Topper, 3rd Year, Dept. of AI.
   `,
 
   hobbies: `
-Outside of AI, I've trained in Bharatanatyam for years — I was honored with the title "Nritya Ratna" in 2019 and won a state-level dance competition in 2021.
-
-I also enjoy reading, mostly machine learning texts with the occasional fiction detour, and creative coding — I once built a hands-free, webcam-tracked musical instrument in a single evening using MediaPipe and the Web Audio API.
+Hobbies from my resume: classical dance, running, and content writing.
   `,
 
   contact: `
-You can reach me at upadhyayshikha2005@gmail.com, or find me on LinkedIn and GitHub — the links are in the Contact section at the bottom of this page.
+Email: upadhyayshikha2005@gmail.com
+Phone: 8374948374
+LinkedIn, GitHub, and Portfolio links are on my resume header and in the Contact section of this site.
 
-I'm currently open to AI, ML, and GenAI opportunities.
+I'm open to roles involving AI evaluations, chatbot testing, LLM applications, and related product-quality work.
   `,
 };
