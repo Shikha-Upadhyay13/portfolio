@@ -34,14 +34,20 @@ function EduCard({
         </p>
       </div>
 
-      <div className="p-8 divide-y divide-white/10">
+      <div className="divide-y divide-white/10 p-8">
         {milestones.map((m, i) => (
-          <div key={m.degree} className={i > 0 ? "pt-5 mt-5" : ""}>
-            <p className={`${textAlign} text-sm font-mono tracking-wider text-[#47F1FF]/80`}>
+          <div key={m.degree} className={i > 0 ? "mt-5 pt-5" : ""}>
+            <p
+              className={`${textAlign} font-mono text-sm tracking-wider text-[#47F1FF]/80`}
+            >
               {m.duration}
             </p>
-            <h3 className={`${textAlign} text-2xl font-semibold mt-2`}>{m.degree}</h3>
-            <p className={`${textAlign} text-base text-gray-300 mt-3`}>{m.score}</p>
+            <h3 className={`${textAlign} mt-2 text-2xl font-semibold`}>
+              {m.degree}
+            </h3>
+            <p className={`${textAlign} mt-3 text-base text-gray-300`}>
+              {m.score}
+            </p>
           </div>
         ))}
       </div>
@@ -51,12 +57,12 @@ function EduCard({
 
 export default function Education() {
   return (
-    <section id="education" className="py-24 px-6 max-w-[1400px] mx-auto">
+    <section id="education" className="mx-auto max-w-[1400px] px-6 py-24">
       <SectionHeading title="Education" />
 
-      <div className="relative max-w-5xl mx-auto">
+      <div className="relative mx-auto max-w-5xl">
         {/* Dashed timeline spine, desktop only */}
-        <div className="hidden md:block absolute left-1/2 top-2 bottom-2 w-px -translate-x-1/2 border-l border-dashed border-white/15" />
+        <div className="absolute bottom-2 left-1/2 top-2 hidden w-px -translate-x-1/2 border-l border-dashed border-white/15 md:block" />
 
         <div className="space-y-12 md:space-y-20">
           {education.map((item, index) => {
@@ -64,11 +70,14 @@ export default function Education() {
             const align = onLeft ? "right" : "left";
 
             return (
-              <div key={item.institution} className="relative md:grid md:grid-cols-2 md:gap-16 items-center">
+              <div
+                key={item.institution}
+                className="relative items-center md:grid md:grid-cols-2 md:gap-16"
+              >
                 {/* Dot marker on the spine, desktop only */}
-                <span className="hidden md:flex absolute left-1/2 top-10 -translate-x-1/2 -translate-y-1/2 z-10 items-center justify-center">
-                  <span className="absolute w-7 h-7 rounded-full bg-[#47F1FF]/20" />
-                  <span className="relative w-3.5 h-3.5 rounded-full bg-[#47F1FF] ring-4 ring-[#0b0b0f]" />
+                <span className="absolute left-1/2 top-10 z-10 hidden -translate-x-1/2 -translate-y-1/2 items-center justify-center md:flex">
+                  <span className="absolute h-7 w-7 rounded-full bg-[#47F1FF]/20" />
+                  <span className="relative h-3.5 w-3.5 rounded-full bg-[#47F1FF] ring-4 ring-[#0b0b0f]" />
                 </span>
 
                 {onLeft ? (
