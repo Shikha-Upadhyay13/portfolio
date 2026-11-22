@@ -66,30 +66,32 @@ function ProfileCodeBlock() {
 
 export default function About() {
   return (
-    <section id="about" className="mx-auto max-w-[1400px] px-6 py-24">
-      <SectionHeading title="About" />
+    <section id="about" className="w-full px-6 py-24">
+      <div className="mx-auto max-w-[1400px]">
+        <SectionHeading title="About" />
 
-      <div className="grid items-center gap-12 lg:grid-cols-2">
-        <Reveal
-          direction="right"
-          className="space-y-5 text-lg leading-relaxed text-gray-300"
-        >
-          <p>
-            I&apos;m focused on AI evaluations, chatbot testing, and analyzing
-            model performance — turning client and design-partner requirements
-            into practical solutions and clearer product quality.
-          </p>
-          <p>
-            Day to day that means RAG and agentic LLM apps, eval frameworks,
-            and stakeholder communication: understanding needs, briefing the
-            build team, and walking partners through what the system can do
-            reliably in the real world.
-          </p>
-        </Reveal>
+        <div className="grid items-center gap-12 lg:grid-cols-2">
+          <Reveal
+            direction="right"
+            className="space-y-5 text-lg leading-relaxed text-gray-300"
+          >
+            <p>
+              I&apos;m focused on AI evaluations, chatbot testing, and analyzing
+              model performance — turning client and design-partner requirements
+              into practical solutions and clearer product quality.
+            </p>
+            <p>
+              Day to day that means RAG and agentic LLM apps, eval frameworks,
+              and stakeholder communication: understanding needs, briefing the
+              build team, and walking partners through what the system can do
+              reliably in the real world.
+            </p>
+          </Reveal>
 
-        <Reveal direction="left" delay={0.1}>
-          <ProfileCodeBlock />
-        </Reveal>
+          <Reveal direction="left" delay={0.1}>
+            <ProfileCodeBlock />
+          </Reveal>
+        </div>
       </div>
     </section>
   );
