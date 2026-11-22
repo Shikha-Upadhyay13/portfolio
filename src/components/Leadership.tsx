@@ -48,7 +48,7 @@ export default function Leadership() {
                   scattered strip rather than forced beside unrelated cards. */}
               {item.media && (
                 <Reveal delay={0.1}>
-                  <MediaFilmstrip items={item.media} center />
+                  <MediaFilmstrip items={item.media} center variant="neon" />
                 </Reveal>
               )}
             </div>
