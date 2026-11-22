@@ -17,42 +17,42 @@ function ProfileCodeBlock() {
       <pre className="overflow-x-auto p-6 font-mono text-[13px] leading-relaxed sm:text-sm">
         <code>
           <span className="text-accent">const</span>{" "}
-          <span className="text-gray-200">engineer</span>{" "}
-          <span className="text-gray-500">=</span>{" "}
-          <span className="text-gray-500">{"{"}</span>
+          <span className="text-gray-100">engineer</span>{" "}
+          <span className="text-gray-600">=</span>{" "}
+          <span className="text-gray-600">{"{"}</span>
           {"\n  "}
-          <span className="text-gray-300">name:</span>{" "}
-          <span className="text-amber-300">&quot;Shikha Upadhyay&quot;</span>
-          <span className="text-gray-500">,</span>
+          <span className="text-gray-400">name:</span>{" "}
+          <span className="text-accent/90">&quot;Shikha Upadhyay&quot;</span>
+          <span className="text-gray-600">,</span>
           {"\n  "}
-          <span className="text-gray-300">role:</span>{" "}
-          <span className="text-amber-300">&quot;AI Engineer&quot;</span>
-          <span className="text-gray-500">,</span>
+          <span className="text-gray-400">role:</span>{" "}
+          <span className="text-accent/90">&quot;AI Engineer&quot;</span>
+          <span className="text-gray-600">,</span>
           {"\n  "}
-          <span className="text-gray-300">focus:</span>{" "}
-          <span className="text-gray-500">[</span>
+          <span className="text-gray-400">focus:</span>{" "}
+          <span className="text-gray-600">[</span>
           {"\n    "}
-          <span className="text-amber-300">&quot;RAG Pipelines&quot;</span>
-          <span className="text-gray-500">,</span>
+          <span className="text-[#8AF6FF]">&quot;RAG Pipelines&quot;</span>
+          <span className="text-gray-600">,</span>
           {"\n    "}
-          <span className="text-amber-300">&quot;Agentic Workflows&quot;</span>
-          <span className="text-gray-500">,</span>
+          <span className="text-[#8AF6FF]">&quot;Agentic Workflows&quot;</span>
+          <span className="text-gray-600">,</span>
           {"\n    "}
-          <span className="text-amber-300">&quot;LLM Integration&quot;</span>
-          <span className="text-gray-500">,</span>
+          <span className="text-[#8AF6FF]">&quot;LLM Integration&quot;</span>
+          <span className="text-gray-600">,</span>
           {"\n    "}
-          <span className="text-amber-300">&quot;Vector Search&quot;</span>
-          <span className="text-gray-500">,</span>
+          <span className="text-[#8AF6FF]">&quot;Vector Search&quot;</span>
+          <span className="text-gray-600">,</span>
           {"\n  "}
-          <span className="text-gray-500">],</span>
+          <span className="text-gray-600">],</span>
           {"\n  "}
-          <span className="text-gray-300">approach:</span>{" "}
-          <span className="text-amber-300">
+          <span className="text-gray-400">approach:</span>{" "}
+          <span className="text-accent/80">
             &quot;reliability-first, production-grade AI&quot;
           </span>
-          <span className="text-gray-500">,</span>
+          <span className="text-gray-600">,</span>
           {"\n"}
-          <span className="text-gray-500">{"}"}</span>
+          <span className="text-gray-600">{"}"}</span>
           <span className="text-accent">;</span>
           <span
             aria-hidden
