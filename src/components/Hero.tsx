@@ -17,13 +17,14 @@ const stats = [
 
 function HeroPortrait() {
   return (
-    <div className="relative w-72 sm:w-80 md:w-[26rem] aspect-[15/16] shrink-0">
+    <div className="relative z-10 h-[22rem] w-72 shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-panel shadow-2xl shadow-black/40 transition-transform duration-500 hover:scale-[1.02] sm:h-[26rem] sm:w-80 md:h-[28rem] md:w-[24rem]">
       <Image
-        src="/profile-cutout.png"
+        src="/profile.jpg"
         alt="Shikha Upadhyay"
-        fill
+        width={768}
+        height={960}
         priority
-        className="object-contain object-bottom transition-transform duration-500 hover:scale-[1.02]"
+        className="h-full w-full object-cover object-top"
       />
     </div>
   );
@@ -130,25 +131,13 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* RIGHT SIDE — portrait, staged with a soft backdrop card and a grounding shadow */}
+        {/* RIGHT SIDE — portrait */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: EASE_OUT_EXPO }}
-          className="relative flex justify-center md:justify-end items-end min-h-[340px] md:min-h-[480px]"
+          className="relative flex justify-center md:justify-end items-center min-h-[340px] md:min-h-[480px]"
         >
-          {/* Backdrop card — aligned to portrait feet */}
-          <div
-            aria-hidden
-            className="absolute bottom-0 right-0 md:right-4 w-56 h-[20rem] md:w-64 md:h-[22rem] rounded-[2.5rem] bg-[#47F1FF]/12 border border-white/5 -rotate-6 -z-10"
-          />
-
-          {/* Ground shadow under the cutout */}
-          <div
-            aria-hidden
-            className="absolute bottom-0 right-1/2 translate-x-1/2 md:right-8 md:translate-x-0 w-44 h-9 bg-black/50 blur-2xl rounded-full -z-10"
-          />
-
           <HeroPortrait />
         </motion.div>
       </div>
