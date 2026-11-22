@@ -38,7 +38,7 @@ function EduCard({
         {milestones.map((m, i) => (
           <div key={m.degree} className={i > 0 ? "mt-5 pt-5" : ""}>
             <p
-              className={`${textAlign} font-mono text-sm tracking-wider text-[#47F1FF]/80`}
+              className={`${textAlign} font-mono text-sm tracking-wider text-accent/80`}
             >
               {m.duration}
             </p>

@@ -4,9 +4,9 @@ import { useRef, type ReactNode } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { EASE_OUT_EXPO } from "@/lib/animations";
 
-/** Theater-velvet pleats — deep wine with soft fold highlights. */
+/** Cafe-brown velvet pleats — warm stage for hobbies / Bharatanatyam. */
 const VELVET =
-  "repeating-linear-gradient(90deg, #2a0a12 0px, #4a1420 10px, #6b1e2e 18px, #3d1018 28px, #5c1828 36px, #2a0a12 44px)";
+  "repeating-linear-gradient(90deg, #3d2416 0px, #5c3a24 10px, #7a4e32 18px, #4a2e1a 28px, #6b4228 36px, #3d2416 44px)";
 
 const OPEN_EASE: [number, number, number, number] = [0.76, 0, 0.24, 1];
 
@@ -59,7 +59,7 @@ export default function CurtainReveal({
             duration: open ? (reduceMotion ? 0.01 : 0.9) : closeMs,
             ease: EASE_OUT_EXPO,
           }}
-          className="absolute inset-0 bg-[#0a0608]/85"
+          className="absolute inset-0 bg-[#2a1c14]/85"
         />
 
         {/* Top valance / pelmet */}
@@ -75,25 +75,25 @@ export default function CurtainReveal({
           style={{
             background: VELVET,
             boxShadow:
-              "0 12px 28px rgba(0,0,0,0.55), inset 0 -1px 0 rgba(212,175,95,0.35)",
+              "0 12px 28px rgba(42,28,20,0.55), inset 0 -1px 0 rgba(196,164,132,0.4)",
           }}
         >
-          {/* Gold fringe */}
+          {/* Warm beige fringe */}
           <div
             className="absolute inset-x-0 bottom-0 h-2"
             style={{
               background:
-                "repeating-linear-gradient(90deg, #d4af5f 0 3px, transparent 3px 9px), linear-gradient(#c9a227, #8a6a1a)",
+                "repeating-linear-gradient(90deg, #c4a484 0 3px, transparent 3px 9px), linear-gradient(#a67c52, #6f4e37)",
               opacity: 0.9,
             }}
           />
           {/* Center crest mark */}
           <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center gap-2">
-            <span className="h-px w-8 bg-gradient-to-r from-transparent to-[#d4af5f]/70" />
-            <span className="font-display text-[10px] uppercase tracking-[0.35em] text-[#e8d5a3]/90">
+            <span className="h-px w-8 bg-gradient-to-r from-transparent to-[#c4a484]/70" />
+            <span className="font-display text-[10px] uppercase tracking-[0.35em] text-[#f5ede0]/90">
               Stage
             </span>
-            <span className="h-px w-8 bg-gradient-to-l from-transparent to-[#d4af5f]/70" />
+            <span className="h-px w-8 bg-gradient-to-l from-transparent to-[#c4a484]/70" />
           </div>
         </motion.div>
 
@@ -124,8 +124,8 @@ export default function CurtainReveal({
           className="absolute inset-y-[12%] left-1/2 z-40 w-px origin-center -translate-x-1/2"
           style={{
             background:
-              "linear-gradient(to bottom, transparent, #d4af5f 15%, #f0e0a8 50%, #d4af5f 85%, transparent)",
-            boxShadow: "0 0 18px rgba(212,175,95,0.45)",
+              "linear-gradient(to bottom, transparent, #a67c52 15%, #f5ede0 50%, #a67c52 85%, transparent)",
+            boxShadow: "0 0 18px rgba(111,78,55,0.4)",
           }}
         />
       </div>
@@ -179,7 +179,7 @@ function CurtainPanel({
         }`}
         style={{
           background:
-            "linear-gradient(to bottom, transparent 5%, #d4af5f 20%, #f5e6b8 50%, #d4af5f 80%, transparent 95%)",
+            "linear-gradient(to bottom, transparent 5%, #a67c52 20%, #f5ede0 50%, #a67c52 80%, transparent 95%)",
           opacity: 0.75,
         }}
       />
@@ -189,8 +189,8 @@ function CurtainPanel({
         className="absolute inset-0 opacity-40"
         style={{
           background: isLeft
-            ? "linear-gradient(105deg, transparent 40%, rgba(255,220,180,0.08) 55%, transparent 70%)"
-            : "linear-gradient(255deg, transparent 40%, rgba(255,220,180,0.08) 55%, transparent 70%)",
+            ? "linear-gradient(105deg, transparent 40%, rgba(245,237,224,0.1) 55%, transparent 70%)"
+            : "linear-gradient(255deg, transparent 40%, rgba(245,237,224,0.1) 55%, transparent 70%)",
         }}
       />
 
@@ -199,7 +199,7 @@ function CurtainPanel({
         className="absolute inset-x-0 bottom-0 h-3"
         style={{
           background:
-            "linear-gradient(to top, rgba(0,0,0,0.55), transparent), linear-gradient(#8a6a1a, #d4af5f)",
+            "linear-gradient(to top, rgba(42,28,20,0.55), transparent), linear-gradient(#6f4e37, #c4a484)",
           opacity: 0.85,
         }}
       />

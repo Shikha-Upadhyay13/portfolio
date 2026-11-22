@@ -7,10 +7,10 @@ const TILTS = ["-rotate-3", "rotate-2", "-rotate-2", "rotate-3", "-rotate-1", "r
 
 const FRAME: Record<"classic" | "neon", string> = {
   classic:
-    "border-4 border-white/95 bg-white shadow-xl shadow-black/50",
+    "border-4 border-[#f5ede0] bg-[#faf4eb] shadow-xl shadow-black/40",
   neon:
-    "border-2 border-accent/70 bg-[#0b0b0f] shadow-[0_0_18px_rgba(71,241,255,0.35),0_0_40px_rgba(71,241,255,0.12)] ring-1 ring-accent/30",
-};
+    "border-2 border-accent/70 bg-panel shadow-[0_0_18px_color-mix(in_srgb,var(--accent-1)_35%,transparent)] ring-1 ring-accent/30",
+}
 
 function MediaFrame({ item, className }: { item: MediaItem; className: string }) {
   if (item.type === "video") {

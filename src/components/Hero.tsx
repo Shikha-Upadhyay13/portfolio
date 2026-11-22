@@ -18,25 +18,24 @@ const stats = [
 function HeroPortrait() {
   return (
     <div className="relative z-10 w-72 shrink-0 sm:w-80 md:w-[24rem]">
-      {/* Soft cyan wash behind the frame */}
+      {/* Soft cafe-brown wash behind the frame */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -inset-8 -z-10 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(71,241,255,0.16),transparent_68%)] blur-2xl"
+        className="pointer-events-none absolute -inset-8 -z-10 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(111,78,55,0.18),transparent_68%)] blur-2xl"
       />
 
-      {/* Light gradient rim */}
+      {/* Warm brown gradient rim */}
       <div
         className="relative rounded-sm p-px shadow-2xl shadow-black/50"
         style={{
           background:
-            "linear-gradient(145deg, rgba(71,241,255,0.45), rgba(255,255,255,0.18) 35%, rgba(71,241,255,0.12) 65%, rgba(255,255,255,0.28))",
+            "linear-gradient(145deg, rgba(111,78,55,0.55), rgba(245,237,224,0.55) 35%, rgba(139,94,60,0.35) 65%, rgba(92,61,46,0.45))",
         }}
       >
-        <div className="relative h-[22rem] overflow-hidden rounded-[3px] bg-[#050507] sm:h-[26rem] md:h-[28rem]">
-          {/* Tiny blue bloom inside the frame */}
+        <div className="relative h-[22rem] overflow-hidden rounded-[3px] bg-[#2a1c14] sm:h-[26rem] md:h-[28rem]">
           <div
             aria-hidden
-            className="pointer-events-none absolute left-[16%] top-[18%] h-48 w-48 rounded-full bg-accent/20 blur-[52px]"
+            className="pointer-events-none absolute left-[16%] top-[18%] h-48 w-48 rounded-full bg-accent/15 blur-[52px]"
           />
 
           <Image
@@ -87,7 +86,7 @@ export default function Hero() {
           {/* Name */}
           <motion.h1
             variants={item}
-            className="text-5xl md:text-6xl font-bold leading-tight"
+            className="font-display text-5xl font-bold leading-tight text-accent md:text-6xl"
           >
             Shikha{" "}
             <span className="accent-text">Upadhyay</span>

@@ -26,7 +26,7 @@ export default function Card({
 }: CardProps) {
   return (
     <div
-      className={`relative rounded-2xl border border-line bg-panel/80 backdrop-blur-xl transition-all duration-300 hover:border-accent/50 ${
+      className={`relative rounded-2xl border border-line bg-panel/90 shadow-[0_10px_30px_-18px_color-mix(in_srgb,var(--accent-1)_28%,transparent)] backdrop-blur-xl transition-all duration-300 hover:border-accent/50 ${
         hoverLift ? "hover:-translate-y-1" : ""
       } ${PADDING_CLASSES[padding]} ${className}`}
     >

@@ -30,30 +30,33 @@ html.dark {
 }
 
 html.light {
-  /* Hobbies cream + black system, site-wide */
+  /* Cafe beige + brown — warm, soft, not coffee-yellow */
   color-scheme: light;
-  --bg: #fff8dc;
-  --bg-soft: #fff3c4;
-  --bg-raised: #fffbf0;
-  --bg-panel: #fffcf0;
-  --text: #1c1917;
-  --text-muted: #57534e;
-  --border: rgba(120, 53, 15, 0.12);
-  --glass-bg: rgba(255, 251, 240, 0.82);
-  --glass-border: rgba(120, 53, 15, 0.12);
-  --nav-scrolled: rgba(255, 248, 220, 0.88);
-  --surface-hover: rgba(120, 53, 15, 0.06);
-  --accent-1: #1c1917;
-  --accent-2: #292524;
-  --accent-glow: rgba(28, 25, 23, 0.22);
-  --ring: rgba(120, 53, 15, 0.14);
-  --selection-fg: #1c1917;
-  --spotlight-core: rgba(120, 53, 15, 0.1);
-  --spotlight-mid: rgba(120, 53, 15, 0.04);
-  --sparkle-1: #1c1917;
-  --sparkle-2: #292524;
-  --sparkle-3: #44403c;
-  --sparkle-flash: rgba(28, 25, 23, 0.22);
+  --bg: #f5ede0;
+  --bg-soft: #efe4d4;
+  --bg-raised: #faf4eb;
+  --bg-panel: #f7efe4;
+  --text: #5c3d2e;
+  --text-muted: #8a7360;
+  --border: rgba(107, 68, 35, 0.18);
+  --glass-bg: rgba(250, 244, 235, 0.78);
+  --glass-border: rgba(107, 68, 35, 0.16);
+  --nav-scrolled: rgba(245, 237, 224, 0.9);
+  --surface-hover: rgba(107, 68, 35, 0.07);
+  --accent-1: #6f4e37;
+  --accent-2: #8b5e3c;
+  --accent-glow: rgba(111, 78, 55, 0.28);
+  --ring: rgba(107, 68, 35, 0.2);
+  --selection-fg: #faf4eb;
+  --spotlight-core: rgba(139, 94, 60, 0.12);
+  --spotlight-mid: rgba(139, 94, 60, 0.05);
+  --sparkle-1: #6f4e37;
+  --sparkle-2: #8b5e3c;
+  --sparkle-3: #a67c52;
+  --sparkle-flash: rgba(111, 78, 55, 0.2);
+  --brown: #6f4e37;
+  --brown-deep: #5c3d2e;
+  --beige: #f5ede0;
 }
 
 /* Registers tokens as Tailwind utilities: `bg-page`, `bg-raised`, `text-fg`,
@@ -205,13 +208,13 @@ body {
   color: transparent;
 }
 
-/* Light mode: solid black headings (cream palette), not cyan gradient */
+/* Light mode: dominant cafe brown headings on beige */
 html.light .accent-text {
   background: none;
   -webkit-background-clip: unset;
   background-clip: unset;
-  -webkit-text-fill-color: #000;
-  color: #000;
+  -webkit-text-fill-color: var(--brown);
+  color: var(--brown);
 }
 
 /* Primary button — outlined in the accent rather than filled, since a solid
@@ -323,27 +326,31 @@ a:focus-visible,
   border: 3px solid var(--bg);
 }
 
-/* ───────────── Light-mode readability helpers ─────────────
-   Soft remaps for the most common dark-only utility stacks so the
-   cream + black pass stays usable without rewriting every file. */
+/* ───────────── Light-mode cafe helpers (beige + brown) ───────────── */
 html.light .text-white {
   color: var(--text);
 }
+html.light .text-gray-100,
 html.light .text-gray-200,
 html.light .text-gray-300 {
-  color: #44403c;
+  color: #5c3d2e;
 }
 html.light .text-gray-400,
 html.light .text-gray-500 {
-  color: #78716c;
+  color: #8a7360;
 }
 html.light .text-gray-600 {
-  color: #a8a29e;
+  color: #a89080;
+}
+html.light .text-black {
+  color: var(--brown-deep);
 }
 html.light .border-white\/10,
 html.light .border-white\/\[0\.07\],
 html.light .border-white\/\[0\.08\],
-html.light .border-white\/\[0\.09\] {
+html.light .border-white\/\[0\.09\],
+html.light .border-white\/20,
+html.light .border-white\/25 {
   border-color: var(--border);
 }
 html.light .bg-white\/5,
@@ -352,8 +359,9 @@ html.light .bg-white\/\[0\.03\],
 html.light .bg-white\/\[0\.04\],
 html.light .bg-white\/\[0\.05\],
 html.light .bg-white\/\[0\.055\],
-html.light .bg-white\/\[0\.06\] {
-  background-color: color-mix(in srgb, var(--text) 5%, transparent);
+html.light .bg-white\/\[0\.06\],
+html.light .bg-white\/10 {
+  background-color: color-mix(in srgb, var(--brown) 8%, transparent);
 }
 html.light .hover\:bg-white\/5:hover,
 html.light .hover\:bg-white\/10:hover,
@@ -363,7 +371,7 @@ html.light .hover\:bg-white\/\[0\.06\]:hover {
   background-color: var(--surface-hover);
 }
 html.light .hover\:text-white:hover {
-  color: var(--text);
+  color: var(--brown-deep);
 }
 html.light .bg-black\/40,
 html.light .bg-black\/50,
@@ -371,17 +379,17 @@ html.light .bg-black\/60,
 html.light .bg-black\/75,
 html.light .bg-black\/80,
 html.light .bg-black\/85 {
-  background-color: rgba(28, 25, 23, 0.4);
+  background-color: rgba(92, 61, 46, 0.35);
 }
 html.light .divide-white\/10 > :not([hidden]) ~ :not([hidden]) {
   border-color: var(--border);
 }
 
-/* Soften neon cyan accents that were tuned for dark only */
 html.light .text-accent,
 html.light .text-\[\#47F1FF\],
+html.light .text-\[\#8AF6FF\],
 html.light .glow-text {
-  color: #000;
+  color: var(--brown);
 }
 html.light .bg-\[\#47F1FF\]\/10,
 html.light .bg-\[\#47F1FF\]\/20,
@@ -390,26 +398,24 @@ html.light .bg-accent\/5,
 html.light .bg-accent\/10,
 html.light .bg-accent\/15,
 html.light .bg-accent\/20 {
-  background-color: rgba(120, 53, 15, 0.08);
+  background-color: color-mix(in srgb, var(--brown) 12%, transparent);
 }
 html.light .border-accent\/30,
 html.light .border-accent\/40,
 html.light .border-accent\/50 {
-  border-color: rgba(28, 25, 23, 0.22);
+  border-color: color-mix(in srgb, var(--brown) 35%, transparent);
 }
 html.light .shadow-\[0_0_12px_rgba\(71\,241\,255\,0\.35\)\],
-html.light .shadow-\[0_0_18px_rgba\(71\,241\,255\,0\.5\)\] {
-  --tw-shadow-color: rgba(28, 25, 23, 0.12);
+html.light .shadow-\[0_0_18px_rgba\(71\,241\,255\,0\.5\)\],
+html.light .shadow-\[0_0_32px_rgba\(71\,241\,255\,0\.18\)\] {
+  --tw-shadow-color: rgba(111, 78, 55, 0.18);
 }
-
-/* Soften neon watermark / shadows that were tuned for dark only */
+html.light .shadow-black\/40,
 html.light .shadow-black\/50 {
-  --tw-shadow-color: rgba(28, 25, 23, 0.16);
+  --tw-shadow-color: rgba(92, 61, 46, 0.18);
 }
 
-/* ───────────── Light mode: cream shade banding per section ─────────────
-   Each home section gets a distinct cream so the page reads as soft bands.
-   ::before full-bleeds past max-w constrained sections. */
+/* Soft beige banding — cafe layers, not yellow coffee */
 html.light #home,
 html.light #about,
 html.light #experience,
@@ -450,67 +456,85 @@ html.light footer::before {
   pointer-events: none;
 }
 
-/* Home — soft cream (less bright), full-bleed */
 html.light #home {
-  background-color: #f3e6b8;
+  background-color: #f5ede0;
 }
 html.light #home::before {
   display: none;
 }
-/* Bridge between hero and about — same cream so no odd stripe */
 html.light .scroll-connector {
-  background-color: #f3e6b8;
+  background-color: #f5ede0;
 }
 html.light #about {
-  background-color: #fff3c4;
+  background-color: #efe4d4;
 }
 html.light #about::before {
   display: none;
 }
 html.light #experience::before {
-  background-color: #ffefb5;
+  background-color: #f5ede0;
 }
 html.light #education::before {
-  background-color: #fff8dc;
+  background-color: #ebe0d0;
 }
 html.light #skills {
-  background-color: #fff1c0;
+  background-color: #f0e6d6;
 }
 html.light #skills::before {
   display: none;
 }
 html.light #projects::before {
-  background-color: #ffe9ad;
+  background-color: #efe4d4;
 }
 html.light #achievements::before {
-  background-color: #fff3c4;
+  background-color: #f5ede0;
 }
 html.light #certifications::before {
-  background-color: #fff8dc;
+  background-color: #ebe0d0;
 }
 html.light #hackathons::before {
-  background-color: #ffefb5;
+  background-color: #f0e6d6;
 }
 html.light #leadership::before {
-  background-color: #ffedb8;
+  background-color: #efe4d4;
+}
+html.light #hobbies {
+  background-color: #f5ede0 !important;
+  color: var(--text);
 }
 html.light #hobbies::before {
-  background-color: #fff3c4;
+  display: none;
 }
-/* Contact — light brown band */
 html.light #contact::before {
-  background-color: #e0c9a8;
+  background-color: #e8dcc8;
+}
+html.light footer {
+  background-color: #e4d5c0;
 }
 html.light footer::before {
-  background-color: #d9c09a;
+  display: none;
 }
 
-/* Kill opaque raised fills so the cream bands show through */
 html.light #achievements,
 html.light #leadership {
   background-color: transparent;
 }
-html.light #hobbies {
-  background-color: transparent;
-  color: var(--text);
+
+/* About code block — beige fill, brown chrome */
+html.light #about .cafe-code {
+  border-color: color-mix(in srgb, var(--brown) 45%, transparent);
+  background-color: var(--beige);
+  box-shadow: 0 18px 40px -20px rgba(111, 78, 55, 0.35);
+}
+html.light #about .cafe-code__bar {
+  border-color: color-mix(in srgb, var(--brown) 22%, transparent);
+  background-color: color-mix(in srgb, var(--brown) 8%, var(--beige));
+}
+
+/* Polaroid / filmstrip frames → warm beige + brown edge */
+html.light .border-white\/95 {
+  border-color: #f5ede0;
+}
+html.light .bg-white {
+  background-color: #faf4eb;
 }

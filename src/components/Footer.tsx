@@ -1,72 +1,104 @@
 "use client";
 
+import { Github, Linkedin, Mail, ArrowUpRight } from "lucide-react";
+import { SOCIAL_LINKS } from "@/lib/site";
+
+const QUICK_LINKS = [
+  { href: "/#about", label: "About" },
+  { href: "/#projects", label: "Projects" },
+  { href: "/#experience", label: "Experience" },
+  { href: "/#hobbies", label: "Hobbies" },
+  { href: "/#contact", label: "Contact" },
+];
+
 export default function Footer() {
   return (
-    <footer className="mt-24 border-t border-line">
-      <div className="max-w-[1400px] mx-auto px-6 py-12">
-        {/* Top Section */}
-        <div className="grid md:grid-cols-2 gap-8">
-          {/* Left */}
+    <footer className="relative mt-0 border-t border-line">
+      <div className="mx-auto max-w-[1400px] px-6 py-16 md:py-20">
+        <div className="grid gap-12 md:grid-cols-[1.2fr_0.8fr] md:gap-16">
           <div>
-            <h3 className="text-lg font-semibold">Shikha Upadhyay</h3>
-            <p className="text-gray-400 mt-3 text-sm max-w-sm">
-              AI Engineer focused on building reliable RAG systems, agentic
-              workflows, and production-ready GenAI applications.
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent">
+              Let’s keep in touch
             </p>
+            <h3 className="mt-3 font-display text-3xl font-semibold tracking-tight text-fg md:text-4xl">
+              Shikha{" "}
+              <span className="accent-text">Upadhyay</span>
+            </h3>
+            <p className="mt-4 max-w-md text-sm leading-relaxed text-muted md:text-base">
+              AI Engineer crafting reliable RAG systems, agentic workflows, and
+              production GenAI — with a little cafe warmth on the side.
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a
+                href={SOCIAL_LINKS.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-line bg-panel/70 px-4 py-2 text-sm text-muted transition hover:border-accent/40 hover:text-accent"
+              >
+                <Linkedin className="h-3.5 w-3.5" />
+                LinkedIn
+                <ArrowUpRight className="h-3.5 w-3.5 opacity-50" />
+              </a>
+              <a
+                href={SOCIAL_LINKS.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-line bg-panel/70 px-4 py-2 text-sm text-muted transition hover:border-accent/40 hover:text-accent"
+              >
+                <Github className="h-3.5 w-3.5" />
+                GitHub
+                <ArrowUpRight className="h-3.5 w-3.5 opacity-50" />
+              </a>
+              <a
+                href={`mailto:${SOCIAL_LINKS.email}`}
+                className="inline-flex items-center gap-2 rounded-full border border-line bg-panel/70 px-4 py-2 text-sm text-muted transition hover:border-accent/40 hover:text-accent"
+              >
+                <Mail className="h-3.5 w-3.5" />
+                Email
+                <ArrowUpRight className="h-3.5 w-3.5 opacity-50" />
+              </a>
+            </div>
           </div>
 
-          {/* Right */}
-          <div className="flex md:justify-end gap-12 text-sm">
-            <div className="space-y-2">
-              <h4 className="font-semibold">Quick Links</h4>
-              <ul className="text-gray-400 space-y-1">
-                <li>
-                  <a href="/#about">About</a>
-                </li>
-                <li>
-                  <a href="/#projects">Projects</a>
-                </li>
-                <li>
-                  <a href="/#experience">Experience</a>
-                </li>
-                <li>
-                  <a href="/#contact">Contact</a>
-                </li>
+          <div className="grid grid-cols-2 gap-10 sm:gap-12">
+            <div>
+              <h4 className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
+                Explore
+              </h4>
+              <ul className="mt-4 space-y-2.5 text-sm">
+                {QUICK_LINKS.map((link) => (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      className="text-muted transition hover:text-accent"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
 
-            <div className="space-y-2">
-              <h4 className="font-semibold">Connect</h4>
-              <ul className="text-gray-400 space-y-1">
-                <li>
-                  <a
-                    href="https://www.linkedin.com/in/shikha-upadhyay-2955aa2b8"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    LinkedIn
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://github.com/Shikha-Upadhyay13"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    GitHub
-                  </a>
-                </li>
-                <li>
-                  <a href="mailto:upadhyayshikha2005@gmail.com">Email</a>
-                </li>
-              </ul>
+            <div>
+              <h4 className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
+                Based in
+              </h4>
+              <p className="mt-4 text-sm leading-relaxed text-fg">
+                Hyderabad, India
+              </p>
+              <p className="mt-2 text-sm text-muted">
+                Open to AI / ML roles &amp; collaborations.
+              </p>
             </div>
           </div>
         </div>
 
-        {/* Bottom Line */}
-        <div className="mt-12 border-t border-line pt-6 text-center text-sm text-muted">
-          © {new Date().getFullYear()} Shikha Upadhyay. All rights reserved.
+        <div className="mt-14 flex flex-col gap-3 border-t border-line pt-6 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} Shikha Upadhyay. All rights reserved.</p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.18em]">
+            AI · Hyderabad
+          </p>
         </div>
       </div>
     </footer>
