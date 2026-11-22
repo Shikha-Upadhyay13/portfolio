@@ -61,6 +61,12 @@ export default function ProjectCard({
   const number = String(index + 1).padStart(2, "0");
   const visibleTech = project.tech.slice(0, MAX_TECH);
   const extraTech = project.tech.length - visibleTech.length;
+  const primaryHref = project.caseStudy
+    ? `/projects/${project.slug}`
+    : isPlaceholder
+      ? null
+      : project.github;
+  const primaryExternal = Boolean(primaryHref?.startsWith("http"));
 
   return (
     <motion.div
@@ -74,12 +80,29 @@ export default function ProjectCard({
         ease: EASE_OUT_EXPO,
         layout: { duration: 0.4, ease: EASE_OUT_EXPO },
       }}
-      className={`group/card relative flex h-full flex-col overflow-hidden rounded-2xl bg-white/[0.03] border transition-all duration-300 hover:border-white/20 hover:-translate-y-1 hover:bg-white/[0.05] group-hover/cards:opacity-40 hover:!opacity-100 ${glow} ${
+      className={`group/card relative flex h-full flex-col overflow-hidden rounded-2xl bg-white/[0.03] border transition-all duration-300 hover:border-accent/40 hover:-translate-y-1 hover:bg-white/[0.05] group-hover/cards:opacity-40 hover:!opacity-100 ${glow} ${
         isTopMatch ? "border-accent/60" : "border-white/10"
       } ${isDimmed ? "opacity-30 saturate-50" : ""} ${
         fullWidth ? "md:col-span-2" : ""
-      }`}
+      } ${primaryHref ? "cursor-pointer" : ""}`}
     >
+      {/* Stretched hit target — whole card is the primary CTA */}
+      {primaryHref &&
+        (primaryExternal ? (
+          <a
+            href={primaryHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="absolute inset-0 z-[1]"
+            aria-label={`Open ${project.title}`}
+          />
+        ) : (
+          <Link
+            href={primaryHref}
+            className="absolute inset-0 z-[1]"
+            aria-label={`Open ${project.title}`}
+          />
+        ))}
       {/* Soft category wash */}
       <div
         aria-hidden
@@ -175,17 +198,16 @@ export default function ProjectCard({
             )}
           </div>
 
-          <div className="mt-auto flex flex-wrap items-center gap-4">
-            {project.caseStudy && (
+          <div className="relative z-[2] mt-auto flex flex-wrap items-center gap-3">
+            {project.caseStudy ? (
               <Link
                 href={`/projects/${project.slug}`}
-                className="inline-flex items-center gap-1 text-sm font-medium text-accent transition-all hover:text-[#8AF6FF] group-hover/card:gap-2"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-accent/40 bg-accent/10 px-3 py-1.5 text-sm font-medium text-accent transition hover:bg-accent/20"
               >
-                Read case study
+                View project
                 <BookOpen className="h-4 w-4" />
               </Link>
-            )}
-            {isPlaceholder ? (
+            ) : isPlaceholder ? (
               <span className="inline-flex items-center gap-1.5 text-sm text-gray-500">
                 <Lock className="h-4 w-4" />
                 Repo coming soon
@@ -195,9 +217,20 @@ export default function ProjectCard({
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-sm font-medium text-gray-400 transition-all hover:text-white group-hover/card:gap-2"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-accent/40 bg-accent/10 px-3 py-1.5 text-sm font-medium text-accent transition hover:bg-accent/20"
               >
-                View Repository
+                View project
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+            )}
+            {project.caseStudy && !isPlaceholder && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-sm font-medium text-gray-400 transition hover:text-white"
+              >
+                Repository
                 <ArrowUpRight className="h-4 w-4" />
               </a>
             )}
