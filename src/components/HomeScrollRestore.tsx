@@ -27,6 +27,14 @@ export function rememberHomeSection(sectionId: string) {
   sessionStorage.setItem(SCROLL_Y_KEY, String(window.scrollY));
 }
 
+/** Logo / brand: land on the hero top, not a restored mid-page section. */
+export function preferHomeTop() {
+  if (typeof window === "undefined") return;
+  sessionStorage.setItem(SECTION_KEY, "home");
+  sessionStorage.setItem(SCROLL_Y_KEY, "0");
+  sessionStorage.setItem("portfolio-force-home-top", "1");
+}
+
 /**
  * On the home page: restore the section/hash you came back from,
  * and keep saving scroll position while you browse.
@@ -38,13 +46,36 @@ export default function HomeScrollRestore() {
     if (pathname !== "/") return;
 
     // Prefer URL hash, then last remembered section / Y.
-    const hash = window.location.hash.replace(/^#/, "");
-    const savedSection = sessionStorage.getItem(SECTION_KEY) ?? "";
-    const savedY = Number(sessionStorage.getItem(SCROLL_Y_KEY) ?? "");
+    // Brand logo sets portfolio-force-home-top so we always land at the hero.
+    const forceTop =
+      sessionStorage.getItem("portfolio-force-home-top") === "1";
+    if (forceTop) {
+      sessionStorage.removeItem("portfolio-force-home-top");
+      if (window.location.hash) {
+        window.history.replaceState(null, "", pathname);
+      }
+    }
+
+    const hash = forceTop ? "" : window.location.hash.replace(/^#/, "");
+    const savedSection = forceTop
+      ? ""
+      : (sessionStorage.getItem(SECTION_KEY) ?? "");
+    const savedY = forceTop
+      ? 0
+      : Number(sessionStorage.getItem(SCROLL_Y_KEY) ?? "");
 
     const restore = () => {
+      if (forceTop) {
+        smoothScrollTo(0);
+        return;
+      }
       if (hash && smoothScrollToId(hash)) return;
-      if (savedSection && smoothScrollToId(savedSection)) return;
+      if (savedSection && savedSection !== "home" && smoothScrollToId(savedSection))
+        return;
+      if (savedSection === "home") {
+        smoothScrollTo(0);
+        return;
+      }
       if (Number.isFinite(savedY) && savedY > 0) smoothScrollTo(savedY);
     };
 

@@ -1,23 +1,59 @@
 @import "tailwindcss";
 
 /* ───────────────────────── Design Tokens ───────────────────────── */
-:root {
+/* Dark is the default; `html.light` swaps the same variables for light mode. */
+:root,
+html.dark {
+  color-scheme: dark;
   --bg: #0b0b0f;
   --bg-soft: #0f0f14;
-  --accent-1: #47f1ff; /* electric cyan — single flat accent, no gradient */
+  --bg-raised: #121218;
+  --bg-panel: #101015;
+  --text: #f5f5f5;
+  --text-muted: #9ca3af;
+  --border: rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --nav-scrolled: rgba(0, 0, 0, 0.5);
+  --surface-hover: rgba(255, 255, 255, 0.04);
+  --accent-1: #47f1ff;
   --accent-2: #47f1ff;
   --accent-glow: rgba(71, 241, 255, 0.45);
   --ring: rgba(255, 255, 255, 0.1);
+  --selection-fg: #f5f5f5;
 }
 
-/* Registers the tokens above (plus a couple new ones) as first-class Tailwind
-   utilities via Tailwind v4's CSS-first config, so components can use
-   `bg-accent`, `text-accent`, `border-accent/50`, `bg-panel` etc. instead of
-   re-hardcoding `#47F1FF`/`#101015`-family literals per file. */
+html.light {
+  color-scheme: light;
+  --bg: #f4f5f7;
+  --bg-soft: #eef0f3;
+  --bg-raised: #ffffff;
+  --bg-panel: #ffffff;
+  --text: #171717;
+  --text-muted: #5b6472;
+  --border: rgba(15, 23, 42, 0.12);
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(15, 23, 42, 0.1);
+  --nav-scrolled: rgba(255, 255, 255, 0.82);
+  --surface-hover: rgba(15, 23, 42, 0.04);
+  --accent-1: #0891b2;
+  --accent-2: #0e7490;
+  --accent-glow: rgba(8, 145, 178, 0.35);
+  --ring: rgba(15, 23, 42, 0.12);
+  --selection-fg: #0f172a;
+}
+
+/* Registers tokens as Tailwind utilities: `bg-page`, `bg-raised`, `text-fg`,
+   `border-line`, `bg-accent`, `bg-panel`, etc. */
 @theme {
-  --color-accent: #47f1ff;
-  --color-accent-deep: #0b5c68; /* formalizes the teal already hand-used for chat bubbles */
-  --color-panel: #101015; /* unifies the near-black modal/lightbox/dropdown literals */
+  --color-accent: var(--accent-1);
+  --color-accent-deep: #0b5c68;
+  --color-panel: var(--bg-panel);
+  --color-page: var(--bg);
+  --color-raised: var(--bg-raised);
+  --color-fg: var(--text);
+  --color-muted: var(--text-muted);
+  --color-line: var(--border);
 }
 
 /* Body copy uses Inter; headings opt into the display face. */
@@ -62,8 +98,9 @@ html {
 
 /* Base theme */
 body {
-  background-color: #0f0f0f;
-  color: #f5f5f5;
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 /* Contact illustration — soft pulse on signal arcs */
@@ -88,24 +125,24 @@ body {
 
 /* Text selection — soft cyan tint instead of default browser blue */
 ::selection {
-  background: rgba(71, 241, 255, 0.28);
-  color: #f5f5f5;
+  background: color-mix(in srgb, var(--accent-1) 28%, transparent);
+  color: var(--selection-fg);
 }
 ::-moz-selection {
-  background: rgba(71, 241, 255, 0.28);
-  color: #f5f5f5;
+  background: color-mix(in srgb, var(--accent-1) 28%, transparent);
+  color: var(--selection-fg);
 }
 
 /* Glass reusable class */
 .glass {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--glass-bg);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--glass-border);
 }
 
 /* Glow text */
 .glow-text {
-  color: #47f1ff;
+  color: var(--accent-1);
 }
 
 /* Soft hover lift */
@@ -167,7 +204,7 @@ body {
 }
 .accent-btn:hover {
   transform: translateY(-2px);
-  background: rgba(71, 241, 255, 0.12);
+  background: color-mix(in srgb, var(--accent-1) 12%, transparent);
   box-shadow: 0 12px 36px -8px var(--accent-glow);
 }
 .accent-btn:active {
@@ -176,7 +213,7 @@ body {
 
 /* Outlined accent border on hover (used by glass CTAs) */
 .accent-border:hover {
-  border-color: rgba(71, 241, 255, 0.5);
+  border-color: color-mix(in srgb, var(--accent-1) 50%, transparent);
 }
 
 /* Active-state grow line for nav links + animated underline */
@@ -262,4 +299,68 @@ a:focus-visible,
   background: linear-gradient(var(--accent-1), var(--accent-2));
   border-radius: 9999px;
   border: 3px solid var(--bg);
+}
+
+/* ───────────── Light-mode readability helpers ─────────────
+   Soft remaps for the most common dark-only utility stacks so the
+   first light-mode pass stays usable without rewriting every file. */
+html.light .text-white {
+  color: var(--text);
+}
+html.light .text-gray-200,
+html.light .text-gray-300 {
+  color: #334155;
+}
+html.light .text-gray-400,
+html.light .text-gray-500 {
+  color: #64748b;
+}
+html.light .text-gray-600 {
+  color: #94a3b8;
+}
+html.light .border-white\/10,
+html.light .border-white\/\[0\.07\],
+html.light .border-white\/\[0\.08\],
+html.light .border-white\/\[0\.09\] {
+  border-color: var(--border);
+}
+html.light .bg-white\/5,
+html.light .bg-white\/\[0\.02\],
+html.light .bg-white\/\[0\.03\],
+html.light .bg-white\/\[0\.04\],
+html.light .bg-white\/\[0\.05\],
+html.light .bg-white\/\[0\.055\],
+html.light .bg-white\/\[0\.06\] {
+  background-color: color-mix(in srgb, var(--text) 4%, transparent);
+}
+html.light .hover\:bg-white\/5:hover,
+html.light .hover\:bg-white\/10:hover,
+html.light .hover\:bg-white\/\[0\.04\]:hover,
+html.light .hover\:bg-white\/\[0\.05\]:hover,
+html.light .hover\:bg-white\/\[0\.06\]:hover {
+  background-color: var(--surface-hover);
+}
+html.light .hover\:text-white:hover {
+  color: var(--text);
+}
+html.light .bg-black\/40,
+html.light .bg-black\/50,
+html.light .bg-black\/60,
+html.light .bg-black\/75,
+html.light .bg-black\/80,
+html.light .bg-black\/85 {
+  background-color: rgba(15, 23, 42, 0.45);
+}
+html.light .divide-white\/10 > :not([hidden]) ~ :not([hidden]) {
+  border-color: var(--border);
+}
+
+/* Keep cream hobbies section intentional in both themes */
+html.light #hobbies {
+  border-color: rgba(15, 23, 42, 0.08);
+}
+
+/* Soften neon watermark / shadows that were tuned for dark only */
+html.light .shadow-black\/50 {
+  --tw-shadow-color: rgba(15, 23, 42, 0.18);
 }

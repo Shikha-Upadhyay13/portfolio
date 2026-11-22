@@ -5,8 +5,10 @@ import CursorRipple from "@/components/CursorRipple";
 import ScrollProgress from "@/components/ScrollProgress";
 import Spotlight from "@/components/Spotlight";
 import CommandPalette from "@/components/CommandPalette";
+import ResumePreview from "@/components/ResumePreview";
 import SmartAssistant from "@/components/SmartAssistant";
 import IntroSplash from "@/components/IntroSplash";
+import ThemeProvider from "@/components/ThemeProvider";
 import JsonLd from "@/components/JsonLd";
 import {
   SITE_DESCRIPTION,
@@ -72,10 +74,17 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetBrainsMono.variable}`}
     >
       <head>
         <JsonLd />
+        {/* Theme before paint — avoids a flash of the wrong mode. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var t=localStorage.getItem('portfolio-theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}var r=document.documentElement;r.classList.remove('light','dark');r.classList.add(t);r.style.colorScheme=t;}catch(e){document.documentElement.classList.add('dark');}`,
+          }}
+        />
         {/* First visit only: land on hero. Later visits / back keep section + hash. */}
         <script
           dangerouslySetInnerHTML={{
@@ -83,30 +92,30 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="relative bg-[#0b0b0f] text-white overflow-x-hidden">
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-[#0b0b0f] focus:border focus:border-accent focus:text-accent"
-        >
-          Skip to content
-        </a>
-        {/* Soft static ambient glow (sits under the cursor spotlight) */}
-        <div className="fixed top-40 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-[#47F1FF]/5 blur-[150px] rounded-full -z-20" />
-        <div className="fixed bottom-0 right-0 w-[500px] h-[500px] bg-[#47F1FF]/5 blur-[150px] rounded-full -z-20" />
+      <body className="relative overflow-x-hidden bg-page text-fg">
+        <ThemeProvider>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-lg focus:border focus:border-accent focus:bg-page focus:px-4 focus:py-2 focus:text-accent"
+          >
+            Skip to content
+          </a>
+          {/* Soft static ambient glow (sits under the cursor spotlight) */}
+          <div className="pointer-events-none fixed left-1/2 top-40 -z-20 h-[700px] w-[700px] -translate-x-1/2 rounded-full bg-accent/5 blur-[150px]" />
+          <div className="pointer-events-none fixed bottom-0 right-0 -z-20 h-[500px] w-[500px] rounded-full bg-accent/5 blur-[150px]" />
 
-        {/* Cursor-following signature glow */}
-        <Spotlight />
+          <Spotlight />
+          <ScrollProgress />
+          <IntroSplash />
 
-        <ScrollProgress />
+          {children}
 
-        <IntroSplash />
-
-        {children}
-
-        <CustomCursor />
-        <CursorRipple />
-        <CommandPalette />
-        <SmartAssistant />
+          <CustomCursor />
+          <CursorRipple />
+          <CommandPalette />
+          <ResumePreview />
+          <SmartAssistant />
+        </ThemeProvider>
       </body>
     </html>
   );

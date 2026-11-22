@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { NAV_LINKS } from "@/data/navLinks";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function MobileNav() {
   const [open, setOpen] = useState(false);
@@ -32,7 +33,7 @@ export default function MobileNav() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="p-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition"
+        className="rounded-lg p-2 text-muted transition hover:bg-white/10 hover:text-fg"
         aria-label="Open navigation menu"
         aria-expanded={open}
       >
@@ -57,29 +58,34 @@ export default function MobileNav() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", stiffness: 320, damping: 32 }}
-              className="fixed top-0 right-0 h-full w-[min(100%,20rem)] z-[70] bg-[#0b0b0f]/95 backdrop-blur-xl border-l border-white/10 flex flex-col"
+              className="fixed top-0 right-0 z-[70] flex h-full w-[min(100%,20rem)] flex-col border-l border-line bg-page/95 backdrop-blur-xl"
               aria-label="Mobile navigation"
             >
-              <div className="flex items-center justify-between px-5 h-16 border-b border-white/10">
-                <span className="font-semibold accent-text font-display">Menu</span>
-                <button
-                  type="button"
-                  onClick={() => setOpen(false)}
-                  className="p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10"
-                  aria-label="Close menu"
-                >
-                  <X className="w-5 h-5" />
-                </button>
+              <div className="flex h-16 items-center justify-between border-b border-line px-5">
+                <span className="font-display font-semibold accent-text">
+                  Menu
+                </span>
+                <div className="flex items-center gap-1">
+                  <ThemeToggle showLabel />
+                  <button
+                    type="button"
+                    onClick={() => setOpen(false)}
+                    className="rounded-lg p-2 text-muted transition hover:bg-accent/15 hover:text-accent"
+                    aria-label="Close menu"
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
+                </div>
               </div>
 
-              <nav className="flex-1 overflow-y-auto py-4 px-3">
+              <nav className="flex-1 overflow-y-auto px-3 py-4">
                 <ul className="space-y-1">
                   {NAV_LINKS.map(({ id, label }) => (
                     <li key={id}>
                       <button
                         type="button"
                         onClick={() => navigate(id)}
-                        className="w-full text-left px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition"
+                        className="w-full rounded-xl px-4 py-3 text-left text-muted transition hover:bg-white/10 hover:text-fg"
                       >
                         {label}
                       </button>

@@ -105,7 +105,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 px-6 max-w-[1400px] mx-auto">
+    <section id="contact" className="mx-auto max-w-[1400px] px-6 py-24">
       <SectionHeading
         title="Contact"
         subtitle="Open to AI, ML, and GenAI opportunities — roles, collaborations, or a quick hello."
@@ -197,10 +197,18 @@ export default function Contact() {
               <ArrowUpRight className="w-4 h-4 text-gray-600 group-hover:text-accent ml-auto shrink-0" />
             </a>
 
-            <a
-              href="/resume.pdf"
-              download
-              className={channelClass}
+            <button
+              type="button"
+              onMouseEnter={() =>
+                window.dispatchEvent(new CustomEvent("preload-resume-preview"))
+              }
+              onFocus={() =>
+                window.dispatchEvent(new CustomEvent("preload-resume-preview"))
+              }
+              onClick={() =>
+                window.dispatchEvent(new CustomEvent("open-resume-preview"))
+              }
+              className={`${channelClass} w-full cursor-pointer text-left`}
             >
               <FileDown className="w-4 h-4 text-accent shrink-0" />
               <div className="min-w-0 text-left">
@@ -208,11 +216,11 @@ export default function Contact() {
                   Résumé
                 </p>
                 <p className="text-sm text-gray-200 group-hover:text-white">
-                  Download PDF
+                  Preview PDF
                 </p>
               </div>
               <ArrowUpRight className="w-4 h-4 text-gray-600 group-hover:text-accent ml-auto shrink-0" />
-            </a>
+            </button>
           </div>
         </div>
 

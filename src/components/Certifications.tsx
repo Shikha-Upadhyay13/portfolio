@@ -38,13 +38,13 @@ export default function Certifications() {
   }, []);
 
   return (
-    <section id="certifications" className="py-24 px-6 max-w-[1400px] mx-auto">
+    <section id="certifications" className="mx-auto max-w-[1400px] px-6 py-24">
       <SectionHeading
         title="Certifications"
         subtitle="Courses, simulations, and programs I've completed along the way."
       />
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {featured.map((cert, i) => (
           <Reveal key={cert.id} delay={(i % 3) * 0.05}>
             <CertificationCard

@@ -61,13 +61,13 @@ export default function CertificateLightbox({
             animate="visible"
             exit="hidden"
             transition={modalPanelTransition}
-            className="relative w-full max-w-4xl h-[85vh] rounded-2xl border border-white/10 bg-panel shadow-2xl overflow-hidden flex flex-col"
+            className="relative flex h-[85vh] w-full max-w-4xl flex-col overflow-hidden rounded-2xl border border-line bg-panel shadow-2xl"
           >
             <button
               ref={closeButtonRef}
               onClick={onClose}
               aria-label="Close"
-              className="absolute top-3 right-3 z-10 w-9 h-9 flex items-center justify-center rounded-full glass accent-border text-gray-300 hover:text-white transition"
+              className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-line bg-page/80 text-muted transition hover:border-accent/50 hover:bg-accent/15 hover:text-accent"
             >
               <X className="w-4 h-4" />
             </button>

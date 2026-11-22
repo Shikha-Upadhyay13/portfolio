@@ -169,7 +169,7 @@ export default function SmartAssistant() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.97 }}
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed bottom-6 right-6 z-50 w-[92vw] max-w-md overflow-hidden rounded-2xl border border-white/10 bg-black/85 shadow-2xl backdrop-blur-xl"
+            className="fixed bottom-6 right-6 z-50 w-[92vw] max-w-md overflow-hidden rounded-2xl border border-line bg-panel/95 shadow-2xl backdrop-blur-xl"
             role="dialog"
             aria-label="Portfolio Guide"
           >
@@ -207,7 +207,7 @@ export default function SmartAssistant() {
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
-                  className="rounded-lg p-1.5 hover:bg-white/5 hover:text-white"
+                  className="rounded-lg p-1.5 text-gray-300 transition hover:bg-accent/15 hover:text-accent"
                   aria-label="Close"
                 >
                   <X className="h-4 w-4" />

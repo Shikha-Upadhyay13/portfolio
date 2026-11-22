@@ -10,7 +10,7 @@ export default function Leadership() {
   return (
     <section
       id="leadership"
-      className="border-y border-white/10 bg-[#121218] px-6 py-24"
+      className="border-y border-line bg-raised px-6 py-24"
     >
       <div className="mx-auto max-w-[1400px]">
         <SectionHeading
@@ -29,7 +29,7 @@ export default function Leadership() {
               <Card
                 padding="sm"
                 accentRail={Boolean(item.media)}
-                className="h-full !border-white/[0.08] !bg-white/[0.03] !p-5 md:!p-6"
+                className="h-full !p-5 md:!p-6"
               >
                 <div
                   className={

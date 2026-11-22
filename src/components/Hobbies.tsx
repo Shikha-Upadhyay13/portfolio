@@ -10,7 +10,7 @@ export default function Hobbies() {
   const [featured, ...rest] = hobbies;
 
   return (
-    <section id="hobbies" className="bg-[#FFF8DC] py-24 px-6 text-stone-800">
+    <section id="hobbies" className="bg-[#FFF8DC] px-6 py-24 text-stone-800">
       <div className="mx-auto max-w-[1400px]">
         <SectionHeading
           title="Hobbies & Passion"

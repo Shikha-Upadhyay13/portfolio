@@ -81,11 +81,11 @@ export default function IntroSplash() {
             filter: "blur(6px)",
             transition: { duration: 0.35, ease: EASE_OUT_EXPO },
           }}
-          className="fixed inset-0 z-[200] flex flex-col items-center justify-center overflow-hidden bg-[#0b0b0f]"
+          className="fixed inset-0 z-[200] flex flex-col items-center justify-center overflow-hidden bg-page"
         >
           <div
             aria-hidden
-            className="absolute left-1/2 top-1/2 h-[min(90vw,28rem)] w-[min(90vw,28rem)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#47F1FF]/10 blur-[100px]"
+            className="absolute left-1/2 top-1/2 h-[min(90vw,28rem)] w-[min(90vw,28rem)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/10 blur-[100px]"
           />
 
           <div className="relative z-10 flex flex-col items-center px-6 text-center">
@@ -95,7 +95,7 @@ export default function IntroSplash() {
               }
               animate={{ opacity: 1, scale: 1, rotate: 45 }}
               transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
-              className="mb-8 h-10 w-10 rounded-md bg-[#47F1FF] shadow-[0_0_40px_rgba(71,241,255,0.45)] md:h-12 md:w-12"
+              className="mb-8 h-10 w-10 rounded-md bg-accent shadow-[0_0_40px_var(--accent-glow)] md:h-12 md:w-12"
               aria-hidden
             />
 
@@ -106,7 +106,7 @@ export default function IntroSplash() {
               className="font-display text-4xl font-bold tracking-tight md:text-6xl"
             >
               <span className="accent-text">Shikha</span>
-              <span className="text-white">.dev</span>
+              <span className="text-fg">.dev</span>
             </motion.p>
 
             <motion.p

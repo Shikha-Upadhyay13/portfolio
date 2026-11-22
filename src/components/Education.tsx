@@ -77,7 +77,7 @@ export default function Education() {
                 {/* Dot marker on the spine, desktop only */}
                 <span className="absolute left-1/2 top-10 z-10 hidden -translate-x-1/2 -translate-y-1/2 items-center justify-center md:flex">
                   <span className="absolute h-7 w-7 rounded-full bg-[#47F1FF]/20" />
-                  <span className="relative h-3.5 w-3.5 rounded-full bg-[#47F1FF] ring-4 ring-[#0b0b0f]" />
+                  <span className="relative h-3.5 w-3.5 rounded-full bg-accent ring-4 ring-page" />
                 </span>
 
                 {onLeft ? (

@@ -6,8 +6,8 @@ import SectionHeading from "@/components/ui/SectionHeading";
 /** Profile as a syntax-highlighted object literal — on-brand for an AI engineer. */
 function ProfileCodeBlock() {
   return (
-    <div className="overflow-hidden rounded-2xl border border-white/10 bg-panel shadow-2xl shadow-black/40">
-      <div className="flex items-center gap-2 border-b border-white/10 bg-white/[0.03] px-4 py-3">
+    <div className="overflow-hidden rounded-2xl border border-line bg-panel shadow-2xl shadow-black/40">
+      <div className="flex items-center gap-2 border-b border-line bg-page/40 px-4 py-3">
         <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
         <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/70" />
         <span className="h-2.5 w-2.5 rounded-full bg-green-400/70" />

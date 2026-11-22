@@ -2,7 +2,7 @@
 
 export default function Footer() {
   return (
-    <footer className="border-t mt-24">
+    <footer className="mt-24 border-t border-line">
       <div className="max-w-[1400px] mx-auto px-6 py-12">
         {/* Top Section */}
         <div className="grid md:grid-cols-2 gap-8">
@@ -65,7 +65,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Line */}
-        <div className="border-t mt-12 pt-6 text-center text-gray-500 text-sm">
+        <div className="mt-12 border-t border-line pt-6 text-center text-sm text-muted">
           © {new Date().getFullYear()} Shikha Upadhyay. All rights reserved.
         </div>
       </div>

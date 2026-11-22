@@ -1,12 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Search } from "lucide-react";
 import Button from "@/components/ui/Button";
 import MobileNav from "@/components/MobileNav";
+import ThemeToggle from "@/components/ThemeToggle";
 import { DESKTOP_NAV_LINKS, SCROLL_SPY_IDS } from "@/data/navLinks";
+import { preferHomeTop } from "@/components/HomeScrollRestore";
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [active, setActive] = useState("home");
   const [scrolled, setScrolled] = useState(false);
 
@@ -37,16 +42,32 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 border-b ${
+      className={`fixed top-0 z-50 w-full border-b transition-all duration-300 ${
         scrolled
-          ? "backdrop-blur-xl bg-black/50 border-white/10"
-          : "bg-transparent border-transparent"
+          ? "border-line bg-[var(--nav-scrolled)] backdrop-blur-xl"
+          : "border-transparent bg-transparent"
       }`}
     >
       <div className="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="/" className="text-lg font-semibold accent-text font-display">
+        <Link
+          href="/"
+          className="text-lg font-semibold accent-text font-display"
+          onClick={(e) => {
+            preferHomeTop();
+            if (pathname === "/") {
+              e.preventDefault();
+              if (window.location.hash) {
+                window.history.replaceState(null, "", "/");
+              }
+              const reduce = window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+              ).matches;
+              window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+            }
+          }}
+        >
           Shikha.dev
-        </a>
+        </Link>
 
         <div className="flex items-center gap-4 md:gap-8 text-sm">
           <div className="hidden md:flex items-center gap-6">
@@ -56,7 +77,7 @@ export default function Navbar() {
                 href={`/#${id}`}
                 data-active={active === id}
                 className={`nav-underline transition-colors ${
-                  active === id ? "text-white" : "text-gray-400 hover:text-white"
+                  active === id ? "text-fg" : "text-muted hover:text-fg"
                 }`}
               >
                 {label}
@@ -79,9 +100,23 @@ export default function Navbar() {
             </kbd>
           </Button>
 
-          <Button href="/resume.pdf" download variant="ghost" size="md">
+          <Button
+            variant="ghost"
+            size="md"
+            onMouseEnter={() =>
+              window.dispatchEvent(new CustomEvent("preload-resume-preview"))
+            }
+            onFocus={() =>
+              window.dispatchEvent(new CustomEvent("preload-resume-preview"))
+            }
+            onClick={() =>
+              window.dispatchEvent(new CustomEvent("open-resume-preview"))
+            }
+          >
             Resume
           </Button>
+
+          <ThemeToggle />
 
           <MobileNav />
         </div>

@@ -225,8 +225,9 @@ export function AchievementsPreview() {
     <section
       ref={sectionRef}
       id="achievements"
-      className="relative mx-auto max-w-[1400px] px-6 py-24"
+      className="relative border-y border-line bg-raised px-6 py-24"
     >
+      <div className="relative mx-auto max-w-[1400px]">
       <AchievementSparkles active={inView} />
 
       <div className="relative z-10">
@@ -254,7 +255,7 @@ export function AchievementsPreview() {
                 >
                   {/* Node */}
                   <div className="relative z-[1] flex w-10 shrink-0 justify-center pt-3 md:w-12">
-                    <span className="flex h-5 w-5 items-center justify-center rounded-full border border-accent/50 bg-[#0b0b0f] shadow-[0_0_12px_rgba(71,241,255,0.35)] transition group-hover:border-accent group-hover:shadow-[0_0_18px_rgba(71,241,255,0.5)] md:h-6 md:w-6">
+                    <span className="flex h-5 w-5 items-center justify-center rounded-full border border-accent/50 bg-raised shadow-[0_0_12px_rgba(71,241,255,0.35)] transition group-hover:border-accent group-hover:shadow-[0_0_18px_rgba(71,241,255,0.5)] md:h-6 md:w-6">
                       <span className="h-1.5 w-1.5 rounded-full bg-accent" />
                     </span>
                   </div>
@@ -280,7 +281,7 @@ export function AchievementsPreview() {
                         {item.eyebrow}
                       </span>
                     </div>
-                    <h3 className="mt-1 font-display text-base font-semibold leading-snug text-white transition group-hover:text-accent md:text-lg">
+                    <h3 className="mt-1 font-display text-base font-semibold leading-snug text-fg transition group-hover:text-accent md:text-lg">
                       {item.title}
                     </h3>
                     <p className="mt-1 line-clamp-1 text-sm text-gray-500">
@@ -322,6 +323,7 @@ export function AchievementsPreview() {
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
         </Link>
       </Reveal>
+      </div>
     </section>
   );
 }

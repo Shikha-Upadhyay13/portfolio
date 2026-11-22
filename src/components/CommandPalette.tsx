@@ -65,15 +65,12 @@ export default function CommandPalette() {
       { label: "Hobbies & Passion", hint: "Jump to section", icon: Heart, action: go("hobbies") },
       { label: "Contact", hint: "Jump to section", icon: Mail, action: go("contact") },
       {
-        label: "Download Résumé",
+        label: "Preview Résumé",
         hint: "PDF",
         icon: FileDown,
         action: () => {
           setOpen(false);
-          const a = document.createElement("a");
-          a.href = "/resume.pdf";
-          a.download = "Shikha-Upadhyay-Resume.pdf";
-          a.click();
+          window.dispatchEvent(new CustomEvent("open-resume-preview"));
         },
       },
       { label: "GitHub", hint: "Open profile", icon: Github, action: openExternal("https://github.com/Shikha-Upadhyay13") },
@@ -162,7 +159,7 @@ export default function CommandPalette() {
             animate="visible"
             exit="hidden"
             transition={modalPanelTransition}
-            className="relative w-full max-w-lg rounded-2xl border border-white/10 bg-panel/95 shadow-2xl overflow-hidden"
+            className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-line bg-panel/95 shadow-2xl"
             onKeyDown={onListKey}
           >
             {/* Search */}
