@@ -95,7 +95,7 @@ export default function Contact() {
       topic ? `[${topic}]` : null,
       `Portfolio contact from ${name.trim()}`,
     ].filter(Boolean);
-    const body = `${message.trim()}\n\n— ${name.trim()} (${email.trim()})`;
+    const body = `${message.trim()}\n\n- ${name.trim()} (${email.trim()})`;
     const mailtoLink = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
       subjectParts.join(" ")
     )}&body=${encodeURIComponent(body)}`;
@@ -108,17 +108,17 @@ export default function Contact() {
     <section id="contact" className="mx-auto max-w-[1400px] px-6 py-24">
       <SectionHeading
         title="Contact"
-        subtitle="Open to AI, ML, and GenAI opportunities — roles, collaborations, or a quick hello."
+        subtitle="Open to AI, ML, and GenAI opportunities - roles, collaborations, or a quick hello."
       />
 
       {/* Equal-width, equal-height panels */}
       <div className="grid md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
         {/* Left */}
         <div className="flex flex-col h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6 md:p-8 overflow-hidden">
-          <div className="inline-flex items-center gap-2 self-start px-3 py-1.5 text-xs rounded-full border border-emerald-400/25 bg-emerald-400/10 text-emerald-300 mb-4">
+          <div className="mb-4 inline-flex items-center gap-2 self-start rounded-full border border-accent/30 bg-accent/10 px-3 py-1.5 text-xs text-accent">
             <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60 animate-ping" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-50" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
             </span>
             Available for opportunities
           </div>
@@ -409,7 +409,7 @@ export default function Contact() {
                   Send message
                 </Button>
                 <p className="text-xs text-gray-500 leading-relaxed">
-                  Opens your email app — no account required.
+                  Opens your email app - no account required.
                 </p>
               </div>
             </form>
