@@ -39,15 +39,9 @@ function readStoredTheme(): Theme | null {
   return null;
 }
 
-function systemTheme(): Theme {
-  if (typeof window === "undefined") return "dark";
-  return window.matchMedia("(prefers-color-scheme: light)").matches
-    ? "light"
-    : "dark";
-}
-
 export function getInitialTheme(): Theme {
-  return readStoredTheme() ?? systemTheme();
+  // Prefer stored choice; otherwise always start in dark mode.
+  return readStoredTheme() ?? "dark";
 }
 
 export default function ThemeProvider({ children }: { children: ReactNode }) {

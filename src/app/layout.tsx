@@ -82,7 +82,7 @@ export default function RootLayout({
         {/* Theme before paint — avoids a flash of the wrong mode. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{var t=localStorage.getItem('portfolio-theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}var r=document.documentElement;r.classList.remove('light','dark');r.classList.add(t);r.style.colorScheme=t;}catch(e){document.documentElement.classList.add('dark');}`,
+            __html: `try{var t=localStorage.getItem('portfolio-theme');if(t!=='light'&&t!=='dark'){t='dark';}var r=document.documentElement;r.classList.remove('light','dark');r.classList.add(t);r.style.colorScheme=t;}catch(e){document.documentElement.classList.add('dark');}`,
           }}
         />
         {/* First visit only: land on hero. Later visits / back keep section + hash. */}
