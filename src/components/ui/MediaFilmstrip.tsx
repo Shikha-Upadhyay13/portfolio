@@ -3,14 +3,20 @@
 import Image from "next/image";
 import type { MediaItem } from "@/types/media";
 
-const TILTS = ["-rotate-3", "rotate-2", "-rotate-2", "rotate-3", "-rotate-1", "rotate-1"];
+const TILTS = [
+  "-rotate-3",
+  "rotate-2",
+  "-rotate-2",
+  "rotate-3",
+  "-rotate-1",
+  "rotate-1",
+];
 
-const FRAME: Record<"classic" | "neon", string> = {
+const FRAME: Record<"classic" | "soft", string> = {
   classic:
-    "border-4 border-[#f5ede0] bg-[#faf4eb] shadow-xl shadow-black/40",
-  neon:
-    "border-2 border-accent/70 bg-panel shadow-[0_0_18px_color-mix(in_srgb,var(--accent-1)_35%,transparent)] ring-1 ring-accent/30",
-}
+    "rounded-lg border-4 border-white/95 bg-white shadow-xl shadow-black/50",
+  soft: "rounded-lg bg-transparent shadow-[0_0_0_1px_color-mix(in_srgb,var(--accent-1)_18%,transparent),0_12px_28px_-12px_color-mix(in_srgb,var(--accent-1)_28%,transparent)]",
+};
 
 function MediaFrame({ item, className }: { item: MediaItem; className: string }) {
   if (item.type === "video") {
@@ -41,8 +47,9 @@ function MediaFrame({ item, className }: { item: MediaItem; className: string })
 }
 
 /**
- * Filmstrip for 2+ media items.
- * `variant="neon"` — cyan glow border for a futuristic look (hackathons / clubs).
+ * Filmstrip for media items.
+ * `classic` = white frame + tilt (hackathons); `soft` = straight brown halo (hobbies).
+ * `neon` aliases `classic`.
  */
 export default function MediaFilmstrip({
   items,
@@ -51,20 +58,21 @@ export default function MediaFilmstrip({
 }: {
   items: MediaItem[];
   center?: boolean;
-  variant?: "classic" | "neon";
+  variant?: "classic" | "neon" | "soft";
 }) {
-  const frame = FRAME[variant];
+  const style = variant === "soft" ? "soft" : "classic";
+  const frame = FRAME[style];
+  const mediaBg = style === "soft" ? "bg-page" : "bg-black";
+  const tilted = style === "classic";
 
   if (items.length === 1) {
     const item = items[0];
     return (
       <div className="flex justify-center">
-        <div
-          className={`relative aspect-video w-full max-w-lg overflow-hidden rounded-lg ${frame}`}
-        >
+        <div className={`relative aspect-video w-full max-w-lg overflow-hidden ${frame}`}>
           {item.type === "video" ? (
             <video
-              className="h-full w-full object-contain bg-black"
+              className={`h-full w-full object-contain ${mediaBg}`}
               controls
               muted
               loop
@@ -81,7 +89,7 @@ export default function MediaFilmstrip({
               alt={item.alt}
               fill
               sizes="(max-width: 640px) 90vw, 512px"
-              className="object-contain bg-black"
+              className={`object-contain ${mediaBg}`}
             />
           )}
         </div>
@@ -98,19 +106,15 @@ export default function MediaFilmstrip({
       {items.map((item, i) => (
         <div
           key={item.src}
-          className={`relative h-60 w-48 shrink-0 snap-center overflow-hidden rounded-lg transition-transform duration-300 ease-out hover:!rotate-0 hover:scale-105 hover:z-10 sm:h-72 sm:w-56 ${frame} ${
-            variant === "classic" ? TILTS[i % TILTS.length] : "rotate-0"
-          } ${
-            variant === "neon"
-              ? "hover:border-accent hover:shadow-[0_0_28px_rgba(71,241,255,0.5)]"
-              : ""
+          className={`relative h-60 w-48 shrink-0 snap-center overflow-hidden transition-transform duration-300 ease-out hover:!rotate-0 hover:scale-105 hover:z-10 sm:h-72 sm:w-56 ${frame} ${
+            tilted ? TILTS[i % TILTS.length] : "rotate-0"
           }`}
         >
           <MediaFrame
             item={item}
             className={
               item.type === "video"
-                ? "h-full w-full object-cover bg-black"
+                ? `h-full w-full object-cover ${mediaBg}`
                 : "object-cover"
             }
           />

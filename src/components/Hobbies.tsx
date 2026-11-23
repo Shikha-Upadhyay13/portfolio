@@ -36,7 +36,7 @@ export default function Hobbies() {
               </Reveal>
 
               <Reveal delay={0.1}>
-                <MediaFilmstrip items={featured.media} />
+                <MediaFilmstrip items={featured.media} variant="soft" />
               </Reveal>
             </div>
 
@@ -61,7 +61,7 @@ export default function Hobbies() {
                       {hobby.description}
                     </p>
                   </div>
-                  <MediaFilmstrip items={hobby.media} />
+                  <MediaFilmstrip items={hobby.media} variant="soft" />
                 </Reveal>
               ))}
 
