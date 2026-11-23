@@ -7,10 +7,10 @@ import { EASE_OUT_EXPO } from "@/lib/animations";
 type Direction = "up" | "down" | "left" | "right" | "none";
 
 const offset: Record<Direction, { x?: number; y?: number }> = {
-  up: { y: 40 },
+  up: { y: 56 },
   down: { y: -40 },
-  left: { x: 40 },
-  right: { x: -40 },
+  left: { x: 48 },
+  right: { x: -48 },
   none: {},
 };
 
@@ -28,10 +28,16 @@ export default function Reveal({
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, ...offset[direction] }}
-      whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, ease: EASE_OUT_EXPO, delay }}
+      initial={{ opacity: 0, filter: "blur(8px)", ...offset[direction] }}
+      whileInView={{ opacity: 1, filter: "blur(0px)", x: 0, y: 0 }}
+      viewport={{ once: true, amount: 0.2, margin: "-10% 0px -8% 0px" }}
+      transition={{
+        duration: 0.85,
+        ease: EASE_OUT_EXPO,
+        delay,
+        opacity: { duration: 0.7, ease: EASE_OUT_EXPO, delay },
+        filter: { duration: 0.75, ease: EASE_OUT_EXPO, delay },
+      }}
     >
       {children}
     </motion.div>
