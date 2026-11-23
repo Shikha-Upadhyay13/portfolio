@@ -1,62 +1,129 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
+import { useInView, useReducedMotion } from "framer-motion";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 
-/** Profile as a syntax-highlighted object literal — on-brand for an AI engineer. */
+const SOURCE = `const engineer = {
+  name: "Shikha Upadhyay",
+  role: "AI Engineer",
+  focus: [
+    "RAG Pipelines",
+    "Agentic Workflows",
+    "LLM Integration",
+    "Vector Search",
+  ],
+  approach: "reliability-first, production-grade AI",
+};`;
+
+/** Tokenize a TypeScript-ish snippet for cafe / accent highlighting. */
+function highlight(code: string) {
+  const nodes: { text: string; className: string; key: string }[] = [];
+  const re =
+    /(\/\/.*$)|("(?:\\.|[^"\\])*")|(\b(?:const|let|var)\b)|(\b[A-Za-z_][\w]*\b)|(\s+)|([^\s"\w]+)/gm;
+  let m: RegExpExecArray | null;
+  let i = 0;
+  while ((m = re.exec(code))) {
+    const [full, comment, str, kw, ident, space, punct] = m;
+    let className = "text-fg";
+    if (comment) className = "text-muted";
+    else if (str) className = "text-accent";
+    else if (kw) className = "text-accent";
+    else if (ident) {
+      className =
+        ident === "engineer" || ident === "name" || ident === "role" ||
+        ident === "focus" || ident === "approach"
+          ? ident === "engineer"
+            ? "text-fg"
+            : "text-muted"
+          : "text-fg";
+    } else if (space) className = "";
+    else if (punct) className = "text-muted";
+    nodes.push({ text: full, className, key: `${i++}-${full.slice(0, 8)}` });
+  }
+  return nodes;
+}
+
 function ProfileCodeBlock() {
+  const reduceMotion = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
+  // Replay whenever About scrolls back into view
+  const inView = useInView(ref, { once: false, amount: 0.4, margin: "0px" });
+  const [typed, setTyped] = useState("");
+  const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    if (!inView) {
+      // Reset so the next scroll-in starts from the beginning
+      setTyped("");
+      setDone(false);
+      return;
+    }
+
+    if (reduceMotion) {
+      setTyped(SOURCE);
+      setDone(true);
+      return;
+    }
+
+    let i = 0;
+    let timer = 0;
+    let cancelled = false;
+    setTyped("");
+    setDone(false);
+
+    const step = () => {
+      if (cancelled) return;
+      i += 1;
+      setTyped(SOURCE.slice(0, i));
+      if (i >= SOURCE.length) {
+        setDone(true);
+        return;
+      }
+      const ch = SOURCE[i - 1];
+      const delay =
+        ch === "\n" ? 90 : ch === "," || ch === "{" || ch === "[" ? 45 : 18;
+      timer = window.setTimeout(step, delay);
+    };
+    timer = window.setTimeout(step, 280);
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+    };
+  }, [inView, reduceMotion]);
+
+  const tokens = highlight(typed);
+
   return (
-    <div className="cafe-code overflow-hidden rounded-2xl border-2 border-accent/40 bg-panel shadow-2xl shadow-black/40">
+    <div
+      ref={ref}
+      className="cafe-code overflow-hidden rounded-2xl border-2 border-accent/40 bg-panel shadow-2xl shadow-black/40"
+    >
       <div className="cafe-code__bar flex items-center gap-2 border-b border-line bg-page/40 px-4 py-3">
-        <span className="h-2.5 w-2.5 rounded-full bg-[#c4a484]/80" />
-        <span className="h-2.5 w-2.5 rounded-full bg-[#a67c52]/80" />
-        <span className="h-2.5 w-2.5 rounded-full bg-[#6f4e37]/70" />
+        <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
+        <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/70" />
+        <span className="h-2.5 w-2.5 rounded-full bg-green-400/70" />
         <span className="ml-3 font-mono text-xs text-muted">about.ts</span>
       </div>
 
-      <pre className="overflow-x-auto bg-page/30 p-6 font-mono text-[13px] leading-relaxed sm:text-sm">
+      <pre className="min-h-[300px] overflow-x-auto bg-page/30 p-6 font-mono text-[13px] leading-relaxed sm:text-sm">
         <code>
-          <span className="text-accent">const</span>{" "}
-          <span className="text-fg">engineer</span>{" "}
-          <span className="text-muted">=</span>{" "}
-          <span className="text-muted">{"{"}</span>
-          {"\n  "}
-          <span className="text-muted">name:</span>{" "}
-          <span className="text-accent/90">&quot;Shikha Upadhyay&quot;</span>
-          <span className="text-muted">,</span>
-          {"\n  "}
-          <span className="text-muted">role:</span>{" "}
-          <span className="text-accent/90">&quot;AI Engineer&quot;</span>
-          <span className="text-muted">,</span>
-          {"\n  "}
-          <span className="text-muted">focus:</span>{" "}
-          <span className="text-muted">[</span>
-          {"\n    "}
-          <span className="text-accent">&quot;RAG Pipelines&quot;</span>
-          <span className="text-muted">,</span>
-          {"\n    "}
-          <span className="text-accent">&quot;Agentic Workflows&quot;</span>
-          <span className="text-muted">,</span>
-          {"\n    "}
-          <span className="text-accent">&quot;LLM Integration&quot;</span>
-          <span className="text-muted">,</span>
-          {"\n    "}
-          <span className="text-accent">&quot;Vector Search&quot;</span>
-          <span className="text-muted">,</span>
-          {"\n  "}
-          <span className="text-muted">],</span>
-          {"\n  "}
-          <span className="text-muted">approach:</span>{" "}
-          <span className="text-accent/80">
-            &quot;reliability-first, production-grade AI&quot;
-          </span>
-          <span className="text-muted">,</span>
-          {"\n"}
-          <span className="text-muted">{"}"}</span>
-          <span className="text-accent">;</span>
+          {tokens.map((t) =>
+            t.className ? (
+              <span key={t.key} className={t.className}>
+                {t.text}
+              </span>
+            ) : (
+              <span key={t.key}>{t.text}</span>
+            )
+          )}
           <span
             aria-hidden
-            className="ml-0.5 inline-block h-4 w-[7px] animate-pulse align-middle bg-accent"
+            className={`ml-0.5 inline-block h-4 w-[7px] align-middle bg-accent ${
+              done ? "animate-pulse" : ""
+            }`}
           />
         </code>
       </pre>
@@ -77,7 +144,7 @@ export default function About() {
           >
             <p>
               I&apos;m focused on AI evaluations, chatbot testing, and analyzing
-              model performance — turning client and design-partner requirements
+              model performance - turning client and design-partner requirements
               into practical solutions and clearer product quality.
             </p>
             <p>
@@ -88,9 +155,8 @@ export default function About() {
             </p>
           </Reveal>
 
-          <Reveal direction="left" delay={0.1}>
-            <ProfileCodeBlock />
-          </Reveal>
+          {/* No Reveal wrapper - typing animation is the entrance */}
+          <ProfileCodeBlock />
         </div>
       </div>
     </section>
