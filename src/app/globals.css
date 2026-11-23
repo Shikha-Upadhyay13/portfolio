@@ -498,9 +498,9 @@ html.light #hackathons::before {
 html.light #leadership::before {
   background-color: #efe4d4;
 }
+/* Hobbies follows theme bands like other sections */
 html.light #hobbies {
-  background-color: #f5ede0 !important;
-  color: var(--text);
+  background-color: #f5ede0;
 }
 html.light #hobbies::before {
   display: none;

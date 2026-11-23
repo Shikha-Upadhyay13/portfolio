@@ -15,7 +15,7 @@ const TILTS = [
 const FRAME: Record<"classic" | "soft", string> = {
   classic:
     "rounded-lg border-4 border-white/95 bg-white shadow-xl shadow-black/50",
-  soft: "rounded-lg bg-transparent shadow-[0_0_0_1px_color-mix(in_srgb,var(--accent-1)_18%,transparent),0_12px_28px_-12px_color-mix(in_srgb,var(--accent-1)_28%,transparent)]",
+  soft: "rounded-lg bg-transparent shadow-[0_0_0_1px_color-mix(in_srgb,var(--accent-1)_22%,transparent),0_12px_28px_-12px_color-mix(in_srgb,var(--accent-1)_28%,transparent)]",
 };
 
 function MediaFrame({ item, className }: { item: MediaItem; className: string }) {

@@ -10,38 +10,36 @@ export default function Hobbies() {
   const [featured, ...rest] = hobbies;
 
   return (
-    <section id="hobbies" className="bg-[#f5ede0] px-6 py-24 text-[#5c3d2e]">
+    <section id="hobbies" className="w-full border-y border-line bg-page px-6 py-24 text-fg">
       <div className="mx-auto max-w-[1400px]">
         <SectionHeading
           title="Hobbies & Passion"
-          subtitle="Life beyond the terminal — the pursuits that keep me curious and grounded."
-          titleClassName="text-[#6f4e37]"
-          className="[&_p]:text-[#8a7360]"
+          subtitle="Life beyond the terminal - the pursuits that keep me curious and grounded."
         />
 
-        <CurtainReveal className="border border-[#6f4e37]/15 bg-[#efe4d4]/80 p-6 md:p-10">
+        <CurtainReveal className="border border-line bg-raised/80 p-6 md:p-10">
           <div className="space-y-20">
             {/* Featured hobby, full width */}
             <div className="space-y-8">
               <Reveal className="mx-auto max-w-2xl space-y-3 text-center">
-                <h3 className="text-2xl font-semibold text-[#5c3d2e]">
+                <h3 className="text-2xl font-semibold text-fg">
                   {featured.title}
                 </h3>
-                <p className="text-sm font-medium uppercase tracking-wide text-[#8b5e3c]">
+                <p className="text-sm font-medium uppercase tracking-wide text-accent">
                   {featured.tagline}
                 </p>
-                <p className="leading-relaxed text-[#8a7360]">
+                <p className="leading-relaxed text-muted">
                   {featured.description}
                 </p>
               </Reveal>
 
               <Reveal delay={0.1}>
-                <MediaFilmstrip items={featured.media} variant="soft" />
+                <MediaFilmstrip items={featured.media} variant="classic" />
               </Reveal>
             </div>
 
             {/* Remaining hobbies */}
-            <div className="relative grid gap-y-12 divide-y divide-[#6f4e37]/15 md:grid-cols-2 md:divide-y-0">
+            <div className="relative grid gap-y-12 divide-y divide-line md:grid-cols-2 md:divide-y-0">
               {rest.map((hobby, i) => (
                 <Reveal
                   key={hobby.title}
@@ -51,23 +49,23 @@ export default function Hobbies() {
                   }`}
                 >
                   <div className="space-y-3 text-center">
-                    <h3 className="text-2xl font-semibold text-[#5c3d2e]">
+                    <h3 className="text-2xl font-semibold text-fg">
                       {hobby.title}
                     </h3>
-                    <p className="text-sm font-medium uppercase tracking-wide text-[#8b5e3c]">
+                    <p className="text-sm font-medium uppercase tracking-wide text-accent">
                       {hobby.tagline}
                     </p>
-                    <p className="leading-relaxed text-[#8a7360]">
+                    <p className="leading-relaxed text-muted">
                       {hobby.description}
                     </p>
                   </div>
-                  <MediaFilmstrip items={hobby.media} variant="soft" />
+                  <MediaFilmstrip items={hobby.media} variant="classic" />
                 </Reveal>
               ))}
 
               <div
                 aria-hidden
-                className="absolute inset-y-0 left-1/2 hidden w-px -translate-x-1/2 bg-[#6f4e37]/15 md:block"
+                className="absolute inset-y-0 left-1/2 hidden w-px -translate-x-1/2 bg-line md:block"
               />
             </div>
           </div>
