@@ -72,17 +72,6 @@ export default function Hero() {
           animate="show"
           className="space-y-7"
         >
-          {/* Availability badge */}
-          <motion.div variants={item}>
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 text-xs rounded-full glass text-gray-300">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400" />
-              </span>
-              Open to AI / ML opportunities
-            </span>
-          </motion.div>
-
           {/* Name */}
           <motion.h1
             variants={item}
