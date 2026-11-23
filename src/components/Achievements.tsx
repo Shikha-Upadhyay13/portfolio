@@ -24,24 +24,16 @@ const DEPTH = [
   { x: 38, y: 30, rotate: 12, scale: 0.92, zIndex: 10, opacity: 0.55 },
 ];
 
-/** Fixed positions — colors use theme tokens (black on cream, soft white on dark). */
+/** Soft constellation - fewer, gentler sparkles (no harsh flash). */
 const SPARKLES = [
-  { left: "4%", top: "6%", size: 28, delay: 0.02, drift: -28, color: "var(--sparkle-1)" },
-  { left: "14%", top: "18%", size: 16, delay: 0.12, drift: -18, color: "var(--sparkle-2)" },
-  { left: "24%", top: "4%", size: 22, delay: 0.2, drift: -32, color: "var(--sparkle-3)" },
-  { left: "36%", top: "14%", size: 14, delay: 0.28, drift: -16, color: "var(--sparkle-2)" },
-  { left: "48%", top: "2%", size: 26, delay: 0.08, drift: -36, color: "var(--sparkle-1)" },
-  { left: "58%", top: "16%", size: 12, delay: 0.34, drift: -14, color: "var(--sparkle-2)" },
-  { left: "68%", top: "5%", size: 24, delay: 0.06, drift: -26, color: "var(--sparkle-3)" },
-  { left: "80%", top: "18%", size: 18, delay: 0.16, drift: -20, color: "var(--sparkle-2)" },
-  { left: "90%", top: "7%", size: 30, delay: 0.22, drift: -30, color: "var(--sparkle-1)" },
-  { left: "8%", top: "38%", size: 16, delay: 0.3, drift: -14, color: "var(--sparkle-3)" },
-  { left: "92%", top: "36%", size: 20, delay: 0.26, drift: -18, color: "var(--sparkle-1)" },
-  { left: "18%", top: "52%", size: 14, delay: 0.38, drift: -12, color: "var(--sparkle-2)" },
-  { left: "82%", top: "50%", size: 18, delay: 0.32, drift: -16, color: "var(--sparkle-3)" },
-  { left: "42%", top: "42%", size: 12, delay: 0.42, drift: -10, color: "var(--sparkle-3)" },
-  { left: "62%", top: "46%", size: 15, delay: 0.36, drift: -12, color: "var(--sparkle-2)" },
-  { left: "30%", top: "30%", size: 10, delay: 0.44, drift: -10, color: "var(--sparkle-1)" },
+  { left: "8%", top: "10%", size: 14, delay: 0.05, drift: -18, color: "var(--sparkle-3)" },
+  { left: "22%", top: "6%", size: 10, delay: 0.18, drift: -12, color: "var(--sparkle-2)" },
+  { left: "48%", top: "4%", size: 16, delay: 0.1, drift: -22, color: "var(--sparkle-1)" },
+  { left: "72%", top: "9%", size: 11, delay: 0.22, drift: -14, color: "var(--sparkle-3)" },
+  { left: "88%", top: "14%", size: 13, delay: 0.14, drift: -16, color: "var(--sparkle-2)" },
+  { left: "14%", top: "28%", size: 9, delay: 0.3, drift: -10, color: "var(--sparkle-3)" },
+  { left: "62%", top: "22%", size: 12, delay: 0.26, drift: -12, color: "var(--sparkle-1)" },
+  { left: "84%", top: "32%", size: 10, delay: 0.34, drift: -9, color: "var(--sparkle-2)" },
 ];
 
 function SparkleIcon({ size, color }: { size: number; color: string }) {
@@ -53,7 +45,8 @@ function SparkleIcon({ size, color }: { size: number; color: string }) {
       fill={color}
       aria-hidden
       style={{
-        filter: `drop-shadow(0 0 4px ${color}) drop-shadow(0 0 12px ${color}) drop-shadow(0 0 22px ${color})`,
+        filter: `drop-shadow(0 0 6px color-mix(in srgb, ${color} 55%, transparent))`,
+        opacity: 0.85,
       }}
     >
       <path d="M12 0 14.2 9.8 24 12 14.2 14.2 12 24 9.8 14.2 0 12 9.8 9.8Z" />
@@ -61,7 +54,7 @@ function SparkleIcon({ size, color }: { size: number; color: string }) {
   );
 }
 
-/** Accent sparkles that pop when the achievements section enters view. */
+/** Soft sparkle drift when achievements enter view - rich, not blinding. */
 function AchievementSparkles({ active }: { active: boolean }) {
   const reduceMotion = useReducedMotion();
   if (reduceMotion) return null;
@@ -76,39 +69,38 @@ function AchievementSparkles({ active }: { active: boolean }) {
           key={i}
           className="absolute will-change-transform"
           style={{ left: s.left, top: s.top }}
-          initial={{ opacity: 0, scale: 0, y: 12, rotate: -25 }}
+          initial={{ opacity: 0, scale: 0.4, y: 8 }}
           animate={
             active
               ? {
-                  opacity: [0, 1, 1, 0.85, 0],
-                  scale: [0, 1.45, 1.15, 1, 0.5],
-                  y: [12, s.drift * 0.35, s.drift * 0.7, s.drift],
-                  rotate: [-25, 8, 28, 48],
+                  opacity: [0, 0.65, 0.75, 0.7, 0.55, 0.25, 0],
+                  scale: [0.4, 1, 1.06, 1.02, 0.98, 0.9, 0.7],
+                  y: [8, s.drift * 0.25, s.drift * 0.5, s.drift * 0.75, s.drift],
                 }
-              : { opacity: 0, scale: 0, y: 12 }
+              : { opacity: 0, scale: 0.4, y: 8 }
           }
           transition={{
-            duration: 2.4,
+            duration: 7.5,
             delay: s.delay,
             ease: EASE_OUT_EXPO,
-            times: [0, 0.12, 0.35, 0.7, 1],
+            // Linger near peak, then fade slowly
+            times: [0, 0.08, 0.2, 0.45, 0.65, 0.85, 1],
           }}
         >
           <SparkleIcon size={s.size} color={s.color} />
         </motion.span>
       ))}
 
-      {/* Bright center flash */}
       <motion.div
-        className="absolute left-1/2 top-12 h-56 w-56 -translate-x-1/2 rounded-full blur-3xl"
+        className="absolute left-1/2 top-10 h-40 w-40 -translate-x-1/2 rounded-full blur-3xl"
         style={{ backgroundColor: "var(--sparkle-flash)" }}
-        initial={{ opacity: 0, scale: 0.5 }}
+        initial={{ opacity: 0, scale: 0.7 }}
         animate={
           active
-            ? { opacity: [0, 1, 0.35, 0], scale: [0.5, 1.25, 1.5, 1.7] }
-            : { opacity: 0, scale: 0.5 }
+            ? { opacity: [0, 0.3, 0.22, 0.12, 0], scale: [0.7, 1.05, 1.15, 1.25] }
+            : { opacity: 0, scale: 0.7 }
         }
-        transition={{ duration: 2, ease: EASE_OUT_EXPO }}
+        transition={{ duration: 6.5, ease: EASE_OUT_EXPO }}
       />
     </div>
   );
