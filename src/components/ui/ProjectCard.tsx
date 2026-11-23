@@ -70,13 +70,13 @@ export default function ProjectCard({
         ease: EASE_OUT_EXPO,
         layout: { duration: 0.4, ease: EASE_OUT_EXPO },
       }}
-      className={`group/card relative flex h-full flex-col overflow-hidden rounded-2xl border bg-panel/70 transition-all duration-300 hover:-translate-y-1 hover:bg-panel hover:shadow-[0_18px_40px_-24px_rgba(0,0,0,0.35)] group-hover/cards:opacity-45 hover:!opacity-100 ${
-        isTopMatch ? "border-accent/50" : "border-line hover:border-accent/30"
+      className={`group/card relative flex h-full flex-col overflow-hidden rounded-2xl border bg-page/80 transition-all duration-300 hover:-translate-y-1 hover:bg-page hover:shadow-[0_18px_40px_-24px_color-mix(in_srgb,var(--accent-1)_30%,transparent)] group-hover/cards:opacity-45 hover:!opacity-100 ${
+        isTopMatch ? "border-accent/50" : "border-accent/25 hover:border-accent/45"
       } ${isDimmed ? "opacity-30 saturate-50" : ""} ${
         fullWidth ? "md:col-span-2" : ""
       } ${primaryHref ? "cursor-pointer" : ""}`}
     >
-      {/* Stretched hit target — whole card is the primary CTA */}
+      {/* Stretched hit target - whole card is the primary CTA */}
       {primaryHref &&
         (primaryExternal ? (
           <a
@@ -95,10 +95,10 @@ export default function ProjectCard({
           />
         ))}
 
-      {/* Soft top shine — neutral, not tinted */}
+      {/* Soft top shine */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/25 to-transparent"
       />
 
       {/* Category accent rail */}
@@ -111,7 +111,7 @@ export default function ProjectCard({
       {showIndex && (
         <span
           aria-hidden
-          className="pointer-events-none absolute -right-1 -top-3 select-none font-display text-[5.5rem] font-bold leading-none text-fg/[0.06] md:text-[6.5rem]"
+          className="pointer-events-none absolute -right-1 -top-3 select-none font-display text-[5.5rem] font-bold leading-none text-accent/[0.12] md:text-[6.5rem]"
         >
           {number}
         </span>
@@ -127,7 +127,7 @@ export default function ProjectCard({
           <div className="mb-3 flex items-center justify-between gap-3">
             <div className="flex min-w-0 items-center gap-2.5">
               {showIndex && (
-                <span className="shrink-0 font-mono text-[11px] tabular-nums text-gray-500">
+                <span className="shrink-0 font-mono text-[11px] tabular-nums text-accent/55">
                   {number}
                 </span>
               )}
@@ -148,7 +148,7 @@ export default function ProjectCard({
             ) : (
               showFeaturedBadge &&
               project.featured && (
-                <span className="inline-flex shrink-0 items-center gap-1 text-[11px] text-amber-300/90">
+                <span className="inline-flex shrink-0 items-center gap-1 text-[11px] text-accent/80">
                   <Sparkles className="h-3.5 w-3.5" />
                   Featured
                 </span>
