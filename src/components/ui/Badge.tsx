@@ -4,7 +4,7 @@ type BadgeTone = "accent" | "amber" | "neutral";
 
 const TONE_CLASSES: Record<BadgeTone, string> = {
   accent: "text-accent bg-accent/10 border-accent/20",
-  amber: "text-amber-300/90 bg-amber-500/10 border-amber-400/20",
+  amber: "text-accent bg-accent/10 border-accent/25",
   neutral: "text-gray-300 bg-white/5 border-white/10",
 };
 

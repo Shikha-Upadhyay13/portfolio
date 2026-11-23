@@ -88,14 +88,14 @@ export default function Hackathons() {
           <h3 className="font-display text-2xl font-semibold md:text-3xl">
             {hack.title}
           </h3>
-          <p className="accent-text text-sm font-medium">{hack.event}</p>
+          <p className="text-sm font-medium text-accent/80">{hack.event}</p>
           <p className="text-left text-gray-300 leading-relaxed sm:text-center">
             {hack.description}
           </p>
         </Reveal>
 
         <Reveal delay={0.08}>
-          <MediaFilmstrip items={hack.media} center />
+          <MediaFilmstrip items={hack.media} center variant="classic" />
         </Reveal>
       </div>
     </section>
